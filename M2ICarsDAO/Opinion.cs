@@ -16,8 +16,13 @@ namespace M2ICarsDAO
         [ForeignKey("UserId")]
         public virtual User User { get; set; }
         public int UserId { get; set; }
+
         public int Note { get; set; }
         public string Comment { get; set; }
+
+        [ForeignKey("DriverId")]
+        public virtual Driver Driver { get; set; }
+        public int DriverId { get; set; }
 
         public Opinion ()
         {
