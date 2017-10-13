@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace M2ICarsDAO
 {
-    class Class3
+    class Admin
     {
     }
 }

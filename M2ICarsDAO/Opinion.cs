@@ -6,9 +6,7 @@ using System.Threading.Tasks;
 
 namespace M2ICarsDAO
 {
-    //commit
-    public class Class1
+    class Opinion
     {
-        //Test
     }
 }
