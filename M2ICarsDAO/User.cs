@@ -11,7 +11,7 @@ namespace M2ICarsDAO
     public class User
     {
         [Key]
-        public int ClientId { get; set; }              
+        public int UserId { get; set; }              
         public string Firstname { get; set; }        
         public string Lastname { get; set; }                  
         public DateTime Birthday { get; set; }        
@@ -20,10 +20,6 @@ namespace M2ICarsDAO
         public string Email { get; set; }
         public string PhotoUrl { get; set; }
         public string Password { get; set; }
-       
-        public virtual Driver Driver { get;set; }
-        [ForeignKey("Driver")]
-        public int DriverId { get; set; }
 
         public User()
         {

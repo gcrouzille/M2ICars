@@ -11,9 +11,10 @@ namespace M2ICarsDAO
     public class Opinion
     {
         [Key]
-        public int OpinionId { get; set; }        
+        public int OpinionId { get; set; }
+
+        [ForeignKey("UserId")]
         public virtual User User { get; set; }
-        [ForeignKey("user")]
         public int UserId { get; set; }
         public int Note { get; set; }
         public string Comment { get; set; }

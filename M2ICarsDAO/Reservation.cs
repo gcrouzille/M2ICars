@@ -15,14 +15,17 @@ namespace M2ICarsDAO
         public DateTime Date { get; set; }
         public string DepartureLocation { get; set; }
         public string ArrivalLocation { get; set; }
-        public virtual Driver Driver { get; set; }
-        [ForeignKey("Driver")]
-        public int DriverId { get; set; }
+
+        [ForeignKey("ReservationDriverId")]
+        public virtual Driver ReservationDriver { get; set; }
+        public int ReservationDriverId { get; set; }
+
+        [ForeignKey("ClientId")]
         public virtual User Client { get; set; }
-        [ForeignKey("Client")]
         public int ClientId { get; set; }
-        public int Duration;
-        public decimal Price;
+
+        public int Duration { get; set; }
+        public decimal Price { get; set; }
 
         public Reservation ()
         {

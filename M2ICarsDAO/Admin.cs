@@ -14,8 +14,6 @@ namespace M2ICarsDAO
 
         public string Mail { get; set; }
 
-        [DataType(DataType.Password)]
-        [Display(Name = "Current password")]
         public string Password { get; set; }
 
         public int Access { get; set; }
