@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace M2ICarsDAO
 {
-    class Driver
+    public class Driver
     {
     }
 }

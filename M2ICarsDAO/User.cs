@@ -6,7 +6,8 @@ using System.Threading.Tasks;
 
 namespace M2ICarsDAO
 {
-    class User
+    public class User
     {
+
     }
 }
