@@ -1,4 +1,5 @@
-﻿using System;
+﻿using M2ICarsDAO;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Net;
@@ -9,10 +10,11 @@ namespace M2ICarsAPI.Controllers
 {
     public class ValuesController : ApiController
     {
+        private DB DBContext = new DB();
         // GET api/values
-        public IEnumerable<string> Get()
+        public IEnumerable<User> Get()
         {
-            return new string[] { "value1", "value2" };
+            return DBContext.Users;
         }
 
         // GET api/values/5
