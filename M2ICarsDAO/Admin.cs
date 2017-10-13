@@ -19,5 +19,10 @@ namespace M2ICarsDAO
         public string Password { get; set; }
 
         public int Access { get; set; }
+
+        public Admin()
+        {
+
+        }
     }
 }

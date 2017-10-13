@@ -22,5 +22,10 @@ namespace M2ICarsDAO
 
         public string Immatriculation { get; set; }
 
+        public Driver()
+        {
+
+        }
+
     }
 }
