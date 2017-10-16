@@ -15,11 +15,25 @@ namespace M2ICarsAPI.Controllers
     public class NotificationsController : ApiController
     {
         private DB db = new DB();
-        //test
+
         // GET: api/Notifications
         public IQueryable<Notification> GetNotifications()
         {
             return db.Notifications;
+        }
+        
+        // GET: api/Notifications/Drivers
+        [Route("api/Notifications/Drivers")]
+        public IQueryable<Notification> GetDriversNotifications()
+        {
+            return db.Notifications.Where(n=>n.IsDriverNotification);
+        }
+
+        // GET: api/Notifications/Clients
+        [Route("api/Notifications/Clients")]
+        public IQueryable<Notification> GetClientsNotifications()
+        {
+            return db.Notifications.Where(n => !n.IsDriverNotification);
         }
 
         // GET: api/Notifications/5
