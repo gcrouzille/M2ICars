@@ -16,6 +16,7 @@ namespace M2ICarsAPI.Controllers
     {
         private DB db = new DB();
 
+        
         // GET: api/Tarifs
         public IQueryable<Tarif> GetTarifs()
         {
