@@ -22,6 +22,20 @@ namespace M2ICarsAPI.Controllers
             return db.Drivers;
         }
 
+        // GET: api/Drivers/available
+        [Route("api/Drivers/available")]
+        public IQueryable<Driver> GetDriversAvailable()
+        {
+            return db.Drivers.Where(d=>d.Availability == Driver.Available.DISPO);
+        }
+        
+        // GET: api/Drivers/waitingValidation
+        [Route("api/Drivers/waitingValidation")]
+        public IQueryable<Driver> GetDriversWaitingValidation()
+        {
+            return db.Drivers.Where(d => !d.RegisterState);
+        }
+
         // GET: api/Drivers/5
         [ResponseType(typeof(Driver))]
         public IHttpActionResult GetDriver(int id)
@@ -49,6 +63,85 @@ namespace M2ICarsAPI.Controllers
                 return BadRequest();
             }
 
+            db.Entry(driver).State = EntityState.Modified;
+
+            try
+            {
+                db.SaveChanges();
+            }
+            catch (DbUpdateConcurrencyException)
+            {
+                if (!DriverExists(id))
+                {
+                    return NotFound();
+                }
+                else
+                {
+                    throw;
+                }
+            }
+
+            return StatusCode(HttpStatusCode.NoContent);
+        }
+        
+        // PUT: api/Drivers/5/available
+        [ResponseType(typeof(void))]
+        [Route("api/Drivers/{id}/available")]
+        public IHttpActionResult PutDriverAvailable(int id)
+        {
+            if (!ModelState.IsValid)
+            {
+                return BadRequest(ModelState);
+            }
+
+            Driver driver = db.Drivers.Find(id);
+
+            if (driver == null)
+            {
+                return NotFound();
+            }
+
+            driver.Availability = Driver.Available.DISPO;
+            db.Entry(driver).State = EntityState.Modified;
+
+            try
+            {
+                db.SaveChanges();
+            }
+            catch (DbUpdateConcurrencyException)
+            {
+                if (!DriverExists(id))
+                {
+                    return NotFound();
+                }
+                else
+                {
+                    throw;
+                }
+            }
+
+            return StatusCode(HttpStatusCode.NoContent);
+        }
+
+
+        // PUT: api/Drivers/5/validateRegistration
+        [ResponseType(typeof(void))]
+        [Route("api/Drivers/{id}/validateRegistration")]
+        public IHttpActionResult PutDriverValidateRegistration(int id)
+        {
+            if (!ModelState.IsValid)
+            {
+                return BadRequest(ModelState);
+            }
+
+            Driver driver = db.Drivers.Find(id);
+
+            if (driver == null)
+            {
+                return NotFound();
+            }
+
+            driver.RegisterState = true;
             db.Entry(driver).State = EntityState.Modified;
 
             try

@@ -9,6 +9,13 @@ namespace M2ICarsDAO
 {
     public class Driver
     {
+        public enum Available
+        {
+            NON_DISPO,
+            OCCUPE,
+            DISPO
+        }
+
         [Key]
         public int DriverId { get; set; }
         public string Firstname { get; set; }
@@ -19,8 +26,8 @@ namespace M2ICarsDAO
         public string Email { get; set; }
         public string PhotoUrl { get; set; }
         public string Password { get; set; }
-        public string RegisterState { get; set; }
-        public string Availability { get; set; }
+        public bool RegisterState { get; set; }
+        public Available Availability { get; set; }
         public string CarBrand { get; set; }
         public string CarType { get; set; }
         public string Immatriculation { get; set; }
