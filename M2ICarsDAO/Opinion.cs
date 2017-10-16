@@ -28,5 +28,13 @@ namespace M2ICarsDAO
         {
 
         }
+
+        public Opinion(int driverId, int userId, int note, string comment )
+        {
+            UserId = userId;
+            Note = note;
+            Comment = comment;
+            DriverId = driverId;
+        }
     }
 }
