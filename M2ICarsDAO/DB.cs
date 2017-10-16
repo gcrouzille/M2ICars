@@ -20,7 +20,7 @@ namespace M2ICarsDAO
 
         public DB() : base("M2ICars")
         {
-
+           
         }
     }
 }

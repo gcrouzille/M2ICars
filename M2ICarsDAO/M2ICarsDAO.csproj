@@ -56,7 +56,6 @@
     <Compile Include="Promotion.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Reservation.cs" />
-    <Compile Include="Tarif.cs" />
     <Compile Include="User.cs" />
   </ItemGroup>
   <ItemGroup>
