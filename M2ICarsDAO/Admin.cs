@@ -9,11 +9,17 @@ namespace M2ICarsDAO
 {
     public class Admin
     {
+        public enum access
+        {
+            ANALYST,
+            ADMIN
+        }
+
         [Key]
         public int AdminId { get; set; }
         public string Mail { get; set; }
         public string Password { get; set; }
-        public int Access { get; set; }
+        public access Access { get; set; }
 
         public Admin()
         {
