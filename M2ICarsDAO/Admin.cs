@@ -11,11 +11,8 @@ namespace M2ICarsDAO
     {
         [Key]
         public int AdminId { get; set; }
-
         public string Mail { get; set; }
-
         public string Password { get; set; }
-
         public int Access { get; set; }
 
         public Admin()
