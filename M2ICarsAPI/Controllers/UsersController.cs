@@ -16,14 +16,16 @@ namespace M2ICarsAPI.Controllers
     {
         private DB db = new DB();
 
-        // GET: api/Accounts
+        // GET: api/User
+        [Route("api/User")]
         public IQueryable<User> GetUsers()
         {
             return db.Users;
         }
 
-        // GET: api/Accounts/5
+        // GET: api/User/5
         [ResponseType(typeof(User))]
+        [Route("api/User/{Id}")]
         public IHttpActionResult GetUser(int id)
         {
             User user = db.Users.Find(id);
@@ -35,8 +37,9 @@ namespace M2ICarsAPI.Controllers
             return Ok(user);
         }
 
-        // PUT: api/Accounts/5
+        // PUT: api/User/5
         [ResponseType(typeof(void))]
+        [Route("api/User/{Id}")]
         public IHttpActionResult PutUser(int id, User user)
         {
             if (!ModelState.IsValid)
@@ -70,8 +73,9 @@ namespace M2ICarsAPI.Controllers
             return StatusCode(HttpStatusCode.NoContent);
         }
 
-        // POST: api/Accounts
-        [ResponseType(typeof(User))]
+        // POST: api/Users       
+
+        [ResponseType(typeof(User))]       
         public IHttpActionResult PostUser(User user)
         {
             if (!ModelState.IsValid)
@@ -85,8 +89,8 @@ namespace M2ICarsAPI.Controllers
             return CreatedAtRoute("DefaultApi", new { id = user.UserId }, user);
         }
 
-        // DELETE: api/Accounts/5
-        [ResponseType(typeof(User))]
+        // DELETE: api/User/5
+        [ResponseType(typeof(User))]        
         public IHttpActionResult DeleteUser(int id)
         {
             User user = db.Users.Find(id);
@@ -114,5 +118,7 @@ namespace M2ICarsAPI.Controllers
         {
             return db.Users.Count(e => e.UserId == id) > 0;
         }
+
+
     }
 }
