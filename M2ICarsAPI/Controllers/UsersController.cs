@@ -12,7 +12,7 @@ using M2ICarsDAO;
 
 namespace M2ICarsAPI.Controllers
 {
-    public class AccountsController : ApiController
+    public class UsersController : ApiController
     {
         private DB db = new DB();
 
