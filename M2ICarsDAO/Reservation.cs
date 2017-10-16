@@ -10,9 +10,17 @@ namespace M2ICarsDAO
 {
     public class Reservation
     {
+        public enum statut
+        {
+            EN_ATTENTE,
+            EN_COURS,
+            TERMINE,
+        };
+
         [Key]
         public int ReservationId { get; set; }
         public DateTime Date { get; set; }
+        public statut Statut { get; set; }
         public string DepartureLocation { get; set; }
         public string ArrivalLocation { get; set; }
 

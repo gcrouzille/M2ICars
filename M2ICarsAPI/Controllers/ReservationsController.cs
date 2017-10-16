@@ -35,6 +35,22 @@ namespace M2ICarsAPI.Controllers
             return Ok(reservation);
         }
 
+        // GET: api/Reservations/EnCours
+        [Route("api/Reservations/EnCours")]
+        public IQueryable<Reservation> GetReservationsEnCours()
+        {
+            return db.Reservations.Where(r => r.Statut == Reservation.statut.EN_COURS);
+        }
+
+
+        // GET: api/Reservations/Avances
+        [Route("api/Reservations/Avances")]
+        public IQueryable<Reservation> GetReservationAvances()
+        {
+            return db.Reservations.Where(r => r.Statut == Reservation.statut.EN_ATTENTE);
+        }
+
+
         // PUT: api/Reservations/5
         [ResponseType(typeof(void))]
         public IHttpActionResult PutReservation(int id, Reservation reservation)
