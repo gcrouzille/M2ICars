@@ -30,6 +30,8 @@ namespace M2ICarsASP.Controllers
             return View();
         }
 
+
+        //Exemple de requête vers l'api
         public async Task<string> DriverInfo(int id)
         {
             HttpClient client = new HttpClient();
