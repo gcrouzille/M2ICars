@@ -15,7 +15,7 @@ namespace M2ICarsAPI.Controllers
     public class NotificationsController : ApiController
     {
         private DB db = new DB();
-        //test2
+        //test
         // GET: api/Notifications
         public IQueryable<Notification> GetNotifications()
         {
