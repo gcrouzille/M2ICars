@@ -16,6 +16,12 @@ namespace M2ICarsDAO
             DISPO
         }
 
+        public enum TypeOfCar
+        {
+            ECONOMIQUE,
+            PREMIUM
+        }
+
         [Key]
         public int DriverId { get; set; }
         public string Firstname { get; set; }
@@ -29,7 +35,7 @@ namespace M2ICarsDAO
         public bool RegisterState { get; set; }
         public Available Availability { get; set; }
         public string CarBrand { get; set; }
-        public string CarType { get; set; }
+        public TypeOfCar CarType { get; set; }
         public string Immatriculation { get; set; }
 
         public Driver()
