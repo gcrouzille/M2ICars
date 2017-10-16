@@ -23,34 +23,59 @@ namespace M2ICarsAPI.Controllers
 
             foreach (Opinion o in db.Opinions.ToList())
             {
-                opinion.Add(new Opinion(o.DriverId, o.UserId, o.Note, o.Comment));
+                opinion.Add(new Opinion(o.OpinionId,o.DriverId, o.UserId, o.Note, o.Comment));
             }
 
             return opinion.AsQueryable();
         }
-    }
-
-        //[ResponseType(typeof(Opinion))]
-        //public IHttpActionResult GetOpinion(int id)
-        //{
-                 
-        //    return Ok(db.Opinions.Where(o => o.DriverId == id));
-        //}
-
-        //// GET: api/Opinions/5
-        //[ResponseType(typeof(Opinion))]
-        //public IHttpActionResult GetOpinion(int id)
-        //{
-        //    Opinion opinion = db.Opinions.Find(id);
-        //    if (opinion == null)
-        //    {
-        //        return NotFound();
-        //    }
-
-        //    return Ok(opinion);
-        //}
 
 
+        [Route("api/Opinions/Driver/{id}")]
+        public IQueryable<Opinion> GetOpinionsDriver(int? id)
+        {
+            List<Opinion> opinion = new List<Opinion>();
+
+            foreach (Opinion o in db.Opinions)
+            {
+                if (o.DriverId == id)
+                {
+                    opinion.Add(new Opinion(o.OpinionId,o.DriverId, o.UserId, o.Note, o.Comment));
+                }                
+            }
+            return opinion.AsQueryable();
+        }
+
+        [Route("api/Opinions/Note/{id}")]
+        public IQueryable<Opinion> GetOpinionsNote(int? id)
+        {
+            List<Opinion> opinion = new List<Opinion>();
+
+            foreach (Opinion o in db.Opinions)
+            {
+                if (o.Note == id)
+                {
+                    opinion.Add(new Opinion(o.OpinionId, o.DriverId, o.UserId, o.Note, o.Comment));
+                }
+            }
+            return opinion.AsQueryable();
+        }
+
+        [Route("api/Opinions/User/{id}")]
+        public IQueryable<Opinion> GetOpinionsUser(int? id)
+        {
+            List<Opinion> opinion = new List<Opinion>();
+
+            foreach (Opinion o in db.Opinions)
+            {
+                if (o.UserId == id)
+                {
+                    opinion.Add(new Opinion(o.OpinionId,o.DriverId, o.UserId, o.Note, o.Comment));
+                }
+            }
+            return opinion.AsQueryable();
+        }
+
+        
         // PUT: api/Opinions/5
         [ResponseType(typeof(void))]
         public IHttpActionResult PutOpinion(int id, Opinion opinion)
@@ -103,7 +128,7 @@ namespace M2ICarsAPI.Controllers
 
         // DELETE: api/Opinions/5
         [ResponseType(typeof(Opinion))]
-        public IHttpActionResult DeleteOpinion(int id)
+        public IHttpActionResult DeleteOpinion(int? id)
         {
             Opinion opinion = db.Opinions.Find(id);
             if (opinion == null)
