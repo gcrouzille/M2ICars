@@ -5,8 +5,18 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:M2ICarsWPF"
         mc:Ignorable="d"
-        Title="MainWindow" Height="350" Width="525">
-    <Grid>
-        
-    </Grid>
+        Title="MainWindow" Height="350" Width="370">
+    <StackPanel>
+        <StackPanel Orientation="Horizontal" Margin="20,100,0,25">
+            <Label Width="100">Identifiant :</Label>
+            <TextBox  Width="200"/>
+        </StackPanel>
+        <StackPanel Orientation="Horizontal" Margin="20,0,0,25">
+            <Label Width="100">Mot de passe :</Label>
+            <TextBox  Width="200"/>
+        </StackPanel>
+        <StackPanel Orientation="Horizontal">
+            <Button Width="120" x:Name="Connexion" Margin="180,0,25,0" Click="Connexion_Click" Height="24" Content="connexion"/>
+        </StackPanel>
+    </StackPanel>
 </Window>

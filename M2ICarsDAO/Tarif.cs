@@ -16,7 +16,7 @@ namespace M2ICarsDAO
 
         public Tarif()
         {
-            //test 2
+           
         }
     }
 }

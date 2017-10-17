@@ -10,24 +10,18 @@ using System.Windows.Documents;
 using System.Windows.Input;
 using System.Windows.Media;
 using System.Windows.Media.Imaging;
-using System.Windows.Navigation;
 using System.Windows.Shapes;
 
 namespace M2ICarsWPF
 {
     /// <summary>
-    /// Logique d'interaction pour MainWindow.xaml
+    /// Logique d'interaction pour User.xaml
     /// </summary>
-    public partial class MainWindow : Window
+    public partial class User : Window
     {
-        public MainWindow()
+        public User()
         {
             InitializeComponent();
-        }
-
-        private void Connexion_Click(object sender, RoutedEventArgs e)
-        {
-            
         }
     }
 }

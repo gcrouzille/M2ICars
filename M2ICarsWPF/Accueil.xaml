@@ -1,0 +1,21 @@
+﻿<Window x:Class="M2ICarsWPF.Accueil"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:M2ICarsWPF"
+        mc:Ignorable="d"
+        Title="Accueil" Height="500" Width="500">
+    <Grid>
+        <StackPanel Margin="0,0,0,0">
+            <Menu>
+                <MenuItem Header="Clients" Click="User_Click" Margin="0,0,10,0"/>
+                <MenuItem Header="Conducteurs" Click="Driver_Click" Margin="0,0,10,0"/>
+                <MenuItem Header="Réservations" Click="Reservation_Click" Margin="0,0,10,0"/>
+                <MenuItem Header="Tarifs" Click="Tarif_Click"/>
+                
+            </Menu>
+            <TextBlock Padding=" 50,50,50,50">Bienvenue à vous, mon Seigneur</TextBlock>
+        </StackPanel>
+    </Grid>
+</Window>
