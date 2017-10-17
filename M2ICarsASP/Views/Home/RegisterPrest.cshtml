@@ -1,0 +1,102 @@
+﻿
+@{
+    Layout = null;
+}
+
+<!DOCTYPE html>
+
+<html lang="fr">
+
+    <head>
+        <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-beta/css/bootstrap.min.css" integrity="sha384-/Y6pD6FV/Vv2HJnA6t+vslU6fwYXjCFtcEpHbNJ0lyAFsXTsjBbfaDjzALeQsN6M" crossorigin="anonymous">
+        <meta name="viewport" content="width=device-width" initial-scale=1, shrink-to-fit="no"/>
+
+        <title>Inscription Compte Prestataire</title>
+
+    </head>
+
+    <body>
+
+        <div class="container">
+
+            <h2>Formulaire d'inscription</h2><br /><br />
+
+            <h4>Informations personnelles</h4><br /><br />
+
+            <div class="row">
+                <div class="col">Nom :</div>
+                <div class="col"><input type="text" name="lastname" /></div>
+            </div>  
+            
+            <div class="row">
+                <div class="col">Prenom :</div>
+                <div class="col"><input type="text" name="firstname" /></div>
+            </div>
+
+            <div class="row">
+                <div class="col">Genre :</div>
+                <div class="col"><input type="text" name="gender" /></div>
+            </div>
+
+            <div class="row">
+                <div class="col">Date de naissance :</div>
+                <div class="col"><input type="text" name="birthday" /></div>
+            </div>
+
+            <div class="row">
+                <div class="col">Téléphone :</div>
+                <div class="col"><input type="text" name="phone" /></div>
+            </div>
+
+            <div class="row">
+                <div class="col">Photo </div>
+                <div class="col"><input type="file" name="image" /></div>
+            </div>
+           
+
+        <br/><br/><h4>Informations Véhicule</h4><br /><br />
+
+        <div class="row">
+            <div class="col">Type de Véhicule :</div>
+            <div class="col"><input type="text" name="cartype" /></div>
+        </div>
+
+        <div class="row">
+            <div class="col">Modèle du Véhicule :</div>
+            <div class="col"><input type="text" name="modelcar" /></div>
+        </div>
+
+        <div class="row">
+            <div class="col">Marque du Véhicule :</div>
+            <div class="col"><input type="text" name="brand" /></div>
+        </div>
+
+        <div class="row">
+            <div class="col">Immatriculation :</div>
+            <div class="col"><input type="text" name="numberplate" /></div>
+        </div>
+
+        <br/><br/><h4>Identifiant & Mot de passe</h4><br/><br/>
+
+        <div class="row">
+            <div class="col">Email :</div>
+            <div class="col"><input type="text" name="mail" /></div>
+        </div>
+
+        <div class="row">
+            <div class="col">Saisir Mot de Passe :</div>
+            <div class="col"><input type="password" name="pass" /></div>
+        </div>
+
+        <div class="row">
+            <div class="col">Ressaisir Mot de Passe :</div>
+            <div class="col"><input type="password" name="confirmpass" /></div>
+        </div>
+        <br/><br/>
+        @Html.ActionLink("Valider mon compte Prestataire", "", "Home", new { area = "" }, new { @class = "btn btn btn-success" })
+        @Html.ActionLink("Annuler", "Index", "Home", new { area = "" }, new { @class = "btn btn-warning" })
+
+        </div>
+    </body>
+
+</html>
