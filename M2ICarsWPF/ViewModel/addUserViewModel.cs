@@ -7,7 +7,7 @@ using System.Threading.Tasks;
 
 namespace M2ICarsWPF.ViewModel
 {
-    class DriverViewModel : ViewModelBase
+    class AddUserViewModel : ViewModelBase
     {
 
     }

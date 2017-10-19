@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace M2ICarsWPF
 {   
-      class Driverwindow
+       public class Driver
         {
             public enum Available
             {
@@ -37,12 +37,12 @@ namespace M2ICarsWPF
             public TypeOfCar CarType { get; set; }
             public string Immatriculation { get; set; }
 
-            public Driverwindow()
+            public Driver()
             {
 
             }
 
-        public Driverwindow(int driverId, string firstname, string lastname, DateTime birthday, string phone, int gender, string email, string photoUrl, string password, bool registerState, Available availability, string carBrand, TypeOfCar carType, string immatriculation)
+        public Driver(int driverId, string firstname, string lastname, DateTime birthday, string phone, int gender, string email, string photoUrl, string password, bool registerState, Available availability, string carBrand, TypeOfCar carType, string immatriculation)
         {
             DriverId = driverId;
             Firstname = firstname;
@@ -60,9 +60,9 @@ namespace M2ICarsWPF
             Immatriculation = immatriculation;
         }
 
-        internal void AddToBase()
+        public void AddToBase()
         {
-            throw new NotImplementedException();
+           
         }
     }
     

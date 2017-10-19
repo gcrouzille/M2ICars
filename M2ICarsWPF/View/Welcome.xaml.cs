@@ -10,24 +10,35 @@ using System.Windows.Documents;
 using System.Windows.Input;
 using System.Windows.Media;
 using System.Windows.Media.Imaging;
-using System.Windows.Navigation;
 using System.Windows.Shapes;
+using M2ICarsWPF.ViewModel;
 
 namespace M2ICarsWPF
 {
     /// <summary>
-    /// Logique d'interaction pour MainWindow.xaml
+    /// Logique d'interaction pour Welcome.xaml
     /// </summary>
-    public partial class MainWindow : Window
+    public partial class Welcome : Window
     {
-        public MainWindow()
+        public Welcome()
         {
             InitializeComponent();
         }
 
-        private void Connexion_Click(object sender, RoutedEventArgs e)
+        private void AddUser_Click(object sender, RoutedEventArgs e)
         {
-            
+            AddUser a = new AddUser();
+            a.Show();
+        }
+
+        private void Submit_Click(object sender, RoutedEventArgs e)
+        {
+
+        }
+
+        private void Detail_Click(object sender, RoutedEventArgs e)
+        {
+
         }
     }
 }

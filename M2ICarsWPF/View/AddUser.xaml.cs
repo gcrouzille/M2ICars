@@ -1,4 +1,5 @@
-﻿using System;
+﻿using M2ICarsWPF.ViewModel;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -15,13 +16,23 @@ using System.Windows.Shapes;
 namespace M2ICarsWPF
 {
     /// <summary>
-    /// Logique d'interaction pour DriverWindow.xaml
+    /// Logique d'interaction pour AddUser.xaml
     /// </summary>
-    public partial class DriverWindow : Window
+    public partial class AddUser : Window
     {
-        public DriverWindow()
+        public AddUser()
         {
             InitializeComponent();
+        }
+
+        private void Cancel_Click(object sender, RoutedEventArgs e)
+        {
+            this.Close();
+        }
+
+        public AddUser(Window FenetrePrincipale) : this()
+        {
+            
         }
     }
 }
