@@ -82,7 +82,16 @@ namespace M2ICarsWPF
             return Drivers;
         }
 
-     
+        public void Initialize()
+        {
+            // Initialisation de la liste des réservations
+            Task.Run(async () =>
+            {
+                Reservations = await APIService.Instance.Request<List<Reservation>>("GET", "api/Reservations");
+            });
+
+            int i = 0;
+        }
            
     }
         

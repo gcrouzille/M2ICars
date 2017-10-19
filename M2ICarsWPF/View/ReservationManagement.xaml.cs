@@ -18,22 +18,12 @@ namespace M2ICarsWPF.View
     /// <summary>
     /// Logique d'interaction pour Page2.xaml
     /// </summary>
-    public partial class Page2 : Page
+    public partial class ReservationManagement : Page
     {
-        public Page2()
+        public ReservationManagement()
         {
             InitializeComponent();
-        }
-
-        private void Button_Click(object sender, RoutedEventArgs e)
-        {
-            Driver driver = null;
-            Task.Run(async () =>
-            { 
-                driver = await APIService.Instance.Request<Driver>("GET", "api/Drivers/1");
-            }).Wait();
             
-            Result.Content = driver.Lastname;
         }
     }
 }

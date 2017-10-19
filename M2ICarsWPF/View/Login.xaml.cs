@@ -20,20 +20,21 @@ namespace M2ICarsWPF.View
     /// <summary>
     /// Logique d'interaction pour Page1.xaml
     /// </summary>
-    public partial class Page1 : Page
+    public partial class Login : Page
     {
-        public Page1()
+        public Login()
         {
             InitializeComponent();
         }
 
-        public async void Login(object sender, RoutedEventArgs e)
+        public async void LoginRequest(object sender, RoutedEventArgs e)
         {
             bool loggedIn = await APIService.Instance.GetToken(username.Text,password.Password);
             
             if (loggedIn)
-            {                
-                Page2 nextPage = new Page2();
+            {
+                Manager.Instance.Initialize();
+                Home nextPage = new Home();
                 NavigationService.Navigate(nextPage);
             }
         }
