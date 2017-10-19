@@ -53,7 +53,36 @@ namespace M2ICarsWPF
 
             }
             return Users;
-        }    
+        }
+
+        public async Task<List<Driver>> InfoDriver()
+        {
+
+            HttpClient client = new HttpClient();
+            client.BaseAddress = new Uri("http://localhost:64548/");
+            client.DefaultRequestHeaders.Accept.Clear();
+            string s = null;
+            client.DefaultRequestHeaders.Accept.Add(new MediaTypeWithQualityHeaderValue("application/json"));
+            HttpResponseMessage response = await client.GetAsync($"api/Drivers");
+            if (response.IsSuccessStatusCode)
+            {
+                s = await response.Content.ReadAsStringAsync();
+                Drivers = JsonConvert.DeserializeObject<List<Driver>>(s);
+
+            }
+            return Drivers;
+        }
+
+        public void Initialize()
+        {
+            // Initialisation de la liste des réservations
+            Task.Run(async () =>
+            {
+                Reservations = await APIService.Instance.Request<List<Reservation>>("GET", "api/Reservations");
+            });
+
+            int i = 0;
+        }
            
     }
         

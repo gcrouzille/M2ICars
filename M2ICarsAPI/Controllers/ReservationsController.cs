@@ -19,7 +19,13 @@ namespace M2ICarsAPI.Controllers
         // GET: api/Reservations
         public IQueryable<Reservation> GetReservations()
         {
-            return db.Reservations;
+            List<Reservation> resas = new List<Reservation>();
+
+            foreach (Reservation r in db.Reservations.ToList())
+            {
+                resas.Add(new Reservation(r.ReservationId, r.Date, r.Statut, r.DepartureLocation, r.ArrivalLocation, r.ReservationDriverId, r.ClientId, r.Duration, r.Price));
+            }
+            return resas.AsQueryable();
         }
 
         // GET: api/Reservations/5

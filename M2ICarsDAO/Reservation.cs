@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
 using System.Linq;
+using System.Runtime.Serialization;
 using System.Text;
 using System.Threading.Tasks;
 
@@ -25,10 +26,12 @@ namespace M2ICarsDAO
         public string ArrivalLocation { get; set; }
 
         [ForeignKey("ReservationDriverId")]
+        [IgnoreDataMember]
         public virtual Driver ReservationDriver { get; set; }
         public int ReservationDriverId { get; set; }
 
         [ForeignKey("ClientId")]
+        [IgnoreDataMember]
         public virtual User Client { get; set; }
         public int ClientId { get; set; }
 
@@ -38,6 +41,19 @@ namespace M2ICarsDAO
         public Reservation ()
         {
 
+        }
+
+        public Reservation(int id, DateTime date, statut statut, string departure, string arrival, int driverId, int clientId, int duration, decimal price)
+        {
+            ReservationId = id;
+            Date = date;
+            Statut = statut;
+            DepartureLocation = departure;
+            ArrivalLocation = arrival;
+            ReservationDriverId = driverId;
+            ClientId = clientId;
+            Duration = duration;
+            Price = price;
         }
     }
 }
