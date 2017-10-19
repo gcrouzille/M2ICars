@@ -13,16 +13,27 @@ using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
 
-namespace M2ICarsWPF
+namespace M2ICarsWPF.View
 {
     /// <summary>
-    /// Logique d'interaction pour MainWindow.xaml
+    /// Logique d'interaction pour Page2.xaml
     /// </summary>
-    public partial class MainWindow : Window
+    public partial class Page2 : Page
     {
-        public MainWindow()
+        public Page2()
         {
             InitializeComponent();
+        }
+
+        private void Button_Click(object sender, RoutedEventArgs e)
+        {
+            Driver driver = null;
+            Task.Run(async () =>
+            { 
+                driver = await APIService.Instance.Request<Driver>("GET", "api/Drivers/1");
+            }).Wait();
+            
+            Result.Content = driver.Lastname;
         }
     }
 }
