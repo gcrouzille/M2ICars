@@ -9,6 +9,10 @@ using System.Net.Http;
 using System.Web.Http;
 using System.Web.Http.Description;
 using M2ICarsDAO;
+using System.Threading.Tasks;
+using System.Net.Http.Headers;
+using Newtonsoft.Json;
+using Newtonsoft.Json.Linq;
 
 namespace M2ICarsAPI.Controllers
 {
@@ -28,7 +32,41 @@ namespace M2ICarsAPI.Controllers
         {
             return db.Drivers.Where(d=>d.Availability == Driver.Available.DISPO);
         }
-        
+
+        // GET: api/Drivers/available
+        [Route("api/Drivers/available/{location}")]
+        public async Task<IQueryable<Driver>> GetDriversAvailableForLocation(string location)
+        {
+            List<Driver> driversAvailable = new List<Driver>();
+
+            foreach (Driver driver in db.Drivers)
+            {
+                HttpClient client = new HttpClient();
+                client.BaseAddress = new Uri("https://maps.googleapis.com/maps/");
+                client.DefaultRequestHeaders.Accept.Clear();
+                string s = null;
+                JObject pos =  JObject.Parse(driver.Location);
+
+                string dest = (string)pos["lat"] + "," + (string)pos["lng"];
+
+                client.DefaultRequestHeaders.Accept.Add(new MediaTypeWithQualityHeaderValue("application/json"));
+                HttpResponseMessage response = await client.GetAsync($"api/distancematrix/json?units=imperial&origins={location}&destinations={dest}&key=AIzaSyCDjKjiTE-YwsyVbG2KY4VVJF5w3F7XWt8");
+                if (response.IsSuccessStatusCode)
+                {
+                    s = await response.Content.ReadAsStringAsync();
+                    JObject o = JObject.Parse(s);
+                    int duration = (int)o["rows"].First["elements"].First["duration"]["value"];
+                    
+                    if (duration < 3600)
+                    {
+                        driversAvailable.Add(driver);
+                    }
+                }
+            }
+            
+            return driversAvailable.AsQueryable();
+        }
+
         // GET: api/Drivers/waitingValidation
         [Route("api/Drivers/waitingValidation")]
         public IQueryable<Driver> GetDriversWaitingValidation()
@@ -206,6 +244,17 @@ namespace M2ICarsAPI.Controllers
         private bool DriverExists(int id)
         {
             return db.Drivers.Count(e => e.DriverId == id) > 0;
+        }
+    }
+
+    class Position
+    {
+        public string lat;
+        public string lng;
+
+        public Position()
+        {
+
         }
     }
 }
