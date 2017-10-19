@@ -78,7 +78,6 @@
     <Compile Include="Model\User.cs" />
     <Compile Include="ViewModel\AddDriverViewModel.cs" />
     <Compile Include="ViewModel\AddUserViewModel.cs" />
-    <Compile Include="ViewModel\ViewModelLocator.cs" />
     <Compile Include="ViewModel\WelcomeViewModel.cs" />
     <Compile Include="View\Welcome.xaml.cs">
       <DependentUpon>Welcome.xaml</DependentUpon>
