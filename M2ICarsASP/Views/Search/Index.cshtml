@@ -1,0 +1,44 @@
+﻿@{
+    ViewBag.Title = "Search";
+}
+
+<h2>Search</h2>
+
+<section class="container">
+    <section class="col-md-3">
+        @using (Html.BeginForm("Search","Search",FormMethod.Post))
+        {
+            @Html.AntiForgeryToken()
+
+            <div class="form-horizontal">
+                <h4>Chercher un itinéraire</h4>
+                <hr />
+                @Html.ValidationSummary(true, "", new { @class = "text-danger" })
+                <div class="form-group">
+                    <div class="col-md-10">
+                        <input id="departure" placeholder="départ" class="form-control" type="text" name="departure"/>
+                    </div>
+                </div>
+                <div class="form-group">
+                    <div class="col-md-10">
+                        <input id="arrival" placeholder="arrivée" class="form-control"  type="text" name="arrival"/>
+                    </div>
+                </div>
+
+                <div class="form-group">
+                    <div class="col-md-offset-2 col-md-10">
+                        <input id ="search" type="submit" value="Search" class="btn btn-default" />
+                    </div>
+                </div>
+
+            </div>
+        }
+    </section>
+    <section id="map" class="col-md-9">
+
+    </section>
+    <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyCDjKjiTE-YwsyVbG2KY4VVJF5w3F7XWt8&libraries=places&callback=initAutocomplete"
+            async defer></script>
+    <script src="~/Scripts/placesAutocompletion.js"></script>
+</section>
+

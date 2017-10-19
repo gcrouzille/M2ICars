@@ -1,4 +1,5 @@
-﻿using System;
+﻿using Newtonsoft.Json.Linq;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Net.Http;
@@ -41,8 +42,11 @@ namespace M2ICarsASP.Controllers
             client.DefaultRequestHeaders.Accept.Add(new MediaTypeWithQualityHeaderValue("application/json"));
             HttpResponseMessage response = await client.GetAsync($"api/Drivers/{id}");
             if (response.IsSuccessStatusCode)
-            {
+            {                
                 s = await response.Content.ReadAsStringAsync();
+                JObject jsonObject = JObject.Parse(s);
+
+                return (string)jsonObject["Lastname"];
             }
             return s;
         }
