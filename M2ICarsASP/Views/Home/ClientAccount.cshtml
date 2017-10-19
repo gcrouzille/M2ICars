@@ -1,0 +1,105 @@
+﻿@model M2ICarsASP.Models.Client
+
+@{
+    ViewBag.Script = "ClientAccount.js";
+    ViewBag.Title = "Gestion Compte Client";
+}
+
+<!DOCTYPE html>
+
+<html lang="fr">
+
+    <head>
+
+        <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-beta/css/bootstrap.min.css" integrity="sha384-/Y6pD6FV/Vv2HJnA6t+vslU6fwYXjCFtcEpHbNJ0lyAFsXTsjBbfaDjzALeQsN6M" crossorigin="anonymous">
+        <meta name="viewport" content="width=device-width" initial-scale=1, shrink-to-fit="no" />
+        <link rel="stylesheet" href="//code.jquery.com/ui/1.12.1/themes/base/jquery-ui.css">
+
+        <title>Gestion Compte Client</title>
+
+    </head>
+
+    <body>
+
+        <div class="container">
+      
+           <h2>Gestion & Informations du Compte</h2><br/><br/>
+
+            <h4>Informations personnelles</h4><br/><br/>
+
+            <div class="row">
+                <div class="col">Nom :</div>
+                <div class="col"><input type="text" name="lastname" value="@Model.LastName"/></div>
+            </div>
+
+            <div class="row">
+                <div class="col">Prenom :</div>
+                <div class="col"><input type="text" name="firstname" value="@Model.FirstName" /></div>
+            </div>
+
+            <div class="row">
+                <div class="col">Genre :</div>
+                <div class="col"><input type="text" name="gender" value="@Model.Gender"/></div>
+            </div>
+
+            <div class="row">
+                <div class="col">Date de naissance :</div>
+                <div class="col"><input type="text" id="datepicker" name="birthday" value="@Model.Birthday" /></div>
+            </div>
+
+            <div class="row">
+                <div class="col">Téléphone :</div>
+                <div class="col"><input type="text" name="phone" value="@Model.Phone" /></div>
+            </div>
+
+            <br/><br/>
+
+            <div class="row">
+                <div class="col">Photo </div>
+                <div class="col"><img src="@Url.Content("~/Content/Images/"+Model.PhotoUrl)" height="200" width="200" /></div>
+            </div>
+
+            <div class="row">
+                <input type="file" name="image" value="" />
+            </div>
+
+            <br/><br/>
+
+            <button type="button" class="btn btn-primary btn-lg btn-block">Modifier et Valider</button>
+
+            <br /><br /><h4>Redéfinir adresse mail & mot de passe</h4><br /><br />
+
+            <div class="row">
+                <div class="col"> Adresse Email actuelle :</div>
+                <div class="col">@Model.Email</div>
+            </div>
+            <div class="row">
+                <div class="col"> Nouvelle adresse Email :</div>
+                <div class="col"><input type="text" name="newmail" /></div>
+            </div>
+
+            <br/><br/>
+
+            <input type="submit" class="btn btn-warning" name="mailconfirm" value="Modifier adresse email"/>
+
+            <br /><br />
+
+            <div class="row">
+                <div class="col"> Ancien mot de passe :</div>
+                <div class="col"><input type="password" name="oldpass" /></div>
+            </div>
+            <div class="row">
+                <div class="col"> Nouveau mot de passe :</div>
+                <div class="col"><input type="password" name="newpass" /></div>
+            </div>
+
+            <br /><br />
+
+            <input type="submit" class="btn btn-warning" name="passconfirm" value="Modifier Mot de passe" />
+
+        </div>
+
+
+    </body>
+
+</html>
