@@ -10,14 +10,15 @@ var directionsService;
 var map, arrival, departure;
 
 function initAutocomplete() {
-    console.log("initAutocomplete");
     directionsDisplay = new google.maps.DirectionsRenderer();
     directionService = new google.maps.DirectionsService();
+
     var mapOptions = {
         center: { lat: 48.864716, lng: 2.349014 },
         zoom: 13
     }
     map = new google.maps.Map(document.getElementById('map'), mapOptions);
+
     directionsDisplay.setMap(map);
 
     // Create the autocomplete object, restricting the search to geographical
@@ -29,6 +30,8 @@ function initAutocomplete() {
     arrival = new google.maps.places.Autocomplete(
         /** @type {!HTMLInputElement} */(document.getElementById('arrival')),
         { types: ['geocode'] });
+
+    geolocate();    
 
     // On resitue la map quand on tape une adresse
     departure.addListener('place_changed', function () {
@@ -71,5 +74,31 @@ function calcRoute() {
         } else
             console.log(status);
     });
+}
+
+function geolocate() {
+   //Try HTML5 geolocation.
+    if (navigator.geolocation) {
+        navigator.geolocation.getCurrentPosition(function (position) {
+            var pos = {
+                lat: position.coords.latitude,
+                lng: position.coords.longitude
+            };
+
+            map.setCenter(pos);
+        }, function () {
+            handleLocationError(true, infoWindow, map.getCenter());
+        });
+    } else {
+        // Browser doesn't support Geolocation
+        handleLocationError(false, infoWindow, map.getCenter());
+    }
+}
+
+function handleLocationError(browserHasGeolocation, infoWindow, pos) {
+    infoWindow.setPosition(pos);
+    infoWindow.setContent(browserHasGeolocation ?
+        'Error: The Geolocation service failed.' :
+        'Error: Your browser doesn\'t support geolocation.');
 }
 
