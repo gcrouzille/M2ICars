@@ -1,5 +1,5 @@
 ﻿@{
-    ViewBag.Title = "Accueil";
+    ViewBag.Title = "Index";
 }
 
 <!DOCTYPE html>
@@ -19,7 +19,7 @@
 
         <div class="container">
 
-        @using (Html.BeginForm("Login", "Home", "FormMethod.Post"))
+        @using (Html.BeginForm("Login", "Home", FormMethod.Post, new { enctype = "multipart/form-data" }))
         {
              @Html.AntiForgeryToken()
 
@@ -30,15 +30,37 @@
 
              <div class="row">
                 <div class="col">Mot de passe : </div>
-                <div class="col"><input type="password" name="password"/></div>
+                <div class="col"><input type="password" name="pass"/></div>
              </div>
 
              <div class="row">
-                <input type="submit" value="Se connecter" />
+                <input type="submit" class="btn btn-primary" value="Se connecter sur Compte Client" />
                  @Html.ActionLink("Créer Compte Client", "Register", "Home", new { area = "" }, new { @class = "btn btn-primary" })
-                 @Html.ActionLink("Créer Compte Prestataire", "RegisterPrest", "Home", new { area = "" }, new { @class = "btn btn-primary" })
              </div>
          }
+
+            <br/> <br/>
+
+         @using (Html.BeginForm("LoginPrest", "Home", FormMethod.Post, new { enctype = "multipart/form-data" }))
+         {
+            @Html.AntiForgeryToken()
+
+            <div class="row">
+                <div class="col">Email : </div>
+                <div class="col"><input type="text" name="prestemail" value="Votre adresse email" /></div>
+            </div>
+
+            <div class="row">
+                <div class="col">Mot de passe : </div>
+                <div class="col"><input type="password" name="prestpass" /></div>
+            </div>
+
+            <div class="row">
+                <input type="submit" class="btn btn-primary" value="Se connecter sur Compte Prestataire" />
+                @Html.ActionLink("Créer Compte Prestataire", "RegisterPrest", "Home", new { area = "" }, new { @class = "btn btn-primary" })
+            </div>
+         }
+
 
         </div>
 

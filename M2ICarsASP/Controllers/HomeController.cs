@@ -45,6 +45,34 @@ namespace M2ICarsASP.Controllers
             }
         }
 
+        [HttpPost]
+        [ValidateAntiForgeryToken]
+        public async Task<ActionResult> LoginPrest(string prestemail, string prestpass)
+        {
+            string token = null;
+            Task.Run(async () =>
+            {
+                token = await GetTokenDriver(prestemail, prestpass); // vals form
+            }).Wait();
+            if (token == "TokenError")
+            {
+                ViewBag.alert = "auth-error";
+                return View("Index");
+            }
+            else
+            {
+                Session["token"] = token;
+                Driver driv = null;
+                driv = await GetDriver(prestemail);
+
+                //ViewBag.alert = "auth-success";
+                ViewBag.script = "ClientAccount.js";
+                return View("DriverAccount", driv);
+                // vue ecran connecté
+            }
+        }
+
+
         public ActionResult ClientAccount()
         {
             return View();
@@ -52,15 +80,28 @@ namespace M2ICarsASP.Controllers
 
         public ActionResult DriverAccount()
         {
-            Driver dri = new Driver();
-            return View(dri);
+            return View();
         }
 
         public ActionResult Register()
         {
+            return View();
+        }
+
+        [HttpPost]
+        [ValidateAntiForgeryToken]
+        public ActionResult Register([Bind(Include = "ClientId, LastName, FirstName, Birthday, Gender, Phone, PhotoUrl, Email, Password")], Client client)
+        {
+            if (ModelState.IsValid)
+            {
+                /*db.Users.Add(use);
+                db.SaveChanges();*/
+                return RedirectToAction("Index");
+            }
 
             return View();
         }
+
 
         public ActionResult RegisterPrest()
         {
@@ -85,7 +126,6 @@ namespace M2ICarsASP.Controllers
 
             return View();
         }
-
 
         //Exemple de requête vers l'api
         public async Task<string> DriverInfo(int id)
@@ -112,6 +152,21 @@ namespace M2ICarsASP.Controllers
             string s = null;
             client.DefaultRequestHeaders.Accept.Add(new MediaTypeWithQualityHeaderValue("application/json"));
             HttpResponseMessage response = await client.GetAsync($"api/Account/User/Authenticate?mail={mail}&password={password}");
+            if (response.IsSuccessStatusCode)
+            {
+                s = await response.Content.ReadAsAsync<string>();
+            }
+            return s;
+        }
+
+        public async Task<string> GetTokenDriver(string mail, string password)
+        {
+            HttpClient client = new HttpClient();
+            client.BaseAddress = new Uri("http://localhost:64548/");
+            client.DefaultRequestHeaders.Accept.Clear();
+            string s = null;
+            client.DefaultRequestHeaders.Accept.Add(new MediaTypeWithQualityHeaderValue("application/json"));
+            HttpResponseMessage response = await client.GetAsync($"api/Account/Driver/Authenticate?mail={mail}&password={password}");
             if (response.IsSuccessStatusCode)
             {
                 s = await response.Content.ReadAsAsync<string>();
@@ -161,6 +216,28 @@ namespace M2ICarsASP.Controllers
             }
             return null;
         }
+
+        public async Task<Driver> GetDriver(string email)
+        {
+            HttpClient driver = new HttpClient();
+            driver.BaseAddress = new Uri("http://localhost:64548/");
+            driver.DefaultRequestHeaders.Accept.Clear();
+            string s = null;
+            driver.DefaultRequestHeaders.Accept.Add(new MediaTypeWithQualityHeaderValue("application/json"));
+            driver.DefaultRequestHeaders.Authorization = new AuthenticationHeaderValue("Bearer", Session["token"].ToString());
+
+            string firstPart = email.Split('.')[0];
+            string secondPart = email.Split('.')[1];
+            HttpResponseMessage response = await driver.GetAsync($"api/Driver/mail/{firstPart}/{secondPart}");
+            if (response.IsSuccessStatusCode)
+            {
+                s = await response.Content.ReadAsStringAsync();
+                Driver d = JsonConvert.DeserializeObject<Driver>(s);
+                return d;
+            }
+            return null;
+        }
+
 
     }
 }
