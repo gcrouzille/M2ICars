@@ -1,11 +1,9 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.ComponentModel.DataAnnotations;
 using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+using System.Web;
 
-namespace M2ICarsDAO
+namespace M2ICarsASP.Models
 {
     public class Driver
     {
@@ -22,7 +20,6 @@ namespace M2ICarsDAO
             PREMIUM
         }
 
-        [Key]
         public int DriverId { get; set; }
         public string Firstname { get; set; }
         public string Lastname { get; set; }
@@ -44,6 +41,5 @@ namespace M2ICarsDAO
         {
 
         }
-
     }
 }

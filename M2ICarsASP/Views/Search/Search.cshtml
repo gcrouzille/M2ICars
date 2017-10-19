@@ -1,0 +1,49 @@
+﻿@model M2ICarsASP.Models.SearchResultsViewModel
+@{
+    ViewBag.Title = "Search";
+}
+
+<h2>Search</h2>
+
+<section class="container">
+    <section class="col-md-3">
+        <h3>Choisissez un chauffeur</h3>
+        <p id="departure" hidden>@Model.departure</p>
+        <p id="arrival" hidden>@Model.arrival</p>
+
+        @using (@Html.BeginForm("SelectDriver", "Search", FormMethod.Post))
+        {
+            @Html.AntiForgeryToken()
+            
+            <div class="funkyradio">
+                @for (int i = 0; i < Model.Drivers.Count; i++)
+                {
+                    <div class="funkyradio-success" pos="@Model.Drivers[i].Location">
+                        @if (i == 0)
+                        {
+                            <input type="radio" name="driverRadio" id="@Model.Drivers[i].Lastname" value="@Model.Drivers[i].Lastname" checked/>
+                        }
+                        else
+                        {
+                            <input type="radio" name="driverRadio" id="@Model.Drivers[i].Lastname" value="@Model.Drivers[i].Lastname" />
+                        }
+
+                        <label for="@Model.Drivers[i].Lastname">@Model.Drivers[i].Lastname</label>
+                    </div>
+                }        
+            </div>
+            <div class="form-group">
+                <div class="col-md-offset-2 col-md-10">
+                    <input id="select" type="submit" value="Select" class="btn btn-default" />
+                </div>
+            </div>
+        }
+
+                
+    </section>
+    <section id="map" class="col-md-9"></section>    
+</section>
+
+<script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyCDjKjiTE-YwsyVbG2KY4VVJF5w3F7XWt8&callback=initMap"
+        async defer></script>
+<script src="~/Scripts/showDrivers.js"></script>
