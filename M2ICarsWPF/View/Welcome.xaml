@@ -4,6 +4,7 @@
         xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:M2ICarsWPF.ViewModel"
+        xmlns:ms="http://schemas.microsoft.com/xps/2005/06"
         mc:Ignorable="d"
         Title="Welcome" Height="800" Width="800" x:Name="welcome">
     <Window.DataContext>
@@ -24,7 +25,7 @@
                             <StackPanel  Orientation="Horizontal" Margin="0,5,0,10">
                                 
                                 <Label Content="Nom" Width="50"/>
-                                <TextBox Width="100"></TextBox>
+                                <TextBox Name="filt" Width="100"></TextBox>
                                 <Label Content="Prénom" Width="70"/>
                                 <TextBox  Width="100"></TextBox>
                                 <Label Content="Identifiant" Width="70"/>
@@ -43,9 +44,9 @@
                             <Button Content="ajouter client" Click="AddUser_Click" Width="100" HorizontalAlignment="Right" Margin="0,10,5,10"/>
                         </Label>
                     </DockPanel>
-                    
-                  
-                        <DataGrid ItemsSource="{Binding Users}" AutoGenerateColumns="False" >                           
+
+
+                    <DataGrid x:Name="dataUser" ItemsSource="{Binding Users}" AutoGenerateColumns="False" AlternatingRowBackground="Gainsboro"  AlternationCount="2">                           
                             <DataGrid.Columns>
                                 <DataGridTextColumn Header="Identifiant" Binding="{Binding UserId}" IsReadOnly="True"></DataGridTextColumn>
                                 <DataGridTextColumn Header="Nom" Binding="{Binding Lastname}" IsReadOnly="True"></DataGridTextColumn>
@@ -59,9 +60,36 @@
                                         </DataTemplate>
                                     </DataGridTemplateColumn.CellTemplate>
                                 </DataGridTemplateColumn>
-                            </DataGrid.Columns>                            
-                        </DataGrid>
-                  
+                        </DataGrid.Columns>
+                        <DataGrid.RowDetailsTemplate>
+                                <DataTemplate>
+                                    <DockPanel Background="GhostWhite">
+                                        <Image DockPanel.Dock="Left" Source="{Binding ImageUrl}" Height="64" Margin="10" />
+                                        <Grid Margin="0,10">
+                                            <Grid.ColumnDefinitions>
+                                                <ColumnDefinition Width="Auto" />
+                                                <ColumnDefinition Width="*" />
+                                            </Grid.ColumnDefinitions>
+                                            <Grid.RowDefinitions>
+                                                <RowDefinition Height="Auto" />
+                                                <RowDefinition Height="Auto" />
+                                                <RowDefinition Height="Auto" />
+                                            </Grid.RowDefinitions>
+
+                                            <TextBlock Text="ID: " FontWeight="Bold" />
+                                            <TextBlock Text="{Binding Id}" Grid.Column="1" />
+                                            <TextBlock Text="Name: " FontWeight="Bold" Grid.Row="1" />
+                                            <TextBlock Text="{Binding Name}" Grid.Column="1" Grid.Row="1" />
+                                            <TextBlock Text="Birthday: " FontWeight="Bold" Grid.Row="2" />
+                                            <TextBlock Text="{Binding Birthday, StringFormat=d}" Grid.Column="1" Grid.Row="2" />
+
+                                        </Grid>
+                                    </DockPanel>
+                                </DataTemplate>
+                            </DataGrid.RowDetailsTemplate>
+
+                                                 
+                        </DataGrid>                
                     
                 </StackPanel>
                 
@@ -82,7 +110,7 @@
                             <StackPanel  Orientation="Horizontal" Margin="0,5,0,10">
 
                                 <Label Content="Nom" Width="50"/>
-                                <TextBox Width="100"></TextBox>
+                                <TextBox Name="filtre" Width="100"></TextBox>
                                 <Label Content="Prénom" Width="70"/>
                                 <TextBox  Width="100"></TextBox>
                                 <Label Content="Identifiant" Width="70"/>
@@ -104,7 +132,7 @@
 
 
                     <ScrollViewer  >
-                        <DataGrid ItemsSource="{Binding Users}" AutoGenerateColumns="False" >
+                        <DataGrid Name="datagrid" ItemsSource="{Binding Users}" AutoGenerateColumns="False" AlternatingRowBackground="Gainsboro"  AlternationCount="2">
                             <DataGrid.Columns>
                                 <DataGridTextColumn Header="Identifiant" Binding="{Binding UserId}" IsReadOnly="True"></DataGridTextColumn>
                                 <DataGridTextColumn Header="Nom" Binding="{Binding Lastname}" IsReadOnly="True"></DataGridTextColumn>

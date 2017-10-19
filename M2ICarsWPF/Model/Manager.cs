@@ -28,27 +28,18 @@ namespace M2ICarsWPF
                 }
             }
         }
-
-
-
         private Manager()
         {
 
         }
 
-
         private List<User> users;
-        private List<Driver> drivers;
-        private List<Reservation> reservations;
-
         public List<User> Users { get => users; set => users = value; }
-        public List<Driver> Drivers { get => drivers; set => drivers = value; }
-        internal List<Reservation> Reservations { get => reservations; set => reservations = value; }
+     
 
 
         public async Task<List<User>> InfoUsers()
         {
-
             HttpClient client = new HttpClient();
             client.BaseAddress = new Uri("http://localhost:64548/");
             client.DefaultRequestHeaders.Accept.Clear();
@@ -62,27 +53,7 @@ namespace M2ICarsWPF
 
             }
             return Users;
-        }
-
-        public async Task<List<Driver>> InfoDriver()
-        {
-
-            HttpClient client = new HttpClient();
-            client.BaseAddress = new Uri("http://localhost:64548/");
-            client.DefaultRequestHeaders.Accept.Clear();
-            string s = null;
-            client.DefaultRequestHeaders.Accept.Add(new MediaTypeWithQualityHeaderValue("application/json"));
-            HttpResponseMessage response = await client.GetAsync($"api/Drivers");
-            if (response.IsSuccessStatusCode)
-            {
-                s = await response.Content.ReadAsStringAsync();
-                Drivers = JsonConvert.DeserializeObject<List<Driver>>(s);
-
-            }
-            return Drivers;
-        }
-
-     
+        }    
            
     }
         

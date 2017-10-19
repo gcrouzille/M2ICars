@@ -12,6 +12,7 @@ using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Shapes;
 using M2ICarsWPF.ViewModel;
+using M2ICarsWPF.View;
 
 namespace M2ICarsWPF
 {
@@ -33,12 +34,19 @@ namespace M2ICarsWPF
 
         private void Submit_Click(object sender, RoutedEventArgs e)
         {
+            User user = new User();
+            string text = filtre.Text;
+            Details details = new Details();
+            
 
         }
+            
 
         private void Detail_Click(object sender, RoutedEventArgs e)
         {
 
         }
+
+       
     }
 }
