@@ -64,6 +64,11 @@ namespace M2ICarsWPF
         {
            
         }
+
+        public override string ToString()
+        {
+            return Firstname + " " +Lastname;
+        }
     }
     
 }

@@ -34,5 +34,10 @@ namespace M2ICarsWPF
             PhotoUrl = photoUrl;
             Password = password;
         }
+
+        public override string ToString()
+        {
+            return Firstname + " " + Lastname;
+        }
     }
 }

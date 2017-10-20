@@ -43,7 +43,7 @@ namespace M2ICarsWPF
             string s = null;
             client.DefaultRequestHeaders.Accept.Add(new MediaTypeWithQualityHeaderValue("application/json"));
 
-            HttpResponseMessage response = await client.GetAsync($"api/Account/Admin/Authenticate?mail={username}&password={password}");            
+            HttpResponseMessage response = await client.GetAsync($"api/Account/Admin/Authenticate?mail={username}&password={password}");                        
             
             if (response.IsSuccessStatusCode)
             {
@@ -57,7 +57,7 @@ namespace M2ICarsWPF
             return false;
         }
 
-        public async Task<T> Request<T>(string type, string ressource)
+        public async Task<T> Request<T>(string type, string ressource, params T[] value)
         {
             HttpClient client = new HttpClient();
             client.BaseAddress = new Uri("http://localhost:64548/");
@@ -72,11 +72,17 @@ namespace M2ICarsWPF
                 case "GET":
                     response = await client.GetAsync(ressource);
                     break;
+                case "POST":
+                    response = await client.PostAsJsonAsync<T>(ressource, value[0]);
+                    break;
+                case "DELETE":
+                    response = await client.DeleteAsync(ressource);
+                    break;
                 default:
                     break;
             }
             T retour = default(T);
-            if (response.IsSuccessStatusCode)
+            if (response != null && response.IsSuccessStatusCode)
             {
                 s = await response.Content.ReadAsStringAsync();
                 retour = JsonConvert.DeserializeObject<T>(s);

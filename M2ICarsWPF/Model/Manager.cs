@@ -1,4 +1,6 @@
-﻿using Newtonsoft.Json;
+﻿using M2ICarsWPF.View;
+using M2ICarsWPF.ViewModel;
+using Newtonsoft.Json;
 using System;
 using System.Collections.Generic;
 
@@ -84,13 +86,32 @@ namespace M2ICarsWPF
 
         public void Initialize()
         {
-            // Initialisation de la liste des réservations
+            // Initialisation de la liste des réservations/users/drivers
             Task.Run(async () =>
             {
                 Reservations = await APIService.Instance.Request<List<Reservation>>("GET", "api/Reservations");
+                Users = await APIService.Instance.Request<List<User>>("GET", "api/User");
+                Drivers = await APIService.Instance.Request<List<Driver>>("GET", "api/Drivers");
             });
+        }
 
-            int i = 0;
+        public void AddReservation(Reservation r)
+        {
+            Reservations.Add(r);
+            (((App.Current.MainWindow as MainWindow).MainFrame.Content as ReservationManagement).DataContext as ReservationViewModel).Reservations.Add(r);
+            Task.Run(async () =>
+            {
+                await APIService.Instance.Request("POST", $"api/Reservations", r);
+            });
+        }
+
+        public void DeleteReservation(Reservation r)
+        {
+            Reservations.Remove(r);
+            Task.Run(async () =>
+            {
+                await APIService.Instance.Request<Reservation>("DELETE", $"api/Reservations/{r.ReservationId}");
+            });
         }
            
     }

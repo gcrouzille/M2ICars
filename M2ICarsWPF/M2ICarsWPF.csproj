@@ -87,9 +87,13 @@
     <Compile Include="Model\Reservation.cs" />
     <Compile Include="Model\User.cs" />
     <Compile Include="ViewModel\AddDriverViewModel.cs" />
+    <Compile Include="ViewModel\AddReservationViewModel.cs" />
     <Compile Include="ViewModel\AddUserViewModel.cs" />
     <Compile Include="ViewModel\ReservationViewModel.cs" />
     <Compile Include="ViewModel\WelcomeViewModel.cs" />
+    <Compile Include="View\AddReservation.xaml.cs">
+      <DependentUpon>AddReservation.xaml</DependentUpon>
+    </Compile>
     <Compile Include="View\Home.xaml.cs">
       <DependentUpon>Home.xaml</DependentUpon>
     </Compile>
@@ -103,6 +107,10 @@
       <DependentUpon>Welcome.xaml</DependentUpon>
     </Compile>
     <Page Include="View\AddDriver.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="View\AddReservation.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>

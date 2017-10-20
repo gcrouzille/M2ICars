@@ -1,4 +1,5 @@
-﻿using System;
+﻿using M2ICarsWPF.ViewModel;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -24,6 +25,35 @@ namespace M2ICarsWPF.View
         {
             InitializeComponent();
             
+        }
+
+        private void DataGrid_RowDetailsVisibilityChanged(object sender, DataGridRowDetailsEventArgs e)
+        {
+            if (e.Row.DetailsVisibility == Visibility.Visible)
+            { 
+                User user = Manager.Instance.Users.First(u => u.UserId == (e.Row.Item as Reservation).ClientId);
+                (this.DataContext as ReservationViewModel).SetClient(user);
+            }
+        }
+
+        private void DeleteReservation(object sender, RoutedEventArgs e)
+        {
+            MessageBoxResult result = MessageBox.Show("Etes vous sûr de vouloir supprimer cette réservation ?", "Confirmation", MessageBoxButton.OKCancel, MessageBoxImage.Warning);
+            if (result == MessageBoxResult.OK)
+            {
+                (this.DataContext as ReservationViewModel).DeleteReservation((Reservation)myDataGrid.SelectedItem);
+            }
+        }
+
+        private void EditReservation(object sender, RoutedEventArgs e)
+        {
+
+        }
+
+        private void AddReservation(object sender, RoutedEventArgs e)
+        {
+            AddReservation w = new AddReservation();
+            w.Show();
         }
     }
 }
