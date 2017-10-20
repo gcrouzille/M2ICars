@@ -89,17 +89,25 @@ namespace M2ICarsASP.Controllers
         }
 
         [HttpPost]
-        [ValidateAntiForgeryToken]
-        public ActionResult Register([Bind(Include = "ClientId, LastName, FirstName, Birthday, Gender, Phone, PhotoUrl, Email, Password")], Client client)
+        public ActionResult Register(Client c)
         {
-            if (ModelState.IsValid)
+            using (var client = new HttpClient())
             {
-                /*db.Users.Add(use);
-                db.SaveChanges();*/
-                return RedirectToAction("Index");
+                client.BaseAddress = new Uri("http://localhost:64548/api/Users");
+
+                var postTask = client.PostAsJsonAsync<Client>("Users", c);
+                postTask.Wait();
+
+                var result = postTask.Result;
+                if (result.IsSuccessStatusCode)
+                {
+                    return RedirectToAction("Index");
+                }
             }
 
-            return View();
+            ModelState.AddModelError(string.Empty, "Champ manquant ou imcomplet");
+
+            return View("Register");
         }
 
 
@@ -107,6 +115,29 @@ namespace M2ICarsASP.Controllers
         {
             return View();
         }
+
+        [HttpPost]
+        public ActionResult RegisterPrest(Driver d)
+        {
+            using(var client = new HttpClient())
+            {
+                client.BaseAddress = new Uri("http://localhost:64548/api/Drivers");
+
+                var postTask = client.PostAsJsonAsync<Driver>("Drivers", d);
+                postTask.Wait();
+
+                var result = postTask.Result;
+                if (result.IsSuccessStatusCode)
+                {
+                    return RedirectToAction("Index");
+                }
+            }
+
+            ModelState.AddModelError(string.Empty, "Champ manquant ou imcomplet");
+
+            return View("RegisterPrest");
+        }
+
 
         public ActionResult ForgotPassword()
         {

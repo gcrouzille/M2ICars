@@ -21,19 +21,36 @@ namespace M2ICarsASP.Models
 
         [Key]
         public int ClientId { get => clientId; set => clientId = value; }
+
         [Required]
+        [Display(Name ="Nom")]
         public string LastName { get => lastName; set => lastName = value; }
+
         [Required]
+        [Display(Name = "Prénom")]
         public string FirstName { get => firstName; set => firstName = value; }
+
+        [Display(Name = "Date de Naissance")]
         public DateTime Birthday { get => birthday; set => birthday = value; }
+
+        [Display(Name = "Genre")]
         public string Gender { get => gender; set => gender = value; }
+
         [Required]
+        [Display(Name = "Téléphone")]
         public string Phone { get => phone; set => phone = value; }
+
+        [Display(Name = "Photo")]
         public string PhotoUrl { get => photoUrl; set => photoUrl = value; }
+
         [Required]
         [DataType(DataType.EmailAddress)]
+        [Display(Name = "Adresse Email")]
         public string Email { get => email; set => email = value; }
+
+        [Required]
         [MinLength(4)]
+        [Display(Name = "Mot de Passe")]
         public string Password { get => password; set => password = value; }
       
 
