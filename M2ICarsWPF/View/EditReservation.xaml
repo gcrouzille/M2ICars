@@ -1,0 +1,51 @@
+﻿<Window x:Class="M2ICarsWPF.View.EditReservation"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:M2ICarsWPF.ViewModel"
+        mc:Ignorable="d"
+        Title="Modifier une Réservation" Height="450" Width="300" ResizeMode="NoResize">
+    <Window.DataContext>
+        <local:AddReservationViewModel></local:AddReservationViewModel>
+    </Window.DataContext>
+    <StackPanel Background="#FF567BA0">
+        <Label Content="Modifier une Réservation" FontSize="16" FontWeight="Bold" HorizontalContentAlignment="Center" Margin="0,5,0,15" Foreground="#FFFEFEFE" BorderBrush="#FFFEFEFE" BorderThickness="0,0,0,5" Padding="5,5,5,15"></Label>
+        <StackPanel Orientation="Horizontal" Margin="0,0,0,10">
+            <Label Width="70" Foreground="#FFFEFEFE" HorizontalContentAlignment="Right" Margin="0,0,10,0">Date</Label>
+            <DatePicker Width="200"  SelectedDate="{Binding Date}" VerticalContentAlignment="Center" HorizontalContentAlignment="Stretch" />
+        </StackPanel>
+        <StackPanel Orientation="Horizontal" Margin="0,0,0,10">
+            <Label Width="70" Foreground="#FFFEFEFE" HorizontalContentAlignment="Right" Margin="0,0,10,0">Statut</Label>
+            <ComboBox x:Name="StatutCB" Width="200" SelectedItem="{Binding Statut}"></ComboBox>
+        </StackPanel>
+        <StackPanel Orientation="Horizontal" Margin="0,0,0,10">
+            <Label Width="70" Foreground="#FFFEFEFE" HorizontalContentAlignment="Right" Margin="0,0,10,0">Départ</Label>
+            <TextBox Width="200" Text="{Binding DepartureLocation}" ></TextBox>
+        </StackPanel>
+        <StackPanel Orientation="Horizontal" Margin="0,0,0,10">
+            <Label Width="70" Foreground="#FFFEFEFE" HorizontalContentAlignment="Right" Margin="0,0,10,0">Arrivée</Label>
+            <TextBox Width="200" Text="{Binding ArrivalLocation}" ></TextBox>
+        </StackPanel>
+        <StackPanel Orientation="Horizontal" Margin="0,0,0,10">
+            <Label Width="70" Foreground="#FFFEFEFE" HorizontalContentAlignment="Right" Margin="0,0,10,0">Chauffeur</Label>
+            <ComboBox x:Name="DriverCB" Width="200" SelectedItem="{Binding Driver}"></ComboBox>
+        </StackPanel>
+        <StackPanel Orientation="Horizontal" Margin="0,0,0,10">
+            <Label Width="70" Foreground="#FFFEFEFE" HorizontalContentAlignment="Right" Margin="0,0,10,0">Client</Label>
+            <ComboBox x:Name="ClientCB" Width="200" SelectedItem="{Binding Client}"></ComboBox>
+        </StackPanel>
+        <StackPanel Orientation="Horizontal" Margin="0,0,0,10">
+            <Label Width="70" Foreground="#FFFEFEFE" HorizontalContentAlignment="Right" Margin="0,0,10,0">Durée</Label>
+            <TextBox Width="200" Text="{Binding Duration}" ></TextBox>
+        </StackPanel>
+        <StackPanel Orientation="Horizontal" Margin="0,0,0,10">
+            <Label Width="70" Foreground="#FFFEFEFE" HorizontalContentAlignment="Right" Margin="0,0,10,0">Prix</Label>
+            <TextBox Width="200" Text="{Binding Price}" ></TextBox>
+        </StackPanel>
+        <StackPanel Orientation="Horizontal" Width="300">
+            <Button Click="Cancel" Width="100" Height="30" Margin="33,15,33,0">Annuler</Button>
+            <Button Click="SaveReservation" Width="100" Height="30" Margin="0,15,0,0">Modifier</Button>
+        </StackPanel>
+    </StackPanel>
+</Window>

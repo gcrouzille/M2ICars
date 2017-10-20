@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace M2ICarsWPF
 {
-    class Reservation
+    public class Reservation
     {
         public enum statut
         {
@@ -27,7 +27,8 @@ namespace M2ICarsWPF
 
         public Reservation()
         {
-
+            Date = DateTime.Now;
+            Statut = statut.EN_ATTENTE;
         }
     }
 }
