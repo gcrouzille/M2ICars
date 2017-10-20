@@ -6,67 +6,42 @@ using System.Web;
 
 namespace M2ICarsASP.Models
 {
-    public class Driver
+    public class Client
     {
-        private int driverId;
+        private int clientId;
         private string lastName;
         private string firstName;
+        private string gender;
         private DateTime birthday;
         private string phone;
-        private string gender;
         private string photoUrl;
-        private string carBrand;
-        private string carType;
-        private string carModel;
-        private string immatriculation;
-        private bool registerState;
         private string email;
         private string password;
 
 
-
         [Key]
-        public int DriverId { get => driverId; set => driverId = value; }
+        public int ClientId { get => clientId; set => clientId = value; }
 
         [Required]
-        [Display(Name = "Nom")]
+        [Display(Name ="Nom")]
         public string LastName { get => lastName; set => lastName = value; }
 
         [Required]
         [Display(Name = "Prénom")]
         public string FirstName { get => firstName; set => firstName = value; }
 
-        [Display(Name = "Date De Naissance")]
+        [Display(Name = "Date de Naissance")]
         public DateTime Birthday { get => birthday; set => birthday = value; }
+
+        [Display(Name = "Genre")]
+        public string Gender { get => gender; set => gender = value; }
 
         [Required]
         [Display(Name = "Téléphone")]
         public string Phone { get => phone; set => phone = value; }
 
-        [Display(Name = "Genre")]
-        public string Gender { get => gender; set => gender = value; }
-
         [Display(Name = "Photo")]
         public string PhotoUrl { get => photoUrl; set => photoUrl = value; }
-
-        [Required]
-        [Display(Name = "Marque du véhicule")]
-        public string CarBrand { get => carBrand; set => carBrand = value; }
-
-        [Required]
-        [Display(Name = "Type de véhicule")]
-        public string CarType { get => carType; set => carType = value; }
-
-        [Required]
-        [Display(Name = "Modèle")]
-        public string CarModel { get => carModel; set => carModel = value; }
-
-        [Required]
-        [Display(Name = "N° Immatriculation")]
-        public string Immatriculation { get => immatriculation; set => immatriculation = value; }
-
-        [Display(Name = "Licence Validée")]
-        public bool RegisterState { get => registerState; set => registerState = value; }
 
         [Required]
         [DataType(DataType.EmailAddress)]
@@ -77,11 +52,11 @@ namespace M2ICarsASP.Models
         [MinLength(4)]
         [Display(Name = "Mot de Passe")]
         public string Password { get => password; set => password = value; }
+      
 
-        public Driver()
+        public Client()
         {
             PhotoUrl = "default.jpg";
         }
-    
     }
 }

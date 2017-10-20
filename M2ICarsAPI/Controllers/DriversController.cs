@@ -87,6 +87,23 @@ namespace M2ICarsAPI.Controllers
             return Ok(driver);
         }
 
+        // GET: api/Drivers/email
+        [ResponseType(typeof(Driver))]
+        [Route("api/Driver/mail/{email}/{com}")]
+        public IHttpActionResult GetDriver(string email, string com)
+        {
+            string recomposedMail = email + "." + com;
+            Driver driver = db.Drivers.First(u => u.Email == recomposedMail);
+            if (driver == null)
+            {
+                return NotFound();
+            }
+
+            return Ok(driver);
+        }
+
+
+
         // PUT: api/Drivers/5
         [ResponseType(typeof(void))]
         public IHttpActionResult PutDriver(int id, Driver driver)

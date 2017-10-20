@@ -37,6 +37,21 @@ namespace M2ICarsAPI.Controllers
             return Ok(user);
         }
 
+        // GET: api/User/5
+        [ResponseType(typeof(User))]
+        [Route("api/User/mail/{email}/{com}")]
+        public IHttpActionResult GetUser(string email, string com)
+        {
+            string recomposedMail = email+"."+com;
+            User user = db.Users.First(u => u.Email == recomposedMail);
+            if (user == null)
+            {
+                return NotFound();
+            }
+
+            return Ok(user);
+        }
+
         // PUT: api/User/5
         [ResponseType(typeof(void))]
         [Route("api/User/{Id}")]
