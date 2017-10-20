@@ -5,7 +5,7 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:M2ICarsWPF"
         mc:Ignorable="d"
-        Title="M2ICars-Admin" Height="835" Width="805">
+        Title="M2ICars-Admin" Height="835" Width="805" ResizeMode="NoResize">
     <StackPanel>
         <Frame x:Name="MainFrame" Source="Login.xaml" Height="800" Width="800" NavigationUIVisibility="Hidden">
             

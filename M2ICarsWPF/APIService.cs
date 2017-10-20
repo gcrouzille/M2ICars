@@ -75,6 +75,9 @@ namespace M2ICarsWPF
                 case "POST":
                     response = await client.PostAsJsonAsync<T>(ressource, value[0]);
                     break;
+                case "PUT":
+                    response = await client.PutAsJsonAsync<T>(ressource, value[0]);
+                    break;
                 case "DELETE":
                     response = await client.DeleteAsync(ressource);
                     break;

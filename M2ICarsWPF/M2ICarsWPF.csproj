@@ -94,6 +94,9 @@
     <Compile Include="View\AddReservation.xaml.cs">
       <DependentUpon>AddReservation.xaml</DependentUpon>
     </Compile>
+    <Compile Include="View\EditReservation.xaml.cs">
+      <DependentUpon>EditReservation.xaml</DependentUpon>
+    </Compile>
     <Compile Include="View\Home.xaml.cs">
       <DependentUpon>Home.xaml</DependentUpon>
     </Compile>
@@ -115,6 +118,10 @@
       <Generator>MSBuild:Compile</Generator>
     </Page>
     <Page Include="View\AddUser.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="View\EditReservation.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>

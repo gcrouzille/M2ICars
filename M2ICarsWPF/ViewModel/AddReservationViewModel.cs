@@ -29,12 +29,44 @@ namespace M2ICarsWPF.ViewModel
             Reservation = new Reservation();
         }
 
-        public void SaveReservation()
+        public void Initialize(Reservation r)
+        {
+            Reservation = r;
+            Driver = Manager.Instance.Drivers.First(d => d.DriverId == r.ReservationDriverId);
+            Client = Manager.Instance.Users.First(u => u.UserId == r.ClientId);
+            RaisePropertyChanged("Reservation");
+            RaisePropertyChanged("Date");
+            RaisePropertyChanged("Statut");
+            RaisePropertyChanged("DepartureLocation");
+            RaisePropertyChanged("ArrivalLocation");
+            RaisePropertyChanged("Driver");
+            RaisePropertyChanged("Client");
+            RaisePropertyChanged("Duration");
+            RaisePropertyChanged("Price");
+        }
+
+        public bool CheckForm()
+        {
+            if (DepartureLocation == "" || ArrivalLocation == "" || Driver == null || Client == null)
+                return false;
+
+            return true;
+        }
+
+        public void AddNewReservation()
         {
             Reservation.ReservationDriverId = Driver.DriverId;
             Reservation.ClientId = Client.UserId;
 
             Manager.Instance.AddReservation(Reservation);
+        }
+
+        public void SaveReservation()
+        {
+            Reservation.ReservationDriverId = Driver.DriverId;
+            Reservation.ClientId = Client.UserId;
+
+            Manager.Instance.SaveReservation(Reservation);
         }
 
         public override string ToString()

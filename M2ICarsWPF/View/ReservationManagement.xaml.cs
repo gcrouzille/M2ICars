@@ -32,7 +32,9 @@ namespace M2ICarsWPF.View
             if (e.Row.DetailsVisibility == Visibility.Visible)
             { 
                 User user = Manager.Instance.Users.First(u => u.UserId == (e.Row.Item as Reservation).ClientId);
+                Driver driver = Manager.Instance.Drivers.First(d => d.DriverId == (e.Row.Item as Reservation).ReservationDriverId);
                 (this.DataContext as ReservationViewModel).SetClient(user);
+                (this.DataContext as ReservationViewModel).SetDriver(driver);
             }
         }
 
@@ -47,7 +49,8 @@ namespace M2ICarsWPF.View
 
         private void EditReservation(object sender, RoutedEventArgs e)
         {
-
+            EditReservation w = new EditReservation(myDataGrid.SelectedItem as Reservation);
+            w.Show();
         }
 
         private void AddReservation(object sender, RoutedEventArgs e)
