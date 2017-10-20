@@ -38,7 +38,6 @@ namespace M2ICarsDAO
         public string CarBrand { get; set; }
         public string CarModel { get; set; }
         public TypeOfCar CarType { get; set; }
-        public string CarModel { get; set; }
         public string Immatriculation { get; set; }
 
         public Driver()
