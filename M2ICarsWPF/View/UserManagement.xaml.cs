@@ -10,18 +10,17 @@ using System.Windows.Documents;
 using System.Windows.Input;
 using System.Windows.Media;
 using System.Windows.Media.Imaging;
+using System.Windows.Navigation;
 using System.Windows.Shapes;
-using M2ICarsWPF.ViewModel;
-using M2ICarsWPF.View;
 
-namespace M2ICarsWPF
+namespace M2ICarsWPF.View
 {
     /// <summary>
-    /// Logique d'interaction pour Welcome.xaml
+    /// Logique d'interaction pour UserManagement.xaml
     /// </summary>
-    public partial class Welcome : Window
+    public partial class UserManagement : Page
     {
-        public Welcome()
+        public UserManagement()
         {
             InitializeComponent();
         }
@@ -32,21 +31,15 @@ namespace M2ICarsWPF
             a.Show();
         }
 
-        private void Submit_Click(object sender, RoutedEventArgs e)
-        {
-            User user = new User();
-            string text = filtre.Text;
-            Details details = new Details();
-            
-
-        }
-            
-
-        private void Detail_Click(object sender, RoutedEventArgs e)
+        private void Recherche_Click(object sender, RoutedEventArgs e)
         {
 
         }
 
-       
+        private void Retour_Click(object sender, RoutedEventArgs e)
+        {
+            Home home = new Home();
+            NavigationService.Navigate(home);
+        }
     }
 }

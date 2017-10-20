@@ -15,11 +15,11 @@ using System.Windows.Shapes;
 namespace M2ICarsWPF.View
 {
     /// <summary>
-    /// Logique d'interaction pour Details.xaml
+    /// Logique d'interaction pour PutUser.xaml
     /// </summary>
-    public partial class Details : Window
+    public partial class PutUser : Window
     {
-        public Details()
+        public PutUser()
         {
             InitializeComponent();
         }

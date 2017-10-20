@@ -103,11 +103,11 @@
     <Compile Include="Model\User.cs" />
     <Compile Include="ViewModel\AddDriverViewModel.cs" />
     <Compile Include="ViewModel\AddUserViewModel.cs" />
-    <Compile Include="ViewModel\DetailsViewModel.cs" />
+    <Compile Include="ViewModel\DriverViewModel.cs" />
     <Compile Include="ViewModel\ReservationViewModel.cs" />
-    <Compile Include="ViewModel\WelcomeViewModel.cs" />
-    <Compile Include="View\Details.xaml.cs">
-      <DependentUpon>Details.xaml</DependentUpon>
+    <Compile Include="ViewModel\UserViewModel.cs" />
+    <Compile Include="View\DriverManagement.xaml.cs">
+      <DependentUpon>DriverManagement.xaml</DependentUpon>
     </Compile>
     <Compile Include="View\Home.xaml.cs">
       <DependentUpon>Home.xaml</DependentUpon>
@@ -115,11 +115,14 @@
     <Compile Include="View\Login.xaml.cs">
       <DependentUpon>Login.xaml</DependentUpon>
     </Compile>
+    <Compile Include="View\PutUser.xaml.cs">
+      <DependentUpon>PutUser.xaml</DependentUpon>
+    </Compile>
     <Compile Include="View\ReservationManagement.xaml.cs">
       <DependentUpon>ReservationManagement.xaml</DependentUpon>
     </Compile>
-    <Compile Include="View\Welcome.xaml.cs">
-      <DependentUpon>Welcome.xaml</DependentUpon>
+    <Compile Include="View\UserManagement.xaml.cs">
+      <DependentUpon>UserManagement.xaml</DependentUpon>
     </Compile>
     <Page Include="View\AddDriver.xaml">
       <SubType>Designer</SubType>
@@ -129,7 +132,7 @@
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
-    <Page Include="View\Details.xaml">
+    <Page Include="View\DriverManagement.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
@@ -159,11 +162,15 @@
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
+    <Page Include="View\PutUser.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
     <Page Include="View\ReservationManagement.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
-    <Page Include="View\Welcome.xaml">
+    <Page Include="View\UserManagement.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>

@@ -1,25 +1,18 @@
 ﻿using GalaSoft.MvvmLight;
-using GalaSoft.MvvmLight.Command;
-using M2ICarsWPF;
-using Newtonsoft.Json;
-using Newtonsoft.Json.Linq;
 using System;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.Linq;
-using System.Net.Http;
-using System.Net.Http.Headers;
 using System.Text;
 using System.Threading.Tasks;
-using System.Windows;
 
 namespace M2ICarsWPF.ViewModel
 {
-    class WelcomeViewModel : ViewModelBase
+    class UserViewModel:ViewModelBase
     {
         private Manager manager = Manager.Instance;
 
-#region user
+        #region user
         private ObservableCollection<User> users;
         public ObservableCollection<User> Users { get => users; set { users = value; RaisePropertyChanged("Users"); } }
 
@@ -34,28 +27,11 @@ namespace M2ICarsWPF.ViewModel
         public string Email { get => User.Email; set { User.Email = value; RaisePropertyChanged("Email"); } }
 
 
-#endregion
-        
-        public WelcomeViewModel()
-        {            
-            Task.Run(async() => {
-                List<User> managerUsers = await manager.InfoUsers();
-                Users = new ObservableCollection<User>(managerUsers);                
-            });         
+        #endregion
+
+        public UserViewModel()
+        {
+            Users = new ObservableCollection<User>(Manager.Instance.Users);
         }
-        
     }
-
 }
-
-        
-    
-
-    
-    
-   
-
-
-
-    
-

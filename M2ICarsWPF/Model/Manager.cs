@@ -33,57 +33,73 @@ namespace M2ICarsWPF
 
         }
 
-        private List<User> users;
-        public List<User> Users { get => users; set => users = value; }
-     
+        public List<Reservation> Reservations { get; set; }
+        public List<User> Users { get; set; }
+        public List<Driver> Drivers { get; set; }
 
 
-        public async Task<List<User>> InfoUsers()
-        {
-            HttpClient client = new HttpClient();
-            client.BaseAddress = new Uri("http://localhost:64548/");
-            client.DefaultRequestHeaders.Accept.Clear();
-            string s = null;
-            client.DefaultRequestHeaders.Accept.Add(new MediaTypeWithQualityHeaderValue("application/json"));
-            HttpResponseMessage response = await client.GetAsync($"api/User");
-            if (response.IsSuccessStatusCode)
-            {
-                s = await response.Content.ReadAsStringAsync();
-                Users = JsonConvert.DeserializeObject<List<User>>(s);
-
-            }
-            return Users;
-        }
-
-        public async Task<List<Driver>> InfoDriver()
-        {
-
-            HttpClient client = new HttpClient();
-            client.BaseAddress = new Uri("http://localhost:64548/");
-            client.DefaultRequestHeaders.Accept.Clear();
-            string s = null;
-            client.DefaultRequestHeaders.Accept.Add(new MediaTypeWithQualityHeaderValue("application/json"));
-            HttpResponseMessage response = await client.GetAsync($"api/Drivers");
-            if (response.IsSuccessStatusCode)
-            {
-                s = await response.Content.ReadAsStringAsync();
-                Drivers = JsonConvert.DeserializeObject<List<Driver>>(s);
-
-            }
-            return Drivers;
-        }
+   
 
         public void Initialize()
         {
-            // Initialisation de la liste des réservations
+            //Initialisation de la liste des réservations
             Task.Run(async () =>
             {
                 Reservations = await APIService.Instance.Request<List<Reservation>>("GET", "api/Reservations");
+                Users = await APIService.Instance.Request<List<User>>("GET", "api/USer");
+                Drivers = await APIService.Instance.Request<List<Driver>>("GET", "api/Drivers");
+                
+            });
+         }
+
+#region driver
+        public void AddDriver(Driver driver)
+        {
+            _instance.Drivers.Add(driver);
+            Task.Run(async () =>
+            {                
+                driver = await APIService.Instance.Request<Driver>("POST", "api/Drivers");
+
             });
 
-            int i = 0;
         }
-           
+
+        #endregion
+
+#region User
+        public void AddUser(User user)
+        {
+            _instance.Users.Add(user);
+            Task.Run(async () =>
+            {
+                await APIService.Instance.Request<User>("POST", "api/Users");
+
+            });
+        }
+
+        public void DeleteUser(User user)
+        {
+            _instance.Users.Add(user);
+            Task.Run(async () =>
+            {
+                await APIService.Instance.Request<User>("DELETE", "api/Users");
+
+            });
+        }
+
+        public void PutUser(User user)
+        {
+            _instance.Users.Add(user);
+            Task.Run(async () =>
+            {
+                await APIService.Instance.Request<User>("PUT", "api/Users");
+
+            });
+        }
+
+#endregion
+
+
     }
         
     
