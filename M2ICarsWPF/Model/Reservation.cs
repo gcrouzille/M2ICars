@@ -27,7 +27,8 @@ namespace M2ICarsWPF
 
         public Reservation()
         {
-
+            Date = DateTime.Now;
+            Statut = statut.EN_ATTENTE;
         }
     }
 }

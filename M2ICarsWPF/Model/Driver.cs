@@ -61,7 +61,10 @@ namespace M2ICarsWPF
             Immatriculation = immatriculation;
         }
 
-       
+        public override string ToString()
+        {
+            return Firstname + " " +Lastname;
+        }
     }
     
 }

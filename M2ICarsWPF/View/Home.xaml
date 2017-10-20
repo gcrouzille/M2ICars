@@ -9,9 +9,9 @@
       Title="Home">
 
     <StackPanel Background="#FF6B9BCB">
-        <Label HorizontalAlignment="Center" FontSize="22" Margin="0,146,0,0">Bienvenue</Label>
-        <Button Width="200" Height="40" Margin="0,100,0,20" Click="ManageUser">Gestion Clients</Button>
-        <Button Width="200" Height="40" Margin="0,0,0,20" Click="ManageDriver">Gestion Chauffeurs</Button>
+        <Label HorizontalAlignment="Center" FontSize="36" Margin="0,50,0,0" Foreground="#FFFEFEFE" BorderBrush="#FFFEFEFE" FontWeight="Bold" BorderThickness="0,0,0,5" Width="800" HorizontalContentAlignment="Center" Padding="5,5,5,15">Bienvenue</Label>
+        <Button Width="200" Height="40" Margin="0,100,0,20">Gestion Clients</Button>
+        <Button Width="200" Height="40" Margin="0,0,0,20">Gestion Chauffeurs</Button>
         <Button Width="200" Height="40" Click="ManageReservation">Gestion Réservations</Button>
     </StackPanel>
 </Page>

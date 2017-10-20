@@ -13,11 +13,11 @@
         <StackPanel Margin="0,150,0,0">
             <StackPanel Orientation="Horizontal" Margin="20,0,0,25" HorizontalAlignment="Center">
                 <Label Width="100" BorderThickness="1,1,0,1" BorderBrush="#FFABADB3" Background="#FFE6E6E6" HorizontalContentAlignment="Center">Identifiant</Label>
-                <TextBox x:Name="username" Width="200" Height="30" VerticalAlignment="Center" VerticalContentAlignment="Center" Text="admin@m2icars.com"/>
+                <TextBox x:Name="username" Width="200" Height="30" VerticalAlignment="Center" VerticalContentAlignment="Center" Text="admin@m2icars.com" Padding="5,0,0,0"/>
             </StackPanel>
             <StackPanel Orientation="Horizontal" Margin="20,0,0,25" HorizontalAlignment="Center">
                 <Label Width="100" Background="#FFE6E6E9" BorderBrush="#FFABADB3" BorderThickness="1,1,0,1" SnapsToDevicePixels="True" HorizontalContentAlignment="Center">Mot de passe</Label>
-                <PasswordBox x:Name="password" Width="200" Height="30" VerticalAlignment="Center" VerticalContentAlignment="Center" Password="pass"/>
+                <PasswordBox x:Name="password" Width="200" Height="30" VerticalAlignment="Center" VerticalContentAlignment="Center" Password="pass" Padding="5,0,0,0"/>
             </StackPanel>
             <Button x:Name="Connexion" Margin="415,0,240,0" Height="30" Content="Log In" Click="LoginRequest" FontSize="16"/>
         </StackPanel>
