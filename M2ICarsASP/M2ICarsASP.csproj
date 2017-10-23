@@ -158,6 +158,7 @@
     </Compile>
     <Compile Include="Models\Client.cs" />
     <Compile Include="Models\Driver.cs" />
+    <Compile Include="Models\Reservation.cs" />
     <Compile Include="Models\SearchResultsViewModel.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
@@ -267,6 +268,8 @@
     <Content Include="Views\Home\DriverAccount.cshtml" />
     <Content Include="Views\Search\Index.cshtml" />
     <Content Include="Views\Search\Search.cshtml" />
+    <Content Include="Views\Search\Paiement.cshtml" />
+    <Content Include="Views\Search\ReservationValidated.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

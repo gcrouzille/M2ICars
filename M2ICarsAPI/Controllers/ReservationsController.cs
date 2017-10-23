@@ -9,6 +9,7 @@ using System.Net.Http;
 using System.Web.Http;
 using System.Web.Http.Description;
 using M2ICarsDAO;
+using M2ICarsAPI.Controllers.JWT;
 
 namespace M2ICarsAPI.Controllers
 {
@@ -94,6 +95,7 @@ namespace M2ICarsAPI.Controllers
 
         // POST: api/Reservations
         [ResponseType(typeof(Reservation))]
+        [TokenAuthenticate(MemberShipProvider.Role.USER)]
         public IHttpActionResult PostReservation(Reservation reservation)
         {
             if (!ModelState.IsValid)

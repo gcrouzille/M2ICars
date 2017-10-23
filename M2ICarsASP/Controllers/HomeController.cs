@@ -38,11 +38,9 @@ namespace M2ICarsASP.Controllers
                 Session["token"] = token;
                 Client cli = null;
                 cli = await GetUser(email);
+                Session["clientId"] = cli.UserId;
 
-                //ViewBag.alert = "auth-success";
-                ViewBag.script = "ClientAccount.js";
-                return View("ClientAccount", cli);
-                // vue ecran connecté
+                return RedirectToAction("Index", "Search");
             }
         }
 

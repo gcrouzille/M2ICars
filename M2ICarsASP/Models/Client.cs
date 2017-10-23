@@ -20,7 +20,7 @@ namespace M2ICarsASP.Models
 
 
         [Key]
-        public int ClientId { get => clientId; set => clientId = value; }
+        public int UserId { get => clientId; set => clientId = value; }
 
         [Required]
         [Display(Name ="Nom")]
