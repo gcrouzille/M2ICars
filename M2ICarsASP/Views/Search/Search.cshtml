@@ -3,24 +3,21 @@
     ViewBag.Title = "Search";
 }
 
-<h2>Search</h2>
-
-<section class="container">
-    <section class="col-md-3">
+<section class="container search-container">
+    <div class="col-md-3">
         <h3>Choisissez un chauffeur</h3>
-        <p id="departure" hidden>@Model.departure</p>
-        <p id="arrival" hidden>@Model.arrival</p>
-        @using (@Html.BeginForm("SelectDriver", "Search", FormMethod.Post))
+        <hr />
+        @using (@Html.BeginForm("SelectDriver", "Search", FormMethod.Post, new { @class = "driver-form" }))
         {
             @Html.AntiForgeryToken()
             
-            <div class="funkyradio">
+            <div class="funkyradio driver-list">
                 @for (int i = 0; i < Model.Drivers.Count; i++)
                 {
                     <input type="hidden" name="driverId" value="@Model.Drivers[i].DriverId"/>
                     <input type="hidden" name="departureLocation" value="@Model.departure"/>
                     <input type="hidden" name="arrivalLocation" value="@Model.arrival"/>
-                    <div class="funkyradio-success" pos="@Model.Drivers[i].Location">
+                    <div class="funkyradio-success driver" pos="@Model.Drivers[i].Location">
                         @if (i == 0)
                         {
                             <input type="radio" name="driverRadio" id="@Model.Drivers[i].LastName" value="@Model.Drivers[i].LastName" checked/>
@@ -35,17 +32,15 @@
                 }        
             </div>
             <div class="form-group">
-                <div class="col-md-offset-2 col-md-10">
+                <div class="col-10">
                     <input id="select" type="submit" value="Select" class="btn btn-default" />
                 </div>
             </div>
         }
-
-                
-    </section>
+        <span id="departure" hidden>@Model.departure</span>
+        <span id="arrival" hidden>@Model.arrival</span>                
+    </div>
     <section id="map" class="col-md-9"></section> 
-    @*<script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyCDjKjiTE-YwsyVbG2KY4VVJF5w3F7XWt8&callback=initMap"
-            async defer></script>
-    <script src="~/Scripts/showDrivers.js"></script>*@   
+    <img src="~/Content/Images/search.jpg" />
 </section>
 

@@ -3,6 +3,17 @@
     ViewBag.Title = "Fin de réservation";
 }
 
-<h2>Félicitations !</h2>
-<p>Votre chauffeur a été prévenu et va bientôt venir vous chercher au lieu de départ !</p>
-
+<section class="container validated-container">
+    @if (ViewBag.Result == "OK")
+    {
+        <h2>Félicitations !</h2>
+        <p>Votre chauffeur a été prévenu et va bientôt venir vous chercher au lieu de départ !</p>
+        <p>Une notification vous sera envoyé lorsque le chauffeur sera à proximité.</p>
+        @Html.ActionLink("Revenir à l'accueil", "Index", "Search", new { area = "" }, new { @class = "" })
+    }
+    else
+    {
+        <h2>Erreur !</h2>
+        <p>Votre réservation n'a pu aboutir, veuillez réessayer ultérieurement</p>
+    }
+</section>

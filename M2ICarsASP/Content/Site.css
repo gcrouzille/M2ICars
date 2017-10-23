@@ -81,12 +81,37 @@ body .paiement-container {
     padding: 0px 15px;
 }
 
+body .paiement-container form div{
+    margin: 15px 0px;
+}
 
-/*RESEARCH*/
-body .search-container{
+body .paiement-container form label{
+    margin: 0px 15px;
+}
+
+/* VALIDATED*/
+body .validated-container {
     height: 100vh;
     background-color: white;
-    padding: 0px 0px;
+}
+
+/*RESEARCH*/
+body .user-infos-section {
+    padding: 15px 15px;
+}
+
+body .search-container {
+    height: 100%;
+    background-color: white;
+    padding: 0px 0px 15px 0px;
+    margin-bottom: 15px;
+}
+body .search-container .driver-form {
+    margin: 0px 0px;
+    padding: 5px 5px;
+}
+body .search-container .driver-list{
+    padding: 0px 0px 15px 0px;
 }
 
 body .search-container h2 {
@@ -94,7 +119,8 @@ body .search-container h2 {
 }
 
 body .search-container .map-section {    
-    padding: 0px 15px;
+    padding: 15px 15px;
+    height: 475px;
 }
 
 .search-container img {
