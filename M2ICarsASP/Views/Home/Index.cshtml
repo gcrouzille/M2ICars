@@ -1,69 +1,60 @@
 ﻿@{
-    ViewBag.Title = "Index";
+    ViewBag.Title = "Connexion";
 }
 
-<!DOCTYPE html>
-
-<html lang="fr">
-
-    <head>
-
-        <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-beta/css/bootstrap.min.css" integrity="sha384-/Y6pD6FV/Vv2HJnA6t+vslU6fwYXjCFtcEpHbNJ0lyAFsXTsjBbfaDjzALeQsN6M" crossorigin="anonymous">
-        <meta name="viewport" content="width=device-width" initial-scale=1, shrink-to-fit="no" />
-
-        <title>Accueil</title>
-
-    </head>
-
-    <body>
-
-        <div class="form-container">
-
-        @using (Html.BeginForm("Login", "Home", FormMethod.Post, new { enctype = "multipart/form-data" }))
+<section class="container homeContainer">
+    <h2>Connexion</h2>
+    <div class="form-container col-md-6">
+        <h3>Passager</h3>
+        <p>Retrouvez toutes les informations dont vous avez besoin pour réussir sur la route et réserver le trajet qui vous convient</p>
+        @using (Html.BeginForm("Index", "Search", FormMethod.Post, new { enctype = "multipart/form-data" }))
         {
-             @Html.AntiForgeryToken()
-
-             <div class="row">
-                <div class="col">Email : </div>
-                <div class="col"><input type="text" name="email" value="Votre adresse email"/></div>
-             </div>
-
-             <div class="row">
-                <div class="col">Mot de passe : </div>
-                <div class="col"><input type="password" name="pass"/></div>
-             </div>
-
-             <div class="row">
-                <input type="submit" class="btn btn-primary" value="Se connecter sur Compte Client" />
-                 @Html.ActionLink("Créer Compte Client", "Register", "Home", new { area = "" }, new { @class = "btn btn-primary" })
-             </div>
-         }
-
-            <br/> <br/>
-
-         @using (Html.BeginForm("LoginPrest", "Home", FormMethod.Post, new { enctype = "multipart/form-data" }))
-         {
             @Html.AntiForgeryToken()
 
-            <div class="row">
-                <div class="col">Email : </div>
-                <div class="col"><input type="text" name="prestemail" value="Votre adresse email" /></div>
+            <div class="col-10">
+                <label>Email</label>
+                <input class="form-control" type="text" name="email" placeholder="Votre adresse email" />
             </div>
 
-            <div class="row">
-                <div class="col">Mot de passe : </div>
-                <div class="col"><input type="password" name="prestpass" /></div>
+            <div class="col-10">
+                <label>Mot de passe</label>
+                <input class="form-control" type="password" name="pass" placeholder="Votre mot de passe" />
             </div>
 
-            <div class="row">
-                <input type="submit" class="btn btn-primary" value="Se connecter sur Compte Prestataire" />
-                @Html.ActionLink("Créer Compte Prestataire", "RegisterPrest", "Home", new { area = "" }, new { @class = "btn btn-primary" })
+            <div class="col-10">
+                <input type="submit" class="btn btn-primary" value="Se connecter" />                
             </div>
-         }
+            <div class="home-register">
+                <span>Vous n'avez pas de compte ? </span>
+                @Html.ActionLink("S'inscrire", "Register", "Home", new { area = "" }, new { @class = "" })
+            </div>
+        }
+    </div>
+    <div class="form-container col-md-6">
+        <h3>Conducteur</h3>
+        <p>Gérez vos options de paiement, parcourez l'historique de vos courses et bien plus encore.</p>
+        @using (Html.BeginForm("LoginPrest", "Home", FormMethod.Post, new { enctype = "multipart/form-data" }))
+        {
+            @Html.AntiForgeryToken()
 
+            <div class="col-10">
+                <label>Email</label>
+                <input class="form-control" type="text" name="prestemail" placeholder="Votre adresse email" />
+            </div>
 
-        </div>
+            <div class="col-10">
+                <label>Mot de passe</label>
+                <input class="form-control" type="password" name="prestpass" placeholder="Votre mot de passe" />
+            </div>
 
-    </body>
-
-</html>
+            <div class="col-10">
+                <input type="submit" class="btn btn-primary" value="Se connecter" />
+            </div>
+            <div class="home-register">
+                <span>Vous n'avez pas de compte ? </span>
+                @Html.ActionLink("S'inscrire", "RegisterPrest", "Home", new { area = "" }, new { @class = "" })
+            </div>
+        }
+    </div>
+    <img src="~/Content/Images/home.jpg" />
+</section>
