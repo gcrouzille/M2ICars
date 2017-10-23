@@ -113,6 +113,9 @@
     <Compile Include="View\AddReservation.xaml.cs">
       <DependentUpon>AddReservation.xaml</DependentUpon>
     </Compile>
+    <Compile Include="View\EditDriver.xaml.cs">
+      <DependentUpon>EditDriver.xaml</DependentUpon>
+    </Compile>
     <Compile Include="View\EditReservation.xaml.cs">
       <DependentUpon>EditReservation.xaml</DependentUpon>
     </Compile>
@@ -144,6 +147,10 @@
       <Generator>MSBuild:Compile</Generator>
     </Page>
     <Page Include="View\DriverManagement.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="View\EditDriver.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>

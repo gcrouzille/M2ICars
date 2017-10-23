@@ -8,9 +8,12 @@
       d:DesignHeight="800" d:DesignWidth="790"
       Title="Page2">
     
-    <StackPanel Background="#FF6B9BCB">
+    <StackPanel Background="#FF6B9BCB">        
         <Label Content="Gestion des Réservations" FontSize="20" FontWeight="Bold" HorizontalContentAlignment="Center" Margin="0,25,0,15" Foreground="#FFFEFEFE" BorderBrush="#FFFEFEFE" BorderThickness="0,0,0,5" Padding="5,5,5,15"></Label>
-        <Button Click="AddReservation" Width="25" Height="25" Margin="0,0,10,15" HorizontalAlignment="Right" FontSize="20" Background="#FFFEFEFE" Foreground="#FF6B9BCB" FontWeight="Bold">+</Button>
+        <StackPanel Orientation="Horizontal"  HorizontalAlignment="Right">
+            <Button Click="AddReservation" Width="25" Height="25" Margin="0,0,10,15" HorizontalAlignment="Right" FontSize="20" Background="#FFFEFEFE" Foreground="#FF6B9BCB" FontWeight="Bold">+</Button>
+            <Button Content="&#x2190;" Click="Cancel" Width="25" Height="25" Margin="0,0,20,15" HorizontalAlignment="Right" FontSize="20" Background="#FFFEFEFE" Foreground="#FF6B9BCB" FontWeight="Bold"></Button>
+        </StackPanel>
         <DataGrid x:Name="myDataGrid" ItemsSource="{Binding Reservations}" AutoGenerateColumns="False" RowDetailsVisibilityChanged="DataGrid_RowDetailsVisibilityChanged" CanUserAddRows="false">
             <DataGrid.Columns>
                 <DataGridTextColumn Header="Date" Binding="{Binding Date}" IsReadOnly="True" CanUserResize="False" Width="70">
