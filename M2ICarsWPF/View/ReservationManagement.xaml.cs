@@ -53,6 +53,12 @@ namespace M2ICarsWPF.View
             w.Show();
         }
 
+        private void Cancel(object sender, RoutedEventArgs e)
+        {
+            Home h = new Home();
+            NavigationService.Navigate(h);
+        }
+
         private void AddReservation(object sender, RoutedEventArgs e)
         {
             AddReservation w = new AddReservation();

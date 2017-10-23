@@ -58,15 +58,16 @@ namespace M2ICarsWPF
         public void AddDriver(Driver driver)
         {
             Drivers.Add(driver);
+            (((App.Current.MainWindow as MainWindow).MainFrame.Content as DriverManagement).DataContext as DriverViewModel).Drivers.Add(driver);
             Task.Run(async () =>
             {                
-                driver = await APIService.Instance.Request<Driver>("POST", "api/Drivers");
+                driver = await APIService.Instance.Request("POST", "api/Drivers",driver);
 
             });
 
         }
 
-        public void SaveUser(Driver driver)
+        public void SaveDriver(Driver driver)
         {
             int i = Drivers.IndexOf(driver);
             Drivers.Remove(driver);

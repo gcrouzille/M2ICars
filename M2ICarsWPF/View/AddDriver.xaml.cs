@@ -21,6 +21,8 @@ namespace M2ICarsWPF
     /// </summary>
     public partial class AddDriver : Window
     {
+        
+
         public AddDriver()
         {
             InitializeComponent();
@@ -28,14 +30,15 @@ namespace M2ICarsWPF
 
         }
 
-        private void Cancel_Click(object sender, RoutedEventArgs e)
+        private void Cancel(object sender, RoutedEventArgs e)
         {
             this.Close();
         }
 
-        public AddDriver(Window FenetrePrincipale) : this()
+        private void SaveDriver(object sender, RoutedEventArgs e)
         {
-            (DataContext as AddDriverViewModel).Wp = FenetrePrincipale;
+            (this.DataContext as AddDriverViewModel).AddNewDriver();
+            this.Close();
         }
     }
 }

@@ -1,4 +1,5 @@
-﻿using System;
+﻿using M2ICarsWPF.ViewModel;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -23,19 +24,34 @@ namespace M2ICarsWPF.View
         public DriverManagement()
         {
             InitializeComponent();
-            
+
         }
 
-        private void AddDriver_Click(object sender, RoutedEventArgs e)
+        private void DeleteDriver(object sender, RoutedEventArgs e)
         {
-            AddDriver a = new AddDriver();
-            a.Show();
+            MessageBoxResult result = MessageBox.Show("Etes vous sûr de vouloir supprimer cette réservation ?", "Confirmation", MessageBoxButton.OKCancel, MessageBoxImage.Warning);
+            if (result == MessageBoxResult.OK)
+            {
+                (this.DataContext as DriverViewModel).DeleteDriver((Driver)DataDriver.SelectedItem);
+            }
         }
 
-        private void Retour_Click(object sender, RoutedEventArgs e)
+        private void EditDriver(object sender, RoutedEventArgs e)
         {
-            Home home = new Home();
-            NavigationService.Navigate(home);
+            EditDriver w = new EditDriver(DataDriver.SelectedItem as Driver);
+            w.Show();
+        }
+
+        private void Cancel(object sender, RoutedEventArgs e)
+        {
+            Home h = new Home();
+            NavigationService.Navigate(h);
+        }
+
+        private void AddDriver(object sender, RoutedEventArgs e)
+        {
+            AddDriver w = new AddDriver();
+            w.Show();
         }
     }
 }

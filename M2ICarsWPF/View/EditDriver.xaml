@@ -1,11 +1,11 @@
-﻿<Window x:Class="M2ICarsWPF.AddDriver"
+﻿<Window x:Class="M2ICarsWPF.View.EditDriver"
         xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
         xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
         xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:M2ICarsWPF.ViewModel"
         mc:Ignorable="d"
-        Title="Ajouter Chauffeur" Height="420" Width="600" ResizeMode="NoResize">
+         Title="Modifier Driver" Height="420" Width="600" ResizeMode="NoResize">
     <Window.DataContext>
         <local:AddDriverViewModel></local:AddDriverViewModel>
     </Window.DataContext>
@@ -15,8 +15,9 @@
             <ColumnDefinition />
             <ColumnDefinition />
         </Grid.ColumnDefinitions>
+
         <StackPanel Grid.Row = "0" Grid.Column="0" Background="#FF567BA0">
-            <Label Content="Ajouter un chauffeur" FontSize="16" FontWeight="Bold" HorizontalContentAlignment="Center" Margin="0,5,0,15" Foreground="#FFFEFEFE" BorderBrush="#FFFEFEFE" BorderThickness="0,0,0,5" Padding="5,5,5,15"></Label>
+            <Label Content="Ajouter un client" FontSize="16" FontWeight="Bold" HorizontalContentAlignment="Center" Margin="0,5,0,15" Foreground="#FFFEFEFE" BorderBrush="#FFFEFEFE" BorderThickness="0,0,0,5" Padding="5,5,5,15"></Label>
             <StackPanel Orientation="Horizontal" Margin="0,0,0,10">
                 <Label Width="70" Foreground="#FFFEFEFE" HorizontalContentAlignment="Right" Margin="0,0,10,0">Prénom</Label>
                 <TextBox Width="200"  Text="{Binding Firstname}" VerticalContentAlignment="Center" HorizontalContentAlignment="Stretch" />
@@ -72,5 +73,7 @@
                 <Button Click="SaveDriver" Width="100" Height="30" Margin="0,15,0,0">Ajouter</Button>
             </StackPanel>
         </StackPanel>
+
     </Grid>
 </Window>
+

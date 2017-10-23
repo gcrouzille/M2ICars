@@ -40,7 +40,9 @@ namespace M2ICarsWPF
 
             public Driver()
             {
-
+            Birthday= DateTime.Now;
+            Availability = Available.DISPO;
+            RegisterState = false;
             }
 
         public Driver(int driverId, string firstname, string lastname, DateTime birthday, string phone, int gender, string email, string photoUrl, string password, bool registerState, Available availability, string carBrand, TypeOfCar carType, string immatriculation)
