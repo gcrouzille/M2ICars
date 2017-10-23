@@ -45,5 +45,10 @@
     {
         <script src="@Url.Content("~/Scripts/"+@ViewBag.Script)"></script>
     }
+
+    @if (ViewBag.GoogleScript != null)
+    {
+        <script src="@ViewBag.GoogleScript" async defer></script>
+    }
 </body>
 </html>

@@ -7,7 +7,7 @@
     <div class="form-container col-md-6">
         <h3>Passager</h3>
         <p>Retrouvez toutes les informations dont vous avez besoin pour réussir sur la route et réserver le trajet qui vous convient</p>
-        @using (Html.BeginForm("Index", "Search", FormMethod.Post, new { enctype = "multipart/form-data" }))
+        @using (Html.BeginForm("Login", "Home", FormMethod.Post, new { enctype = "multipart/form-data" }))
         {
             @Html.AntiForgeryToken()
 

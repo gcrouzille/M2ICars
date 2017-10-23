@@ -10,7 +10,6 @@
         <h3>Choisissez un chauffeur</h3>
         <p id="departure" hidden>@Model.departure</p>
         <p id="arrival" hidden>@Model.arrival</p>
-
         @using (@Html.BeginForm("SelectDriver", "Search", FormMethod.Post))
         {
             @Html.AntiForgeryToken()
@@ -18,17 +17,20 @@
             <div class="funkyradio">
                 @for (int i = 0; i < Model.Drivers.Count; i++)
                 {
+                    <input type="hidden" name="driverId" value="@Model.Drivers[i].DriverId"/>
+                    <input type="hidden" name="departureLocation" value="@Model.departure"/>
+                    <input type="hidden" name="arrivalLocation" value="@Model.arrival"/>
                     <div class="funkyradio-success" pos="@Model.Drivers[i].Location">
                         @if (i == 0)
                         {
-                            <input type="radio" name="driverRadio" id="@Model.Drivers[i].Lastname" value="@Model.Drivers[i].Lastname" checked/>
+                            <input type="radio" name="driverRadio" id="@Model.Drivers[i].LastName" value="@Model.Drivers[i].LastName" checked/>
                         }
                         else
                         {
-                            <input type="radio" name="driverRadio" id="@Model.Drivers[i].Lastname" value="@Model.Drivers[i].Lastname" />
+                            <input type="radio" name="driverRadio" id="@Model.Drivers[i].LastName" value="@Model.Drivers[i].LastName" />
                         }
 
-                        <label for="@Model.Drivers[i].Lastname">@Model.Drivers[i].Lastname</label>
+                        <label for="@Model.Drivers[i].LastName">@Model.Drivers[i].LastName</label>
                     </div>
                 }        
             </div>
@@ -41,9 +43,9 @@
 
                 
     </section>
-    <section id="map" class="col-md-9"></section>    
+    <section id="map" class="col-md-9"></section> 
+    @*<script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyCDjKjiTE-YwsyVbG2KY4VVJF5w3F7XWt8&callback=initMap"
+            async defer></script>
+    <script src="~/Scripts/showDrivers.js"></script>*@   
 </section>
 
-<script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyCDjKjiTE-YwsyVbG2KY4VVJF5w3F7XWt8&callback=initMap"
-        async defer></script>
-<script src="~/Scripts/showDrivers.js"></script>

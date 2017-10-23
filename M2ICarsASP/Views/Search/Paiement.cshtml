@@ -1,0 +1,65 @@
+﻿@model M2ICarsASP.Models.Reservation
+@{
+    ViewBag.Title = "Paiement";
+}
+
+<section class="container paiement-container">
+    <h2>Récapitulatif de la commande</h2>
+    <div class="recap-container">
+        <div>
+            <label>Date : </label>
+            <span>@Model.Date</span>
+        </div>
+        <div>
+            <label>Client : </label>
+            <span>@Model.ClientId</span>
+        </div>
+        <div>
+            <label>Chauffeur : </label>
+            <span>@Model.ReservationDriverId</span>
+        </div>
+        <div>
+            <label>Lieu de Départ : </label>
+            <span>@Model.DepartureLocation</span>
+        </div>
+        <div>
+            <label>Lieu d'Arrivée : </label>
+            <span>@Model.ArrivalLocation</span>
+        </div>
+        <div>
+            <label>Durée Estimée : </label>
+            <span>@Model.Duration</span>
+        </div>
+        <div>
+            <label>Tarif Estimé : </label>
+            <span>@Model.Price</span>
+        </div>
+    </div>
+
+    <hr />
+    <div class="paiement-infos-container">
+        <h2>Informations de Paiement</h2>
+        @using (@Html.BeginForm("ValidateReservation", "Search", FormMethod.Post, new { @class = "container" }))
+        {
+            @Html.AntiForgeryToken()
+            <div class="form-group row">                
+                <label class="col-3">Nom du Titulaire de la carte</label>
+                <input class="form-control col-3" type="text" name="ccName" required />
+                <label class="col-3">Numéro de carte bleue</label>
+                <input class="form-control col-3" type="text" name="ccNumber" required />
+            </div>
+            <div class="form-group">
+                <label>CVV</label>
+                <input class="form-control" type="text" maxlength="3" name="ccCVV" required />
+                <label>Date d'expiration</label>
+                <select class="form-control" name="ccExpirationDate" required >
+                    </select>
+            </div>
+            <div class="form-group">
+                <div class="col-md-offset-2 col-md-10">
+                    <input id="select" type="submit" value="Payer" class="btn btn-default" />
+                </div>
+            </div>
+        }
+    </div>
+</section>

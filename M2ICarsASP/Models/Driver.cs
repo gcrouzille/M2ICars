@@ -12,6 +12,7 @@ namespace M2ICarsASP.Models
         private string lastName;
         private string firstName;
         private DateTime birthday;
+        private string location;
         private string phone;
         private string gender;
         private string photoUrl;
@@ -77,6 +78,8 @@ namespace M2ICarsASP.Models
         [MinLength(4)]
         [Display(Name = "Mot de Passe")]
         public string Password { get => password; set => password = value; }
+
+        public string Location { get => location; set => location = value; }
 
         public Driver()
         {

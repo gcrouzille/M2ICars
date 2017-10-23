@@ -74,6 +74,14 @@ body .form-container {
     margin: 35px 0px;
 }
 
+/*Paiement*/
+body .paiement-container {
+    height: 100vh;
+    background-color: white;
+    padding: 0px 15px;
+}
+
+
 /*RESEARCH*/
 body .search-container{
     height: 100vh;
