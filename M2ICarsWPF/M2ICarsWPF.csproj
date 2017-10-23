@@ -110,21 +110,20 @@
     <Compile Include="View\DriverManagement.xaml.cs">
       <DependentUpon>DriverManagement.xaml</DependentUpon>
     </Compile>
-    <Compile Include="ViewModel\WelcomeViewModel.cs" />
     <Compile Include="View\AddReservation.xaml.cs">
       <DependentUpon>AddReservation.xaml</DependentUpon>
     </Compile>
     <Compile Include="View\EditReservation.xaml.cs">
       <DependentUpon>EditReservation.xaml</DependentUpon>
     </Compile>
+    <Compile Include="View\EditUser.xaml.cs">
+      <DependentUpon>EditUser.xaml</DependentUpon>
+    </Compile>
     <Compile Include="View\Home.xaml.cs">
       <DependentUpon>Home.xaml</DependentUpon>
     </Compile>
     <Compile Include="View\Login.xaml.cs">
       <DependentUpon>Login.xaml</DependentUpon>
-    </Compile>
-    <Compile Include="View\PutUser.xaml.cs">
-      <DependentUpon>PutUser.xaml</DependentUpon>
     </Compile>
     <Compile Include="View\ReservationManagement.xaml.cs">
       <DependentUpon>ReservationManagement.xaml</DependentUpon>
@@ -152,6 +151,10 @@
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
+    <Page Include="View\EditUser.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
     <Page Include="View\Home.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
@@ -175,10 +178,6 @@
       <SubType>Code</SubType>
     </Compile>
     <Page Include="View\Login.xaml">
-      <SubType>Designer</SubType>
-      <Generator>MSBuild:Compile</Generator>
-    </Page>
-    <Page Include="View\PutUser.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>

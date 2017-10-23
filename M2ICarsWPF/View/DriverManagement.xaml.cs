@@ -23,17 +23,13 @@ namespace M2ICarsWPF.View
         public DriverManagement()
         {
             InitializeComponent();
+            
         }
 
         private void AddDriver_Click(object sender, RoutedEventArgs e)
         {
             AddDriver a = new AddDriver();
             a.Show();
-        }
-
-        private void Recherche_Click(object sender, RoutedEventArgs e)
-        {
-
         }
 
         private void Retour_Click(object sender, RoutedEventArgs e)

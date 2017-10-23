@@ -48,7 +48,7 @@ namespace M2ICarsWPF
             Task.Run(async () =>
             {
                 Reservations = await APIService.Instance.Request<List<Reservation>>("GET", "api/Reservations");
-                Users = await APIService.Instance.Request<List<User>>("GET", "api/USer");
+                Users = await APIService.Instance.Request<List<User>>("GET", "api/User");
                 Drivers = await APIService.Instance.Request<List<Driver>>("GET", "api/Drivers");
                 
             });
@@ -57,7 +57,7 @@ namespace M2ICarsWPF
 #region driver
         public void AddDriver(Driver driver)
         {
-            _instance.Drivers.Add(driver);
+            Drivers.Add(driver);
             Task.Run(async () =>
             {                
                 driver = await APIService.Instance.Request<Driver>("POST", "api/Drivers");
@@ -66,39 +66,78 @@ namespace M2ICarsWPF
 
         }
 
-        #endregion
-
-#region User
-        public void AddUser(User user)
+        public void SaveUser(Driver driver)
         {
-            _instance.Users.Add(user);
+            int i = Drivers.IndexOf(driver);
+            Drivers.Remove(driver);
+            Drivers.Insert(i, driver);
+
+            DriverViewModel vm = (((App.Current.MainWindow as MainWindow).MainFrame.Content as DriverManagement).DataContext as DriverViewModel);
+            i = vm.Drivers.IndexOf(driver);
+            vm.Drivers.Remove(driver);
+            vm.Drivers.Insert(i, driver);
+            vm.RaisePropertyChanged("Drivers");
+
             Task.Run(async () =>
             {
-                await APIService.Instance.Request<User>("POST", "api/Users");
+                await APIService.Instance.Request("PUT", $"api/Drivers/{driver.DriverId}", driver);
+            });
+        }
+
+        public void DeleteDriver(Driver driver)
+        {
+            Drivers.Remove(driver);
+            Task.Run(async () =>
+            {
+                await APIService.Instance.Request<Driver>("DELETE", $"api/Drivers/{driver.DriverId}");
+            });
+        }
+
+        #endregion
+
+        #region User
+        public void AddUser(User user)
+        {
+            Users.Add(user);
+            (((App.Current.MainWindow as MainWindow).MainFrame.Content as UserManagement).DataContext as UserViewModel).Users.Add(user);
+            Task.Run(async () =>
+            {
+                await APIService.Instance.Request("POST", "api/Users",user);
 
             });
         }
 
         public void DeleteUser(User user)
         {
-            _instance.Users.Add(user);
+            Users.Remove(user);
             Task.Run(async () =>
             {
-                await APIService.Instance.Request<User>("DELETE", "api/Users");
+                await APIService.Instance.Request<User>("DELETE", $"api/User/{user.UserId}");
 
             });
         }
 
-        public void PutUser(User user)
+
+        public void SaveUser(User user)
         {
-            // Initialisation de la liste des réservations/users/drivers
-            _instance.Users.Add(user);
+            int i = Users.IndexOf(user);
+            Users.Remove(user);
+            Users.Insert(i,user);
+
+            UserViewModel vm = (((App.Current.MainWindow as MainWindow).MainFrame.Content as UserManagement).DataContext as UserViewModel);
+            i = vm.Users.IndexOf(user);
+            vm.Users.Remove(user);
+            vm.Users.Insert(i, user);
+            vm.RaisePropertyChanged("Users");
+
             Task.Run(async () =>
             {
-                await APIService.Instance.Request<User>("PUT", "api/Users");
-
+                await APIService.Instance.Request("PUT", $"api/User/{user.UserId}", user);
             });
         }
+#endregion
+
+        #region Reservation
 
         public void AddReservation(Reservation r)
         {

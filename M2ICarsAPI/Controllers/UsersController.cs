@@ -90,7 +90,8 @@ namespace M2ICarsAPI.Controllers
         }
 
         // DELETE: api/User/5
-        [ResponseType(typeof(User))]        
+        [ResponseType(typeof(User))]
+        [Route("api/User/{Id}")]
         public IHttpActionResult DeleteUser(int id)
         {
             User user = db.Users.Find(id);

@@ -1,17 +1,17 @@
-﻿<Window x:Class="M2ICarsWPF.AddUser"
+﻿<Window x:Class="M2ICarsWPF.View.EditUser"
         xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
         xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
         xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:M2ICarsWPF.ViewModel"
         mc:Ignorable="d"
-        Title="Ajouter Client" Height="420" Width="350" ResizeMode="NoResize">
+        Title="EditUser" Height="420" Width="300">
     <Window.DataContext>
         <local:AddUserViewModel></local:AddUserViewModel>
     </Window.DataContext>
     
     <StackPanel Background="#FF567BA0">
-        <Label Content="Ajouter un client" FontSize="16" FontWeight="Bold" HorizontalContentAlignment="Center" Margin="0,5,0,15" Foreground="#FFFEFEFE" BorderBrush="#FFFEFEFE" BorderThickness="0,0,0,5" Padding="5,5,5,15"></Label>
+        <Label Content="Modifier un client" FontSize="16" FontWeight="Bold" HorizontalContentAlignment="Center" Margin="0,5,0,15" Foreground="#FFFEFEFE" BorderBrush="#FFFEFEFE" BorderThickness="0,0,0,5" Padding="5,5,5,15"></Label>
         <StackPanel Orientation="Horizontal" Margin="0,0,0,10">
             <Label Width="70" Foreground="#FFFEFEFE" HorizontalContentAlignment="Right" Margin="0,0,10,0">Prénom</Label>
             <TextBox Width="200"  Text="{Binding Firstname}" VerticalContentAlignment="Center" HorizontalContentAlignment="Stretch" />
@@ -21,11 +21,11 @@
             <TextBox Width="200" Text="{Binding Lastname}"></TextBox>
         </StackPanel>
         <StackPanel Orientation="Horizontal" Margin="0,0,0,10">
-            <Label Width="70" Foreground="#FFFEFEFE" HorizontalContentAlignment="Right" Margin="0,0,10,0">Naissance</Label>
+            <Label Width="70" Foreground="#FFFEFEFE" HorizontalContentAlignment="Right" Margin="0,0,10,0">Date de naissance</Label>
             <DatePicker Width="200" Text="{Binding Birthday}" ></DatePicker>
         </StackPanel>
         <StackPanel Orientation="Horizontal" Margin="0,0,0,10">
-            <Label Width="70" Foreground="#FFFEFEFE" HorizontalContentAlignment="Right" Margin="0,0,10,0">Mail</Label>
+            <Label Width="70" Foreground="#FFFEFEFE" HorizontalContentAlignment="Right" Margin="0,0,10,0">Email</Label>
             <TextBox Width="200" Text="{Binding Email}" ></TextBox>
         </StackPanel>
         <StackPanel Orientation="Horizontal" Margin="0,0,0,10">
@@ -42,7 +42,7 @@
         </StackPanel>
         <StackPanel Orientation="Horizontal" Width="300">
             <Button Click="Cancel" Width="100" Height="30" Margin="33,15,33,0">Annuler</Button>
-            <Button Click="SaveUser" Width="100" Height="30" Margin="0,15,0,0">Ajouter</Button>
+            <Button Click="SaveUser" Width="100" Height="30" Margin="0,15,0,0">Modifier</Button>
         </StackPanel>
     </StackPanel>
 </Window>

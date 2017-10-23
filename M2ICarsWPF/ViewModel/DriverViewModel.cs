@@ -41,6 +41,12 @@ namespace M2ICarsWPF.ViewModel
             
         }
 
+        public void DeleteDriver(Driver driver)
+        {
+            Drivers.Remove(driver);
+            manager.DeleteDriver(driver);
+        }
+
     }
 }
 

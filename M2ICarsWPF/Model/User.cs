@@ -20,7 +20,7 @@ namespace M2ICarsWPF
 
         public User()
         {
-
+            Birthday = DateTime.Now;
         }
 
         public User(string firstname, string lastname, DateTime birthday, string phone, int gender, string email, string photoUrl, string password)

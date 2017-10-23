@@ -17,7 +17,7 @@ namespace M2ICarsWPF.ViewModel
 
         private Driver driver;
 
-        public RelayCommand<Window> CommandAdd { get; }
+     
 
         public Window Wp;
 
@@ -33,20 +33,9 @@ namespace M2ICarsWPF.ViewModel
         public string CarBrand { get => Driver.CarBrand;  set { Driver.CarBrand = value; RaisePropertyChanged("CarBrand"); } }
         public Driver.TypeOfCar CarType  { get => Driver.CarType; set { Driver.CarType = value; RaisePropertyChanged("CarType"); } }
         public string Immatriculation { get => Driver.Immatriculation; set { Driver.Immatriculation = value; RaisePropertyChanged("Immatriculation"); } }
-        public bool RegisterState { get => Driver.RegisterState; set { Driver.RegisterState = value; RaisePropertyChanged("RegisterState"); } }
+        
 
-        //public AddDriverViewModel()
-        //{            
-        //    CommandAdd = new RelayCommand<Window>(Add);
-        //}
-
-        //public void Add(Window w)
-        //{
-        //    driver.AddToBase();
-        //    MessageBox.Show("Le Produit a été ajouté avec succés");
-        //    w.Close();
-        //}
-
+       
         public void AddDriver(Window w)
         {
             manager.AddDriver(Driver);

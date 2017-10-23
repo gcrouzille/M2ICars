@@ -1,4 +1,5 @@
-﻿using System;
+﻿using M2ICarsWPF.ViewModel;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -25,15 +26,10 @@ namespace M2ICarsWPF.View
             InitializeComponent();
         }
 
-        private void AddUser_Click(object sender, RoutedEventArgs e)
+        private void AddUser(object sender, RoutedEventArgs e)
         {
             AddUser a = new AddUser();
             a.Show();
-        }
-
-        private void Recherche_Click(object sender, RoutedEventArgs e)
-        {
-
         }
 
         private void Retour_Click(object sender, RoutedEventArgs e)
@@ -41,5 +37,22 @@ namespace M2ICarsWPF.View
             Home home = new Home();
             NavigationService.Navigate(home);
         }
+
+        private void EditUser(object sender, RoutedEventArgs e)
+        {
+            EditUser w = new EditUser(datagridClient.SelectedItem as User);
+            w.Show();
+        }
+
+        private void DeleteUser(object sender, RoutedEventArgs e)
+        {
+           
+                MessageBoxResult result = MessageBox.Show("Etes vous sûr de vouloir supprimer cette réservation ?", "Confirmation", MessageBoxButton.OKCancel, MessageBoxImage.Warning);
+                if (result == MessageBoxResult.OK)
+                {
+                    (this.DataContext as UserViewModel).DeleteUser((User)datagridClient.SelectedItem);
+                }
+            }
+        
     }
 }

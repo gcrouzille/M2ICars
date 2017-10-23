@@ -5,7 +5,7 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:M2ICarsWPF.ViewModel"
         mc:Ignorable="d"
-        Title="Ajouter Driver" Height="300" Width="600" x:Name="Wp">
+        Title="Ajouter Driver" Height="300" Width="600" ResizeMode="NoResize">
     <Window.DataContext>
         <local:AddDriverViewModel></local:AddDriverViewModel>
     </Window.DataContext>
@@ -15,7 +15,37 @@
         <ColumnDefinition />
         <ColumnDefinition />
     </Grid.ColumnDefinitions>
-        <StackPanel Grid.Row = "0" Grid.Column="0" Height="auto">
+        <StackPanel  Grid.Row = "0" Grid.Column="0"Background="#FF567BA0">
+            <Label Content="Ajouter un client" FontSize="16" FontWeight="Bold" HorizontalContentAlignment="Center" Margin="0,5,0,15" Foreground="#FFFEFEFE" BorderBrush="#FFFEFEFE" BorderThickness="0,0,0,5" Padding="5,5,5,15"></Label>
+            <StackPanel Orientation="Horizontal" Margin="0,0,0,10">
+                <Label Width="70" Foreground="#FFFEFEFE" HorizontalContentAlignment="Right" Margin="0,0,10,0">Prénom</Label>
+                <TextBox Width="200"  Text="{Binding Firstname}" VerticalContentAlignment="Center" HorizontalContentAlignment="Stretch" />
+            </StackPanel>
+            <StackPanel Orientation="Horizontal" Margin="0,0,0,10">
+                <Label Width="70" Foreground="#FFFEFEFE" HorizontalContentAlignment="Right" Margin="0,0,10,0">Nom</Label>
+                <TextBox Width="200" Text="{Binding Lastname}"></TextBox>
+            </StackPanel>
+            <StackPanel Orientation="Horizontal" Margin="0,0,0,10">
+                <Label Width="70" Foreground="#FFFEFEFE" HorizontalContentAlignment="Right" Margin="0,0,10,0">Naissance</Label>
+                <DatePicker Width="200" Text="{Binding Birthday}" ></DatePicker>
+            </StackPanel>
+            <StackPanel Orientation="Horizontal" Margin="0,0,0,10">
+                <Label Width="70" Foreground="#FFFEFEFE" HorizontalContentAlignment="Right" Margin="0,0,10,0">Mail</Label>
+                <TextBox Width="200" Text="{Binding Email}" ></TextBox>
+            </StackPanel>
+            <StackPanel Orientation="Horizontal" Margin="0,0,0,10">
+                <Label Width="70" Foreground="#FFFEFEFE" HorizontalContentAlignment="Right" Margin="0,0,10,0">Téléphone</Label>
+                <TextBox Width="200" Text="{Binding Phone}"></TextBox>
+            </StackPanel>
+            <StackPanel Orientation="Horizontal" Margin="0,0,0,10">
+                <Label Width="70" Foreground="#FFFEFEFE" HorizontalContentAlignment="Right" Margin="0,0,10,0">Photo</Label>
+                <TextBox Width="200" Text="{Binding PhotoUrl }"></TextBox>
+            </StackPanel>
+            <StackPanel Orientation="Horizontal" Margin="0,0,0,10">
+                <Label Width="70" Foreground="#FFFEFEFE" HorizontalContentAlignment="Right" Margin="0,0,10,0">Password</Label>
+                <TextBox Width="200" Text="{Binding Password}"></TextBox>
+            </StackPanel>
+            <StackPanel  Height="auto">
             <StackPanel  Orientation="Horizontal" Margin="0,20,0,10" >
                 <Label Content="Nom" Width="150"/>
                 <TextBox  Width="140"></TextBox>

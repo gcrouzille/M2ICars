@@ -10,29 +10,73 @@
     <Page.DataContext>
         <local:UserViewModel></local:UserViewModel>
     </Page.DataContext>
-    <StackPanel>
-        <Grid Width="400" HorizontalAlignment="Left">
-            <Button Content="ajouter driver" Click="AddUser_Click" Width="100" HorizontalAlignment="Left" Margin="10,10,0,10"/>
-            <Button Content="recherche" Click="Recherche_Click" Width="100"  Margin="10,10,5,10"/>
-            <Button Content="retour" Click="Retour_Click"  Width="100"  Margin="10,10,10,10" HorizontalAlignment="Right" />
-        </Grid>
-
-
-        <DataGrid ItemsSource="{Binding Users}" AutoGenerateColumns="False" AlternatingRowBackground="Gainsboro"  AlternationCount="2">
+    <StackPanel Background="#FF6B9BCB">
+        <Label Content="Gestion des Clients" FontSize="20" FontWeight="Bold" HorizontalContentAlignment="Center" Margin="0,25,0,15" Foreground="#FFFEFEFE" BorderBrush="#FFFEFEFE" BorderThickness="0,0,0,5" Padding="5,5,5,15"></Label>
+        <Button Click="AddUser" Width="25" Height="25" Margin="0,0,10,15" HorizontalAlignment="Right" FontSize="20" Background="#FFFEFEFE" Foreground="#FF6B9BCB" FontWeight="Bold">+</Button>
+        <DataGrid x:Name="datagridClient" ItemsSource="{Binding Users}" AutoGenerateColumns="False"  CanUserAddRows="false">
             <DataGrid.Columns>
-                <DataGridTextColumn Header="Identifiant" Binding="{Binding UserId}" IsReadOnly="True"></DataGridTextColumn>
-                <DataGridTextColumn Header="Nom" Binding="{Binding Lastname}" IsReadOnly="True"></DataGridTextColumn>
-                <DataGridTextColumn Header="Prénom" Binding="{Binding Firstname}" IsReadOnly="True"></DataGridTextColumn>
-                <DataGridTextColumn Header="Téléphone" Binding="{Binding Phone}" IsReadOnly="True"></DataGridTextColumn>
-                <DataGridTextColumn Header="Mail" Binding="{Binding Email}" IsReadOnly="True"></DataGridTextColumn>
-
+                <DataGridTextColumn Header="Id" Binding="{Binding UserId}" IsReadOnly="True" CanUserResize="False" Width="70">
+                    <DataGridTextColumn.HeaderStyle>
+                        <Style TargetType="DataGridColumnHeader">
+                            <Setter Property="HorizontalContentAlignment" Value="Center"/>
+                        </Style>
+                    </DataGridTextColumn.HeaderStyle>
+                </DataGridTextColumn>
+                <DataGridTextColumn Header="Nom" Binding="{Binding Lastname}" IsReadOnly="True" CanUserResize="False" Width="100">
+                    <DataGridTextColumn.HeaderStyle>
+                        <Style TargetType="DataGridColumnHeader">
+                            <Setter Property="HorizontalContentAlignment" Value="Center"/>
+                        </Style>
+                    </DataGridTextColumn.HeaderStyle>
+                </DataGridTextColumn>
+                <DataGridTextColumn Header="Prénom" Binding="{Binding Firstname}" IsReadOnly="True" CanUserResize="False" Width="100">
+                    <DataGridTextColumn.HeaderStyle>
+                        <Style TargetType="DataGridColumnHeader">
+                            <Setter Property="HorizontalContentAlignment" Value="Center"/>
+                        </Style>
+                    </DataGridTextColumn.HeaderStyle>
+                </DataGridTextColumn>
+                <DataGridTextColumn Header="naissance" Binding="{Binding Birthday}" IsReadOnly="True" CanUserResize="False" Width="100">
+                    <DataGridTextColumn.HeaderStyle>
+                        <Style TargetType="DataGridColumnHeader">
+                            <Setter Property="HorizontalContentAlignment" Value="Center"/>
+                        </Style>
+                    </DataGridTextColumn.HeaderStyle>
+                </DataGridTextColumn>
+                <DataGridTextColumn Header="Téléphone" Binding="{Binding Phone}" IsReadOnly="True" CanUserResize="False" Width="100">
+                    <DataGridTextColumn.HeaderStyle>
+                        <Style TargetType="DataGridColumnHeader">
+                            <Setter Property="HorizontalContentAlignment" Value="Center"/>
+                        </Style>
+                    </DataGridTextColumn.HeaderStyle>
+                </DataGridTextColumn>
+                <DataGridTextColumn Header="Email" Binding="{Binding Email}" IsReadOnly="True" CanUserResize="False" Width="100">
+                    <DataGridTextColumn.HeaderStyle>
+                        <Style TargetType="DataGridColumnHeader">
+                            <Setter Property="HorizontalContentAlignment" Value="Center"/>
+                        </Style>
+                    </DataGridTextColumn.HeaderStyle>
+                </DataGridTextColumn>
+                <DataGridTemplateColumn Header="Options" Width="*">
+                    <DataGridTemplateColumn.HeaderStyle>
+                        <Style TargetType="DataGridColumnHeader">
+                            <Setter Property="HorizontalContentAlignment" Value="Center"/>
+                        </Style>
+                    </DataGridTemplateColumn.HeaderStyle>
+                    <DataGridTemplateColumn.CellTemplate>
+                        <DataTemplate>
+                            <TextBlock><Hyperlink Click="EditUser">Editer</Hyperlink> - <Hyperlink Click="DeleteUser">Supprimer</Hyperlink></TextBlock>
+                        </DataTemplate>
+                    </DataGridTemplateColumn.CellTemplate>
+                </DataGridTemplateColumn>
             </DataGrid.Columns>
-            <DataGrid.RowDetailsTemplate>
+            <!--<DataGrid.RowDetailsTemplate>
                 <DataTemplate>
                     <DockPanel Background="GhostWhite">
-                        <Image DockPanel.Dock="Left" Source="{Binding ImageUrl}" Height="64" Margin="10" />
                         <Grid Margin="0,10">
                             <Grid.ColumnDefinitions>
+                                <ColumnDefinition Width="Auto" />
+                                <ColumnDefinition Width="Auto" />
                                 <ColumnDefinition Width="Auto" />
                                 <ColumnDefinition Width="*" />
                             </Grid.ColumnDefinitions>
@@ -40,19 +84,13 @@
                                 <RowDefinition Height="Auto" />
                                 <RowDefinition Height="Auto" />
                                 <RowDefinition Height="Auto" />
-                            </Grid.RowDefinitions>
-
-                            <TextBlock Text="ID: " FontWeight="Bold" />
-                            <TextBlock Text="{Binding Id}" Grid.Column="1" />
-                            <TextBlock Text="Name: " FontWeight="Bold" Grid.Row="1" />
-                            <TextBlock Text="{Binding Name}" Grid.Column="1" Grid.Row="1" />
-                            <TextBlock Text="Birthday: " FontWeight="Bold" Grid.Row="2" />
-                            <TextBlock Text="{Binding Birthday, StringFormat=d}" Grid.Column="1" Grid.Row="2" />
-
+                                <RowDefinition Height="Auto" />
+                            </Grid.RowDefinitions>                          
+                            
                         </Grid>
                     </DockPanel>
                 </DataTemplate>
-            </DataGrid.RowDetailsTemplate>
+            </DataGrid.RowDetailsTemplate>-->
         </DataGrid>
-    </StackPanel>   
+    </StackPanel>
 </Page>

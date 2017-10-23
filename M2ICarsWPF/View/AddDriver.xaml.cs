@@ -24,7 +24,6 @@ namespace M2ICarsWPF
         public AddDriver()
         {
             InitializeComponent();
-
             comboType.ItemsSource = Enum.GetValues(typeof(Driver.TypeOfCar));
 
         }
