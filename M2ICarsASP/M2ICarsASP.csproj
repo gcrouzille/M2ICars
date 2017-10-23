@@ -159,6 +159,7 @@
     </Compile>
     <Compile Include="Models\Client.cs" />
     <Compile Include="Models\Driver.cs" />
+    <Compile Include="Models\IndexViewModel.cs" />
     <Compile Include="Models\Reservation.cs" />
     <Compile Include="Models\SearchResultsViewModel.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />

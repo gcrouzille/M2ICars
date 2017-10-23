@@ -31,14 +31,17 @@ namespace M2ICarsASP.Controllers
             string s = null;
             client.DefaultRequestHeaders.Accept.Add(new MediaTypeWithQualityHeaderValue("application/json"));
             HttpResponseMessage response = await client.GetAsync($"api/Drivers/available/{departure}");
-            List<Driver> drivers;
+            List<Driver> drivers = null;
             if (response.IsSuccessStatusCode)
             {
                 s = await response.Content.ReadAsStringAsync();
                 drivers = JsonConvert.DeserializeObject<List<Driver>>(s);                
             }
-            else
-                drivers = new List<Driver>();
+            
+            if (drivers == null || drivers.Count <= 0)
+            {
+                return View("Index", new IndexViewModel("Aucun chauffeur n'a été trouvé pour le trajet spécifié"));
+            }
 
             SearchResultsViewModel model = new SearchResultsViewModel(drivers, departure, arrival);
             ViewBag.Script = "showDrivers.js";
@@ -61,14 +64,17 @@ namespace M2ICarsASP.Controllers
             clientDeparture.BaseAddress = new Uri("https://maps.googleapis.com/maps/");
             clientDeparture.DefaultRequestHeaders.Accept.Clear();
             clientDeparture.DefaultRequestHeaders.Accept.Add(new MediaTypeWithQualityHeaderValue("application/json"));
-            HttpResponseMessage responseDeparture = await clientDeparture.GetAsync($"api/geocode/json?address={departureLocation}&key=AIzaSyCDjKjiTE-YwsyVbG2KY4VVJF5w3F7XWt8");
+            HttpResponseMessage responseDeparture = await clientDeparture.GetAsync($"api/geocode/json?address={departureLocation}&language=en&key=AIzaSyCDjKjiTE-YwsyVbG2KY4VVJF5w3F7XWt8");
             string departure = null;
             string departureGeocode = null;
             if (responseDeparture.IsSuccessStatusCode)
             {
                 departure = await responseDeparture.Content.ReadAsStringAsync();
                 JObject o = JObject.Parse(departure);
-                departureGeocode = "{\"lat\":" + o["results"].First["geometry"]["location"]["lat"]+ ",\"lng\":"+ o["results"].First["geometry"]["location"]["lng"]+"}";
+
+                string lat = o["results"].First["geometry"]["location"]["lat"].ToString().Replace(',', '.');
+                string lng = o["results"].First["geometry"]["location"]["lng"].ToString().Replace(',', '.');
+                departureGeocode = lat+ ","+ lng;
             }
 
             //Conversion du lieu d'arrivée en geocode
@@ -76,14 +82,17 @@ namespace M2ICarsASP.Controllers
             clientArrival.BaseAddress = new Uri("https://maps.googleapis.com/maps/");
             clientArrival.DefaultRequestHeaders.Accept.Clear();
             clientArrival.DefaultRequestHeaders.Accept.Add(new MediaTypeWithQualityHeaderValue("application/json"));
-            HttpResponseMessage responseArrival = await clientArrival.GetAsync($"api/geocode/json?address={arrivalLocation}&key=AIzaSyCDjKjiTE-YwsyVbG2KY4VVJF5w3F7XWt8");
+            HttpResponseMessage responseArrival = await clientArrival.GetAsync($"api/geocode/json?address={arrivalLocation}&language=en&key=AIzaSyCDjKjiTE-YwsyVbG2KY4VVJF5w3F7XWt8");
             string arrival = null;
             string arrivalGeocode = null;
             if (responseArrival.IsSuccessStatusCode)
             {
                 arrival = await responseArrival.Content.ReadAsStringAsync();
                 JObject o = JObject.Parse(arrival);
-                arrivalGeocode = "{\"lat\":" + o["results"].First["geometry"]["location"]["lat"] + ",\"lng\":" + o["results"].First["geometry"]["location"]["lng"] + "}";
+
+                string lat = o["results"].First["geometry"]["location"]["lat"].ToString().Replace(',', '.');
+                string lng = o["results"].First["geometry"]["location"]["lng"].ToString().Replace(',', '.');
+                arrivalGeocode = lat + "," + lng;
             }
 
             newResa.DepartureLocation = departureGeocode;
