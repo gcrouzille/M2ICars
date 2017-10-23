@@ -13,9 +13,11 @@ namespace M2ICarsWPF.ViewModel
 {
     class AddDriverViewModel : ViewModelBase
     {
+        private Manager manager = Manager.Instance;
+
         private Driver driver;
 
-        public RelayCommand<Window> CommandAdd { get; }
+     
 
         public Window Wp;
 
@@ -33,15 +35,11 @@ namespace M2ICarsWPF.ViewModel
         public string Immatriculation { get => Driver.Immatriculation; set { Driver.Immatriculation = value; RaisePropertyChanged("Immatriculation"); } }
         
 
-        public AddDriverViewModel()
-        {            
-            CommandAdd = new RelayCommand<Window>(Add);
-        }
-
-        public void Add(Window w)
+       
+        public void AddDriver(Window w)
         {
-            driver.AddToBase();
-            MessageBox.Show("Le Produit a été ajouté avec succés");
+            manager.AddDriver(Driver);
+            MessageBox.Show("Le driver a été ajouté ave succés");
             w.Close();
         }
 

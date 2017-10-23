@@ -10,35 +10,32 @@ using System.Windows.Documents;
 using System.Windows.Input;
 using System.Windows.Media;
 using System.Windows.Media.Imaging;
+using System.Windows.Navigation;
 using System.Windows.Shapes;
-using M2ICarsWPF.ViewModel;
 
-namespace M2ICarsWPF
+namespace M2ICarsWPF.View
 {
     /// <summary>
-    /// Logique d'interaction pour Welcome.xaml
+    /// Logique d'interaction pour DriverManagement.xaml
     /// </summary>
-    public partial class Welcome : Window
+    public partial class DriverManagement : Page
     {
-        public Welcome()
+        public DriverManagement()
         {
             InitializeComponent();
+            
         }
 
-        private void AddUser_Click(object sender, RoutedEventArgs e)
+        private void AddDriver_Click(object sender, RoutedEventArgs e)
         {
-            AddUser a = new AddUser();
+            AddDriver a = new AddDriver();
             a.Show();
         }
 
-        private void Submit_Click(object sender, RoutedEventArgs e)
+        private void Retour_Click(object sender, RoutedEventArgs e)
         {
-
-        }
-
-        private void Detail_Click(object sender, RoutedEventArgs e)
-        {
-
+            Home home = new Home();
+            NavigationService.Navigate(home);
         }
     }
 }

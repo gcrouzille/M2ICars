@@ -30,5 +30,17 @@ namespace M2ICarsWPF.View
             ReservationManagement nextPage = new ReservationManagement();
             NavigationService.Navigate(nextPage);
         }
+
+        private void ManageUser(object sender, RoutedEventArgs e)
+        {
+            UserManagement nextPage = new UserManagement();
+            NavigationService.Navigate(nextPage);
+        }
+
+        private void ManageDriver(object sender, RoutedEventArgs e)
+        {
+            DriverManagement nextPage = new DriverManagement();
+            NavigationService.Navigate(nextPage);
+        }
     }
 }

@@ -13,26 +13,33 @@ using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Shapes;
 
-namespace M2ICarsWPF
+namespace M2ICarsWPF.View
 {
     /// <summary>
-    /// Logique d'interaction pour AddUser.xaml
+    /// Logique d'interaction pour EditUser.xaml
     /// </summary>
-    public partial class AddUser 
+    public partial class EditUser : Window
     {
-        public AddUser()
+        public EditUser(User user)
         {
             InitializeComponent();
+            
+            (this.DataContext as AddUserViewModel).Initialize(user);
         }
 
-        private void Cancel (object sender, RoutedEventArgs e)
-        {
-            this.Close();
-        }
 
         private void SaveUser(object sender, RoutedEventArgs e)
         {
-            (this.DataContext as AddUserViewModel).AddNewUser();
+           
+            
+                (this.DataContext as AddUserViewModel).SaveUser();
+                this.Close();
+            
+           
+        }
+
+        private void Cancel(object sender, RoutedEventArgs e)
+        {
             this.Close();
         }
     }

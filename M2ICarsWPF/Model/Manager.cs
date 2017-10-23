@@ -30,70 +30,114 @@ namespace M2ICarsWPF
                 }
             }
         }
-
-
-
         private Manager()
         {
 
         }
 
-
-        private List<User> users;
-        private List<Driver> drivers;
-        private List<Reservation> reservations;
-
-        public List<User> Users { get => users; set => users = value; }
-        public List<Driver> Drivers { get => drivers; set => drivers = value; }
-        internal List<Reservation> Reservations { get => reservations; set => reservations = value; }
+        public List<Reservation> Reservations { get; set; }
+        public List<User> Users { get; set; }
+        public List<Driver> Drivers { get; set; }
 
 
-        public async Task<List<User>> InfoUsers()
-        {
-
-            HttpClient client = new HttpClient();
-            client.BaseAddress = new Uri("http://localhost:64548/");
-            client.DefaultRequestHeaders.Accept.Clear();
-            string s = null;
-            client.DefaultRequestHeaders.Accept.Add(new MediaTypeWithQualityHeaderValue("application/json"));
-            HttpResponseMessage response = await client.GetAsync($"api/User");
-            if (response.IsSuccessStatusCode)
-            {
-                s = await response.Content.ReadAsStringAsync();
-                Users = JsonConvert.DeserializeObject<List<User>>(s);
-
-            }
-            return Users;
-        }
-
-        public async Task<List<Driver>> InfoDriver()
-        {
-
-            HttpClient client = new HttpClient();
-            client.BaseAddress = new Uri("http://localhost:64548/");
-            client.DefaultRequestHeaders.Accept.Clear();
-            string s = null;
-            client.DefaultRequestHeaders.Accept.Add(new MediaTypeWithQualityHeaderValue("application/json"));
-            HttpResponseMessage response = await client.GetAsync($"api/Drivers");
-            if (response.IsSuccessStatusCode)
-            {
-                s = await response.Content.ReadAsStringAsync();
-                Drivers = JsonConvert.DeserializeObject<List<Driver>>(s);
-
-            }
-            return Drivers;
-        }
+   
 
         public void Initialize()
         {
-            // Initialisation de la liste des réservations/users/drivers
+            //Initialisation de la liste des réservations
             Task.Run(async () =>
             {
                 Reservations = await APIService.Instance.Request<List<Reservation>>("GET", "api/Reservations");
                 Users = await APIService.Instance.Request<List<User>>("GET", "api/User");
                 Drivers = await APIService.Instance.Request<List<Driver>>("GET", "api/Drivers");
+                
+            });
+         }
+
+#region driver
+        public void AddDriver(Driver driver)
+        {
+            Drivers.Add(driver);
+            Task.Run(async () =>
+            {                
+                driver = await APIService.Instance.Request<Driver>("POST", "api/Drivers");
+
+            });
+
+        }
+
+        public void SaveUser(Driver driver)
+        {
+            int i = Drivers.IndexOf(driver);
+            Drivers.Remove(driver);
+            Drivers.Insert(i, driver);
+
+            DriverViewModel vm = (((App.Current.MainWindow as MainWindow).MainFrame.Content as DriverManagement).DataContext as DriverViewModel);
+            i = vm.Drivers.IndexOf(driver);
+            vm.Drivers.Remove(driver);
+            vm.Drivers.Insert(i, driver);
+            vm.RaisePropertyChanged("Drivers");
+
+            Task.Run(async () =>
+            {
+                await APIService.Instance.Request("PUT", $"api/Drivers/{driver.DriverId}", driver);
             });
         }
+
+        public void DeleteDriver(Driver driver)
+        {
+            Drivers.Remove(driver);
+            Task.Run(async () =>
+            {
+                await APIService.Instance.Request<Driver>("DELETE", $"api/Drivers/{driver.DriverId}");
+            });
+        }
+
+        #endregion
+
+        #region User
+        public void AddUser(User user)
+        {
+            Users.Add(user);
+            (((App.Current.MainWindow as MainWindow).MainFrame.Content as UserManagement).DataContext as UserViewModel).Users.Add(user);
+            Task.Run(async () =>
+            {
+                await APIService.Instance.Request("POST", "api/Users",user);
+
+            });
+        }
+
+        public void DeleteUser(User user)
+        {
+            Users.Remove(user);
+            Task.Run(async () =>
+            {
+                await APIService.Instance.Request<User>("DELETE", $"api/User/{user.UserId}");
+
+            });
+        }
+
+
+        public void SaveUser(User user)
+        {
+            int i = Users.IndexOf(user);
+            Users.Remove(user);
+            Users.Insert(i,user);
+
+            UserViewModel vm = (((App.Current.MainWindow as MainWindow).MainFrame.Content as UserManagement).DataContext as UserViewModel);
+            i = vm.Users.IndexOf(user);
+            vm.Users.Remove(user);
+            vm.Users.Insert(i, user);
+            vm.RaisePropertyChanged("Users");
+
+            Task.Run(async () =>
+            {
+                await APIService.Instance.Request("PUT", $"api/User/{user.UserId}", user);
+            });
+        }
+#endregion
+
+        #region Reservation
 
         public void AddReservation(Reservation r)
         {
@@ -132,6 +176,9 @@ namespace M2ICarsWPF
             });
         }
            
+#endregion
+
+
     }
         
     

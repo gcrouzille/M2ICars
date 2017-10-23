@@ -34,7 +34,8 @@ namespace M2ICarsWPF
             public bool RegisterState { get; set; }
             public Available Availability { get; set; }
             public string CarBrand { get; set; }
-            public TypeOfCar CarType { get; set; }
+            public string CarModel { get; set; }
+             public TypeOfCar CarType { get; set; }
             public string Immatriculation { get; set; }
 
             public Driver()
@@ -58,11 +59,6 @@ namespace M2ICarsWPF
             CarBrand = carBrand;
             CarType = carType;
             Immatriculation = immatriculation;
-        }
-
-        public void AddToBase()
-        {
-           
         }
 
         public override string ToString()

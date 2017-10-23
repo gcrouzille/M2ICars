@@ -1,17 +1,20 @@
 ﻿using GalaSoft.MvvmLight;
-using GalaSoft.MvvmLight.Command;
 using System;
 using System.Collections.Generic;
+using System.Collections.ObjectModel;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
-using System.Windows;
 
 namespace M2ICarsWPF.ViewModel
 {
-    class AddUserViewModel : ViewModelBase
+    class UserViewModel:ViewModelBase
     {
         private Manager manager = Manager.Instance;
+
+       
+        private ObservableCollection<User> users;
+        public ObservableCollection<User> Users { get => users; set { users = value; RaisePropertyChanged("Users"); } }
 
         private User user;
         public User User { get => user; set { user = value; RaisePropertyChanged("User"); } }
@@ -23,46 +26,18 @@ namespace M2ICarsWPF.ViewModel
         public int Gender { get => User.Gender; set { User.Gender = value; RaisePropertyChanged("Gender"); } }
         public string Email { get => User.Email; set { User.Email = value; RaisePropertyChanged("Email"); } }
         public string PhotoUrl { get => User.PhotoUrl; set { User.PhotoUrl = value; RaisePropertyChanged("PhotoUrl"); } }
-        public string Password { get => User.Password; set { User.Password = value; RaisePropertyChanged("Password"); } }
+        public string Password { get => User.Password; set { User.Password= value; RaisePropertyChanged("Password"); } }
 
-        public AddUserViewModel()
+
+        public UserViewModel()
         {
-            User = new User();
+            Users = new ObservableCollection<User>(Manager.Instance.Users);
         }
 
-        public void Initialize(User user)
+        public void DeleteUser(User user)
         {
-            User = user;
-            RaisePropertyChanged("UserId");
-            RaisePropertyChanged("FirstName");
-            RaisePropertyChanged("LastName");
-            RaisePropertyChanged("Birthday");
-            RaisePropertyChanged("Phone");
-            RaisePropertyChanged("Gender");
-            RaisePropertyChanged("Email");
-            RaisePropertyChanged("PhotoUrl");
-            RaisePropertyChanged("Password");
-
-        }
-
-        public void SaveUser()
-        {            
-             manager.SaveUser(User);
-            
-        }
-
-        public void AddNewUser()
-        {
-            manager.AddUser(User);
-        }
-
-        public void DeleteUser(Window w)
-        {
-            manager.DeleteUser(User);
-            w.Close();
+            Users.Remove(user);
+            manager.DeleteUser(user);
         }
     }
-
-
-        
 }
