@@ -13,7 +13,7 @@
     <StackPanel>
         <Grid Width="400" HorizontalAlignment="Left">
             <Button Content="ajouter driver" Click="AddDriver_Click" Width="100" HorizontalAlignment="Left" Margin="10,10,0,10"/>
-            <Button Content="recherche" Click="Recherche_Click" Width="100"  Margin="10,10,5,10"/>
+            <Button Content="recherche" Width="100"  Margin="10,10,5,10"/>
             <Button Content="retour" Click="Retour_Click"  Width="100"  Margin="10,10,10,10" HorizontalAlignment="Right" />
         </Grid>
 
