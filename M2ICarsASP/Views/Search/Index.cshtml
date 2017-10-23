@@ -3,15 +3,14 @@
 }
 
 <section class="container search-container">
-    <h2>Search</h2>   
-    <div class="map-section">
+    <div class="map-section col-12">
         <div class="col-md-3">
             @using (Html.BeginForm("Search", "Search", FormMethod.Post))
             {
                 @Html.AntiForgeryToken()
 
                 <div class="form-horizontal">
-                    <h4>Chercher un itinéraire</h4>
+                    <h3>Chercher un itinéraire</h3>
                     <hr />
                     @Html.ValidationSummary(true, "", new { @class = "text-danger" })
                     <div class="form-group">
@@ -35,6 +34,15 @@
         </div>
         <div id="map" class="col-md-9">
 
+        </div>
+    </div>
+    <hr />
+    <div class="col-12">
+        <div class="user-infos-section col-md-6">
+            <h3>Vos Réservations</h3>
+        </div>
+        <div class="col-md-6">
+            <h3>Mon Compte</h3>
         </div>
     </div>
     <img src="~/Content/Images/search.jpg" />

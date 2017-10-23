@@ -47,17 +47,6 @@ namespace M2ICarsASP.Controllers
             return View(model);
         }
 
-        public ActionResult Paiement()
-        {
-            Reservation test = new Reservation();
-            test.ClientId = 1;
-            test.ReservationDriverId = 2;
-            test.Date = DateTime.Now;
-            test.DepartureLocation = "Lille";
-            test.ArrivalLocation = "Roubaix";
-            return View("Paiement", test);
-        }
-
         // POST: Search
         [HttpPost]
         [ValidateAntiForgeryToken]
@@ -114,6 +103,9 @@ namespace M2ICarsASP.Controllers
                 s = await response.Content.ReadAsStringAsync();
                 Reservation resa;
                 resa = JsonConvert.DeserializeObject<Reservation>(s);
+                resa.DepartureLocation = departureLocation;
+                resa.ArrivalLocation = arrivalLocation;
+                resa.DriverName = driverRadio;
                 return View("Paiement", resa);
             }
 
@@ -122,9 +114,20 @@ namespace M2ICarsASP.Controllers
 
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult ValidateReservation()
+        public ActionResult ValidateReservation(string ccName, string ccNumber, string ccCVV, string ccExpirationMonth, string ccExpirationYear)
         {
+            //Validation du paiement
+            if (ValidatePaiement(ccName, ccNumber, ccCVV, ccExpirationMonth, ccExpirationYear))
+                ViewBag.Result = "OK";
+            else
+                ViewBag.Result = "NOK";
+
             return View("ReservationValidated");
+        }
+
+        public bool ValidatePaiement(string ccName, string ccNumber, string ccCVV, string ccExpirationMonth, string ccExpirationYear)
+        {
+            return true;
         }
     }
 }
