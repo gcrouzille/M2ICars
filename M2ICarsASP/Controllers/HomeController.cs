@@ -72,9 +72,10 @@ namespace M2ICarsASP.Controllers
         }
 
 
-        public ActionResult ClientAccount()
+        public async Task<ActionResult> ClientAccount()
         {
-            return View();
+            Client c = await APIService.Instance.Request<Client>("GET", $"api/User/{Session["clientId"]}");
+            return View(c);
         }
 
         public ActionResult DriverAccount()

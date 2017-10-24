@@ -11,11 +11,8 @@ function initMap() {
 
     directionsDisplay.setMap(map);
 
-    $(".driver").each(function (i, e) {
-        let infoWindow = new google.maps.InfoWindow({ map: map });
-        
+    $(".driver").each(function (i, e) {        
         var driverPos = JSON.parse($(e).attr("pos"));
-        
         addMarker(driverPos, $(e).text(), map);
     });
     calcRoute();
@@ -43,6 +40,7 @@ function addMarker(location, title, map) {
     var marker = new google.maps.Marker({
         position: location,
         label: title,
+        icon: "http://localhost:64544/Content/Images/carIcon.png",
         map: map
     });
 }
