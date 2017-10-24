@@ -48,6 +48,9 @@ namespace M2ICarsASP.Controllers
                 }
             }
 
+            List<Notification> notifs = await APIService.Instance.Request<List<Notification>>("GET", $"api/Notifications/Client/{Session["clientId"]}");
+            ViewBag.Notifications = notifs;
+
             return View(model);
         }
         

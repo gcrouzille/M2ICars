@@ -25,6 +25,43 @@ textarea {
 
 
 /* GENERAL */
+#notifBtn {
+    border: 1px solid black;
+    border-radius: 20px 20px;
+    height: 40px;
+    margin: 5px;
+    width: 40px;
+}
+
+#notif {
+    background-color: white;
+    border: 1px solid #CCC;
+    border-radius: 5px 5px;
+    display: none;
+    height: 300px;
+    left: 475px;
+    padding: 5px 5px;
+    position: absolute;
+    top: 45px;
+    width: 350px;
+    z-index: 1050;
+}
+#notif::before {
+    content: '';
+    display: block;
+    width: 0;
+    height: 0;
+    color: white;
+    border: 10px solid #CCC;
+    border-color: transparent transparent #FFF;
+    margin-top: -20px;
+    margin-left: 10px;
+}
+
+#notif h4 {
+    border-bottom: 1px solid #CCC;
+}
+
 .myNavBar {
     background-color: #567BA0;
 }

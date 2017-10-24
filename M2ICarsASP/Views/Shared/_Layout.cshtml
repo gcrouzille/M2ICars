@@ -23,7 +23,8 @@
             <div class="navbar-collapse collapse">
                 <ul class="nav navbar-nav">
                     @if (Session["clientId"] != null)
-                    { 
+                    {
+                        <li>@Html.ActionLink("0", "", "", new { id = "notifBtn" })</li>
                         <li>@Html.ActionLink("Mon Compte", "ClientAccount", "Home")</li>
                     }
                 </ul>
@@ -31,6 +32,22 @@
         </div>
     </div>
     <div class="container body-content">
+        <div id="notif">
+            <h4>Mon Compte</h4>
+            <p>@Html.ActionLink("Gérer mon compte", "ClientAccount", "Home")</p>
+            <p>@Html.ActionLink("Me déconnecter", "ClientAccount", "Home")</p>
+            <h4>Notifications</h4>            
+            @if (ViewBag.Notifications != null)
+            {
+                foreach(var item in ViewBag.Notifications)
+                {
+                    <p>@item.Message</p>
+                }
+            } else
+            {
+                <p>Vous n'avez pas de notifications</p>
+            }
+        </div>
         @RenderBody()
         <hr />
         <footer>
@@ -42,7 +59,7 @@
     @Scripts.Render("~/bundles/jquery-ui")
     @Scripts.Render("~/bundles/bootstrap")
     @RenderSection("scripts", required: false)
-
+    <script src="@Url.Content("~/Scripts/NotificationScript.js")"></script>
     @if (ViewBag.Script != null)
     {
         <script src="@Url.Content("~/Scripts/"+@ViewBag.Script)"></script>
