@@ -1,4 +1,5 @@
 ﻿@model M2ICarsASP.Models.IndexViewModel
+@using M2ICarsASP.Models
 
 @{
     ViewBag.Title = "Search";
@@ -34,7 +35,7 @@
                 </div>
             }
 
-            @if (Model != null)
+            @if (Model.ErrorMsg != "")
             {
                 <p class="alert-danger">@Model.ErrorMsg</p>
             }
@@ -44,13 +45,59 @@
         </div>
     </div>
     <hr />
-    <div class="col-12">
-        <div class="user-infos-section col-md-6">
-            <h3>Mes Réservations</h3>
-        </div>
-        <div class="col-md-6">
-            <h3>Mon Compte</h3>
-        </div>
+    <div class="user-infos-section col-md-12">
+        <h3>Mes Réservations</h3>
+        <table class="table">
+            <tr>
+                <th>
+                    <label>Date</label>
+                </th>
+                <th>
+                    <label>Départ</label>
+                </th>
+                <th>
+                    <label>Arrivée</label>
+                </th>
+                <th>
+                    <label>Chauffeur</label>
+                </th>
+                <th>
+                    <label>Durée</label>
+                </th>
+                <th>
+                    <label>Tarif</label>
+                </th>
+                <th></th>
+            </tr>
+
+            @foreach (Reservation r in Model.Reservations)
+            {
+                <tr>
+                    <td>
+                        @Html.DisplayFor(modelItem => r.Date)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => r.DepartureLocation)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => r.ArrivalLocation)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => r.DriverName)
+                    </td>
+                    <td>                        
+                        @{
+                            TimeSpan time = TimeSpan.FromSeconds(r.Duration);
+                            string str = time.ToString(@"hh\:mm\:ss");
+                        }
+                        @Html.DisplayFor(modelItem => str)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => r.Price)
+                    </td>
+                </tr>
+            }
+        </table>            
     </div>
     <img src="~/Content/Images/search.jpg" />
 </section>

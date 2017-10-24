@@ -15,9 +15,40 @@ namespace M2ICarsASP.Controllers
     public class SearchController : Controller
     {
         // GET: Index
-        public ActionResult Index()
+        public async Task<ActionResult> Index()
         {
-            return View();
+            IndexViewModel model = new IndexViewModel("");
+            model.Reservations = await APIService.Instance.Request<List<Reservation>>("GET", "api/Reservations");
+
+            foreach(Reservation r in model.Reservations)
+            {
+                Driver d = await APIService.Instance.Request<Driver>("GET", $"api/Drivers/{r.ReservationDriverId}");
+                r.DriverName = d.FirstName +" "+d.LastName;
+                
+                HttpClient client = new HttpClient();
+                client.BaseAddress = new Uri("https://maps.googleapis.com/maps/");
+                client.DefaultRequestHeaders.Accept.Clear();
+                string s = null;
+                client.DefaultRequestHeaders.Accept.Add(new MediaTypeWithQualityHeaderValue("application/json"));
+                HttpResponseMessage responseDepart = await client.GetAsync($"api/geocode/json?latlng={r.DepartureLocation}&key=AIzaSyCDjKjiTE-YwsyVbG2KY4VVJF5w3F7XWt8");                
+                if (responseDepart.IsSuccessStatusCode)
+                {
+                    s = await responseDepart.Content.ReadAsStringAsync();
+                    JObject o = JObject.Parse(s);
+                    r.DepartureLocation = (string)o["results"].First["formatted_address"];                    
+                }
+                client.DefaultRequestHeaders.Accept.Clear();
+                client.DefaultRequestHeaders.Accept.Add(new MediaTypeWithQualityHeaderValue("application/json"));
+                HttpResponseMessage responseArrival = await client.GetAsync($"api/geocode/json?latlng={r.ArrivalLocation}&key=AIzaSyCDjKjiTE-YwsyVbG2KY4VVJF5w3F7XWt8");
+                if (responseArrival.IsSuccessStatusCode)
+                {
+                    s = await responseArrival.Content.ReadAsStringAsync();
+                    JObject o = JObject.Parse(s);
+                    r.ArrivalLocation = (string)o["results"].First["formatted_address"];
+                }
+            }
+
+            return View(model);
         }
         
         // POST: Search
