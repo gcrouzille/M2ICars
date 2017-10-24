@@ -9,6 +9,7 @@ using System.Net.Http;
 using System.Web.Http;
 using System.Web.Http.Description;
 using M2ICarsDAO;
+using M2ICarsAPI.Models;
 
 namespace M2ICarsAPI.Controllers
 {
@@ -66,8 +67,54 @@ namespace M2ICarsAPI.Controllers
             {
                 return BadRequest();
             }
-
+            
             db.Entry(user).State = EntityState.Modified;
+            db.Entry(user).Property(u => u.Password).IsModified = false;
+
+            try
+            {
+                db.SaveChanges();
+            }
+            catch (DbUpdateConcurrencyException)
+            {
+                if (!UserExists(id))
+                {
+                    return NotFound();
+                }
+                else
+                {
+                    throw;
+                }
+            }
+
+            return StatusCode(HttpStatusCode.NoContent);
+        }
+        // PUT: api/User/Pass/5
+        [ResponseType(typeof(void))]
+        [Route("api/User/Pass/{Id}")]
+        public IHttpActionResult PutUser(int id, ChangePasswordModel change)
+        {
+            if (!ModelState.IsValid)
+            {
+                return BadRequest(ModelState);
+            }
+
+            if (id != change.UserId)
+            {
+                return BadRequest();
+            }
+
+            User user = db.Users.Find(id);
+            if (user == null)
+                return NotFound();
+
+            if (user.Password == change.OldPassword)
+            {
+                user.Password = change.NewPassword;
+                db.Entry(user).Property(u => u.Password).IsModified = true;
+            }
+            else
+                return BadRequest();
 
             try
             {

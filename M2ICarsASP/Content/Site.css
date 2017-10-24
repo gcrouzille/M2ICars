@@ -43,6 +43,50 @@ textarea {
 
 body { background-color: #EEEEEE; }
 
+/*ACCOUNT*/
+body .account-container {
+    height: 100vh;
+    background-color: white;
+    padding: 5px 15px;
+}
+
+body .inner-account-container {
+    border-top: 1px solid black;
+}
+
+body .account-form-inline {
+    margin: 10px 0px;
+}
+body .account-form-inline label {
+    height:auto;
+}
+
+body form .account-btn {
+    margin: 25px 0px;
+}
+
+body .label-file {
+    cursor: pointer;
+    color: #000000;
+    font-weight: bold;
+}
+body .label-file:hover {
+    color: #AAA;
+}
+
+.input-file {
+    width: 0.1px;
+    height: 0.1px;
+    opacity: 0;
+    overflow: hidden;
+    position: absolute;
+    z-index: -1;
+}
+
+body .account-container h4 {
+    margin: 20px 0px 30px 0px;
+}
+
 /* HOME */
 body .homeContainer {
     height: 100vh;

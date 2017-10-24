@@ -18,7 +18,7 @@ namespace M2ICarsASP.Controllers
         public async Task<ActionResult> Index()
         {
             IndexViewModel model = new IndexViewModel("");
-            model.Reservations = await APIService.Instance.Request<List<Reservation>>("GET", "api/Reservations");
+            model.Reservations = await APIService.Instance.Request<List<Reservation>>("GET", $"api/Reservations/Client/{Session["clientId"]}");
 
             foreach(Reservation r in model.Reservations)
             {

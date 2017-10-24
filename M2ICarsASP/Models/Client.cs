@@ -8,10 +8,16 @@ namespace M2ICarsASP.Models
 {
     public class Client
     {
+        public enum GenderEnum
+        {
+            HOMME=1,
+            FEMME
+        }
+
         private int clientId;
         private string lastName;
         private string firstName;
-        private string gender;
+        private GenderEnum gender;
         private DateTime birthday;
         private string phone;
         private string photoUrl;
@@ -34,7 +40,7 @@ namespace M2ICarsASP.Models
         public DateTime Birthday { get => birthday; set => birthday = value; }
 
         [Display(Name = "Genre")]
-        public string Gender { get => gender; set => gender = value; }
+        public GenderEnum Gender { get => gender; set => gender = value; }
 
         [Required]
         [Display(Name = "Téléphone")]
