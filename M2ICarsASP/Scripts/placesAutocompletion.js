@@ -69,10 +69,19 @@ function calcRoute() {
         travelMode: 'DRIVING'
     };
     directionService.route(request, function (result, status) {
-        if (status == 'OK') {
+        if (status == 'OK') {            
             directionsDisplay.setDirections(result);
-        } else
-            console.log(status);
+            $("#search").removeAttr("disabled");
+            var alert = document.getElementById("alert");
+            var formElt = document.getElementById("formContainer").removeChild(alert);
+            
+        } else {
+            var alert = $("<p>Aucun trajet n'a été trouvé</p>").addClass("alert-danger").attr("id","alert");
+            $("#formContainer").append(alert);
+            $("#search").attr("disabled", "true");
+        }
+
+
     });
 }
 

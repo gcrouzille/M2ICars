@@ -13,7 +13,6 @@ function initMap() {
 
     $(".driver").each(function (i, e) {        
         var driverPos = JSON.parse($(e).attr("pos"));
-        console.log(driverPos);
         addMarker(driverPos, $(e).text(), map);
     });
     calcRoute();

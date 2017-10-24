@@ -10,6 +10,9 @@ using System.Web.Http;
 using System.Web.Http.Description;
 using M2ICarsDAO;
 using M2ICarsAPI.Controllers.JWT;
+using Newtonsoft.Json.Linq;
+using System.Net.Http.Headers;
+using System.Threading.Tasks;
 
 namespace M2ICarsAPI.Controllers
 {
@@ -96,11 +99,34 @@ namespace M2ICarsAPI.Controllers
         // POST: api/Reservations
         [ResponseType(typeof(Reservation))]
         [TokenAuthenticate(MemberShipProvider.Role.USER)]
-        public IHttpActionResult PostReservation(Reservation reservation)
+        public async Task<IHttpActionResult> PostReservation(Reservation reservation)
         {
             if (!ModelState.IsValid)
             {
                 return BadRequest(ModelState);
+            }
+
+            HttpClient client = new HttpClient();
+            client.BaseAddress = new Uri("https://maps.googleapis.com/maps/");
+            client.DefaultRequestHeaders.Accept.Clear();
+            string s = null;
+
+            string start = reservation.DepartureLocation;
+            string end = reservation.ArrivalLocation;
+
+            client.DefaultRequestHeaders.Accept.Add(new MediaTypeWithQualityHeaderValue("application/json"));
+            HttpResponseMessage response = await client.GetAsync($"api/distancematrix/json?units=imperial&origins={start}&destinations={end}&key=AIzaSyCDjKjiTE-YwsyVbG2KY4VVJF5w3F7XWt8");
+            if (response.IsSuccessStatusCode)
+            {
+                s = await response.Content.ReadAsStringAsync();
+                JObject o = JObject.Parse(s);
+                int duration = (int)o["rows"].First["elements"].First["duration"]["value"];
+                int distance = (int)o["rows"].First["elements"].First["distance"]["value"];
+                
+                reservation.Duration = duration;
+                
+                Driver driver = db.Drivers.First(d => d.DriverId == reservation.ReservationDriverId);
+                reservation.Price = (distance/1000) * db.Tarifs.First(t => t.CarType == driver.CarType).Price;
             }
 
             db.Reservations.Add(reservation);

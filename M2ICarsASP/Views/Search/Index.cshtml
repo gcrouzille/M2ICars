@@ -1,10 +1,13 @@
-﻿@{
+﻿@model M2ICarsASP.Models.IndexViewModel
+@using M2ICarsASP.Models
+
+@{
     ViewBag.Title = "Search";
 }
 
 <section class="container search-container">
     <div class="map-section col-12">
-        <div class="col-md-3">
+        <div class="col-md-3" id="formContainer">
             @using (Html.BeginForm("Search", "Search", FormMethod.Post))
             {
                 @Html.AntiForgeryToken()
@@ -15,21 +18,26 @@
                     @Html.ValidationSummary(true, "", new { @class = "text-danger" })
                     <div class="form-group">
                         <div class="col-md-10">
-                            <input id="departure" placeholder="départ" class="form-control" type="text" name="departure" />
+                            <input id="departure" placeholder="départ" class="form-control" type="text" name="departure" required />
                         </div>
                     </div>
                     <div class="form-group">
                         <div class="col-md-10">
-                            <input id="arrival" placeholder="arrivée" class="form-control" type="text" name="arrival" />
+                            <input id="arrival" placeholder="arrivée" class="form-control" type="text" name="arrival" required />
                         </div>
                     </div>
 
                     <div class="form-group">
                         <div class="col-md-10">
-                            <input id="search" type="submit" value="Search" class="btn btn-default" />
+                            <input id="search" type="submit" value="Search" class="btn btn-primary" disabled/>
                         </div>
                     </div>
                 </div>
+            }
+
+            @if (Model.ErrorMsg != "")
+            {
+                <p class="alert-danger">@Model.ErrorMsg</p>
             }
         </div>
         <div id="map" class="col-md-9">
@@ -37,13 +45,59 @@
         </div>
     </div>
     <hr />
-    <div class="col-12">
-        <div class="user-infos-section col-md-6">
-            <h3>Vos Réservations</h3>
-        </div>
-        <div class="col-md-6">
-            <h3>Mon Compte</h3>
-        </div>
+    <div class="user-infos-section col-md-12">
+        <h3>Mes Réservations</h3>
+        <table class="table">
+            <tr>
+                <th>
+                    <label>Date</label>
+                </th>
+                <th>
+                    <label>Départ</label>
+                </th>
+                <th>
+                    <label>Arrivée</label>
+                </th>
+                <th>
+                    <label>Chauffeur</label>
+                </th>
+                <th>
+                    <label>Durée</label>
+                </th>
+                <th>
+                    <label>Tarif</label>
+                </th>
+                <th></th>
+            </tr>
+
+            @foreach (Reservation r in Model.Reservations)
+            {
+                <tr>
+                    <td>
+                        @Html.DisplayFor(modelItem => r.Date)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => r.DepartureLocation)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => r.ArrivalLocation)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => r.DriverName)
+                    </td>
+                    <td>                        
+                        @{
+                            TimeSpan time = TimeSpan.FromSeconds(r.Duration);
+                            string str = time.ToString(@"hh\:mm\:ss");
+                        }
+                        @Html.DisplayFor(modelItem => str)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => r.Price)
+                    </td>
+                </tr>
+            }
+        </table>            
     </div>
     <img src="~/Content/Images/search.jpg" />
 </section>

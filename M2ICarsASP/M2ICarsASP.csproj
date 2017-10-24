@@ -157,8 +157,10 @@
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
+    <Compile Include="Models\APIService.cs" />
     <Compile Include="Models\Client.cs" />
     <Compile Include="Models\Driver.cs" />
+    <Compile Include="Models\IndexViewModel.cs" />
     <Compile Include="Models\Reservation.cs" />
     <Compile Include="Models\SearchResultsViewModel.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
