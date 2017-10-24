@@ -3,6 +3,7 @@ using Newtonsoft.Json;
 using Newtonsoft.Json.Linq;
 using System;
 using System.Collections.Generic;
+using System.IO;
 using System.Linq;
 using System.Net.Http;
 using System.Net.Http.Headers;
@@ -14,8 +15,9 @@ namespace M2ICarsASP.Controllers
 {
     public class HomeController : Controller
     {
-        public ActionResult Index()
+        public ActionResult Index(string msg)
         {
+            ViewBag.Info = msg;
             return View();
         }
 
@@ -70,12 +72,45 @@ namespace M2ICarsASP.Controllers
                 // vue ecran connecté
             }
         }
-
-
+        
+        [HttpGet]
         public async Task<ActionResult> ClientAccount()
         {
             Client c = await APIService.Instance.Request<Client>("GET", $"api/User/{Session["clientId"]}");
             return View(c);
+        }
+
+        [HttpPost]
+        [ValidateAntiForgeryToken]
+        public async Task<ActionResult> ClientAccount([Bind(Include = "Email, FirstName, LastName, Gender, Phone, Birthday")] Client client, HttpPostedFileBase PhotoUrl)
+        {
+            if (PhotoUrl != null && PhotoUrl.ContentLength > 0)
+            {
+                string FileName = Path.GetFileName(PhotoUrl.FileName);
+                string path = Path.Combine(Server.MapPath("~/Content/Images"), FileName);
+                PhotoUrl.SaveAs(path);
+                client.PhotoUrl = FileName;
+            }
+
+            client.UserId = (int)Session["clientId"];
+            await APIService.Instance.Request("PUT", $"api/User/{client.UserId}", client);
+            Client c = await APIService.Instance.Request<Client>("GET", $"api/User/{Session["clientId"]}");
+            return View(c);
+        }
+
+        [HttpPost]
+        [ValidateAntiForgeryToken]
+        public async Task<ActionResult> ChangeUserPassword(string oldpass, string newpass)
+        {
+            Client c = await APIService.Instance.Request<Client>("GET", $"api/User/{Session["clientId"]}");
+            
+            await APIService.Instance.Request("PUT", $"api/User/Pass/{Session["clientId"]}", new {
+                userId=Session["clientId"],
+                oldPassword = oldpass,
+                newPassword = newpass
+            });
+            
+            return View("ClientAccount", c);
         }
 
         public ActionResult DriverAccount()
@@ -83,31 +118,30 @@ namespace M2ICarsASP.Controllers
             return View();
         }
 
+        [HttpGet]
         public ActionResult Register()
         {
-            return View();
+            Client c = new Client();
+            return View(c);
         }
 
         [HttpPost]
-        public ActionResult Register(Client c)
+        [ValidateAntiForgeryToken]
+        public async Task<ActionResult> Register([Bind(Include = "Email, Password, FirstName, LastName, Gender, Phone, Birthday")] Client c, HttpPostedFileBase PhotoUrl)
         {
-            using (var client = new HttpClient())
+            if (PhotoUrl != null && PhotoUrl.ContentLength > 0)
             {
-                client.BaseAddress = new Uri("http://localhost:64548/api/Users");
-
-                var postTask = client.PostAsJsonAsync<Client>("Users", c);
-                postTask.Wait();
-
-                var result = postTask.Result;
-                if (result.IsSuccessStatusCode)
-                {
-                    return RedirectToAction("Index");
-                }
+                string FileName = Path.GetFileName(PhotoUrl.FileName);
+                string path = Path.Combine(Server.MapPath("~/Content/Images"), FileName);
+                PhotoUrl.SaveAs(path);
+                c.PhotoUrl = FileName;
             }
 
-            ModelState.AddModelError(string.Empty, "Champ manquant ou imcomplet");
+            Client client = await APIService.Instance.Request("POST", "api/Users", c);
+            if (client != null)
+                return RedirectToAction("Index", new { msg = "Inscription réussie ! Vous pouvez maintenant vous connecter" });
 
-            return View("Register");
+            return View("Register", c);
         }
 
 

@@ -52,12 +52,23 @@ namespace M2ICarsAPI.Controllers
             return db.Reservations.Where(r => r.Statut == Reservation.statut.EN_COURS);
         }
 
-
         // GET: api/Reservations/Avances
         [Route("api/Reservations/Avances")]
         public IQueryable<Reservation> GetReservationAvances()
         {
             return db.Reservations.Where(r => r.Statut == Reservation.statut.EN_ATTENTE);
+        }
+
+        // GET: api/Reservations/Client/5
+        [Route("api/Reservations/Client/{id}")]
+        public IQueryable<Reservation> GetReservationClient(int id)
+        {
+            List<Reservation> resas = new List<Reservation>();
+            foreach (Reservation r in db.Reservations.Where(r => r.ClientId == id).ToList())
+            {
+                resas.Add(new Reservation(r.ReservationId, r.Date, r.Statut, r.DepartureLocation, r.ArrivalLocation, r.ReservationDriverId, r.ClientId, r.Duration, r.Price));
+            }
+            return resas.AsQueryable();
         }
 
 
