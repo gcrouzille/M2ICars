@@ -1,4 +1,6 @@
-﻿<!DOCTYPE html>
+﻿@using M2ICarsASP.Models
+
+<!DOCTYPE html>
 <html>
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=utf-8"/>
@@ -10,6 +12,12 @@
     @Scripts.Render("~/bundles/modernizr")
 </head>
 <body>
+    @{List<Notification> notifs = null;
+        if (Session["notif"] != null)
+        {
+            notifs = (List<Notification>)Session["notif"];
+        }
+    }
     <div class="navbar navbar-inverse navbar-fixed-top myNavBar">
         <div class="container">
             <div class="navbar-header">
@@ -23,14 +31,43 @@
             <div class="navbar-collapse collapse">
                 <ul class="nav navbar-nav">
                     @if (Session["clientId"] != null)
-                    { 
-                        <li>@Html.ActionLink("Mon Compte", "ClientAccount", "Home")</li>
+                    {
+                        if (notifs == null )
+                        {
+                            
+                            <li>@Html.ActionLink("0", "", "", new { id = "notifBtn" })</li>
+                        }
+                        else
+                        {
+                            
+                            string notifCount = notifs.Count.ToString();
+                            <li>@Html.ActionLink(notifCount, "", "", new { id = "notifBtn" })</li>
+                        }
                     }
                 </ul>
             </div>
         </div>
     </div>
     <div class="container body-content">
+        <div id="notif">
+            <h4>Mon Compte</h4>
+            <p>@Html.ActionLink("Gérer mon compte", "ClientAccount", "Home")</p>
+            <p>@Html.ActionLink("Me déconnecter", "Logout", "Home")</p>
+            <h4>Notifications</h4>            
+            @if (notifs != null)
+            {
+                foreach (var item in notifs)
+                {
+                    <p>
+                        <a href="#" class="notifLink" notifId="@item.NotificationId">@item.Message</a>
+                    </p>
+                }
+            }
+            else
+            {
+                <p>Vous n'avez pas de notifications</p>
+            }
+        </div>
         @RenderBody()
         <hr />
         <footer>
@@ -42,7 +79,7 @@
     @Scripts.Render("~/bundles/jquery-ui")
     @Scripts.Render("~/bundles/bootstrap")
     @RenderSection("scripts", required: false)
-
+    <script src="@Url.Content("~/Scripts/NotificationScript.js")"></script>
     @if (ViewBag.Script != null)
     {
         <script src="@Url.Content("~/Scripts/"+@ViewBag.Script)"></script>

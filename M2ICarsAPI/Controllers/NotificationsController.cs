@@ -36,6 +36,13 @@ namespace M2ICarsAPI.Controllers
             return db.Notifications.Where(n => !n.IsDriverNotification);
         }
 
+        // GET: api/Notifications/Client
+        [Route("api/Notifications/Client/{id}")]
+        public IQueryable<Notification> GetClientNotifications(int id)
+        {
+            return db.Notifications.Where(n => !n.IsDriverNotification && n.Userid == id);
+        }
+
         // GET: api/Notifications/5
         [ResponseType(typeof(Notification))]
         public IHttpActionResult GetNotification(int id)

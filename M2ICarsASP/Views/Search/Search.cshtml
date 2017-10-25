@@ -10,21 +10,19 @@
         @using (@Html.BeginForm("SelectDriver", "Search", FormMethod.Post, new { @class = "driver-form" }))
         {
             @Html.AntiForgeryToken()
-            
+            <input type="hidden" name="departureLocation" value="@Model.departure" />
+            <input type="hidden" name="arrivalLocation" value="@Model.arrival" />
             <div class="funkyradio driver-list">
                 @for (int i = 0; i < Model.Drivers.Count; i++)
-                {
-                    <input type="hidden" name="driverId" value="@Model.Drivers[i].DriverId"/>
-                    <input type="hidden" name="departureLocation" value="@Model.departure"/>
-                    <input type="hidden" name="arrivalLocation" value="@Model.arrival"/>
+                {                    
                     <div class="funkyradio-success driver" pos="@Model.Drivers[i].Location">
                         @if (i == 0)
                         {
-                            <input type="radio" name="driverRadio" id="@Model.Drivers[i].LastName" value="@Model.Drivers[i].LastName" checked/>
+                            <input type="radio" name="driverRadio" id="@Model.Drivers[i].LastName" value="@Model.Drivers[i].DriverId" checked/>
                         }
                         else
                         {
-                            <input type="radio" name="driverRadio" id="@Model.Drivers[i].LastName" value="@Model.Drivers[i].LastName" />
+                            <input type="radio" name="driverRadio" id="@Model.Drivers[i].LastName" value="@Model.Drivers[i].DriverId" />
                         }
 
                         <label for="@Model.Drivers[i].LastName">@Model.Drivers[i].LastName</label>

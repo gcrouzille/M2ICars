@@ -48,6 +48,9 @@ namespace M2ICarsASP.Controllers
                 }
             }
 
+            List<Notification> notifs = await APIService.Instance.Request<List<Notification>>("GET", $"api/Notifications/Client/{Session["clientId"]}");
+            Session["notif"] = notifs;
+
             return View(model);
         }
         
@@ -84,11 +87,11 @@ namespace M2ICarsASP.Controllers
         // POST: Search
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<ActionResult> SelectDriver(int driverId, string driverRadio, string departureLocation, string arrivalLocation)
+        public async Task<ActionResult> SelectDriver(string driverRadio, string departureLocation, string arrivalLocation)
         {
             Reservation newResa = new Reservation();
             newResa.ClientId = (int)Session["clientId"];
-            newResa.ReservationDriverId = driverId;
+            newResa.ReservationDriverId = int.Parse(driverRadio);
             
             //Conversion du lieu de départ en geocode
             HttpClient clientDeparture = new HttpClient();
@@ -129,6 +132,7 @@ namespace M2ICarsASP.Controllers
             newResa.DepartureLocation = departureGeocode;
             newResa.ArrivalLocation = arrivalGeocode;
 
+            Driver d = await APIService.Instance.Request<Driver>("GET", $"api/Drivers/{driverRadio}");
 
             HttpClient client = new HttpClient();
             client.BaseAddress = new Uri("http://localhost:64548/");
@@ -145,7 +149,7 @@ namespace M2ICarsASP.Controllers
                 resa = JsonConvert.DeserializeObject<Reservation>(s);
                 resa.DepartureLocation = departureLocation;
                 resa.ArrivalLocation = arrivalLocation;
-                resa.DriverName = driverRadio;
+                resa.DriverName = d.FirstName + " " + d.LastName;
                 return View("Paiement", resa);
             }
 
@@ -154,13 +158,19 @@ namespace M2ICarsASP.Controllers
 
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult ValidateReservation(string ccName, string ccNumber, string ccCVV, string ccExpirationMonth, string ccExpirationYear)
+        public async Task<ActionResult> ValidateReservation(string reservationDriverId, string ccName, string ccNumber, string ccCVV, string ccExpirationMonth, string ccExpirationYear)
         {
             //Validation du paiement
             if (ValidatePaiement(ccName, ccNumber, ccCVV, ccExpirationMonth, ccExpirationYear))
                 ViewBag.Result = "OK";
             else
                 ViewBag.Result = "NOK";
+
+            Notification notif = new Notification();
+            notif.IsDriverNotification = true;
+            notif.Userid = int.Parse(reservationDriverId);
+            notif.Message = "Un client vient de réserver un trajet avec vous";
+            await APIService.Instance.Request<Notification>("POST", "api/Notifications", notif);
 
             return View("ReservationValidated");
         }
