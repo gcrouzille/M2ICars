@@ -1,4 +1,6 @@
-﻿<!DOCTYPE html>
+﻿@using M2ICarsASP.Models
+
+<!DOCTYPE html>
 <html>
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=utf-8"/>
@@ -10,6 +12,12 @@
     @Scripts.Render("~/bundles/modernizr")
 </head>
 <body>
+    @{List<Notification> notifs = null;
+        if (Session["notif"] != null)
+        {
+            notifs = (List<Notification>)Session["notif"];
+        }
+    }
     <div class="navbar navbar-inverse navbar-fixed-top myNavBar">
         <div class="container">
             <div class="navbar-header">
@@ -24,8 +32,17 @@
                 <ul class="nav navbar-nav">
                     @if (Session["clientId"] != null)
                     {
-                        <li>@Html.ActionLink("0", "", "", new { id = "notifBtn" })</li>
-                        <li>@Html.ActionLink("Mon Compte", "ClientAccount", "Home")</li>
+                        if (notifs == null )
+                        {
+                            
+                            <li>@Html.ActionLink("0", "", "", new { id = "notifBtn" })</li>
+                        }
+                        else
+                        {
+                            
+                            string notifCount = notifs.Count.ToString();
+                            <li>@Html.ActionLink(notifCount, "", "", new { id = "notifBtn" })</li>
+                        }
                     }
                 </ul>
             </div>
@@ -35,15 +52,18 @@
         <div id="notif">
             <h4>Mon Compte</h4>
             <p>@Html.ActionLink("Gérer mon compte", "ClientAccount", "Home")</p>
-            <p>@Html.ActionLink("Me déconnecter", "ClientAccount", "Home")</p>
+            <p>@Html.ActionLink("Me déconnecter", "Logout", "Home")</p>
             <h4>Notifications</h4>            
-            @if (ViewBag.Notifications != null)
+            @if (notifs != null)
             {
-                foreach(var item in ViewBag.Notifications)
+                foreach (var item in notifs)
                 {
-                    <p>@item.Message</p>
+                    <p>
+                        <a href="#" class="notifLink" notifId="@item.NotificationId">@item.Message</a>
+                    </p>
                 }
-            } else
+            }
+            else
             {
                 <p>Vous n'avez pas de notifications</p>
             }

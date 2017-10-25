@@ -46,6 +46,12 @@ namespace M2ICarsASP.Controllers
             }
         }
 
+        public ActionResult Logout()
+        {
+            Session.Clear();
+            return RedirectToAction("Index", new { msg = "Déconnexion réussie !" });
+        }
+
         [HttpPost]
         [ValidateAntiForgeryToken]
         public async Task<ActionResult> LoginPrest(string prestemail, string prestpass)

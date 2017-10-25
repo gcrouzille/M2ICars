@@ -31,6 +31,17 @@ textarea {
     height: 40px;
     margin: 5px;
     width: 40px;
+    background-image: url('http://localhost:64544/Content/Images/default.jpg');
+    background-size: 40px 40px;
+    background-repeat: no-repeat;
+    opacity: 0.75;
+    color: red;
+    font-size: 1.5em;
+    font-weight: bold;
+}
+
+#notifBtn:hover {
+    color: darkred;
 }
 
 #notif {
