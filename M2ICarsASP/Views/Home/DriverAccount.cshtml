@@ -5,63 +5,59 @@
     ViewBag.Title = "Gestion Compte Prestataire";
 }
 
-<!DOCTYPE html>
 
-<html lang="fr">
+<div class="container account-container">
+    <h2>Gestion du Compte</h2>
+    <div class="col-md-12 inner-account-container container">
+        <h4>Informations personnelles</h4>
+        @using (Html.BeginForm("Register", "Home", FormMethod.Post, new { enctype = "multipart/form-data" }))
+        {
+            @Html.AntiForgeryToken()
+            <div class="col-md-6">
+                <div class="form-inline container account-form-inline">
+                    <label class="col-md-2" for="Email">Mail</label>
+                    <input type="text" id="Email" name="Email" class="form-control col-md-3" value="@Model.Email" />
+                </div>
 
-<head>
+                <div class="form-inline container account-form-inline">
+                    <label class="col-md-2" for="LastName">Nom</label>
+                    <input type="text" id="LastName" name="LastName" class="form-control col-md-3" value="@Model.LastName" />
+                </div>
 
-    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-beta/css/bootstrap.min.css" integrity="sha384-/Y6pD6FV/Vv2HJnA6t+vslU6fwYXjCFtcEpHbNJ0lyAFsXTsjBbfaDjzALeQsN6M" crossorigin="anonymous">
-    <meta name="viewport" content="width=device-width" initial-scale=1, shrink-to-fit="no" />
-    <link rel="stylesheet" href="//code.jquery.com/ui/1.12.1/themes/base/jquery-ui.css">
+                <div class="form-inline container account-form-inline">
+                    <label class="col-md-2" for="FirstName">Prenom</label>
+                    <input type="text" id="FirstName" name="FirstName" class="form-control col-md-3" value="@Model.FirstName" />
+                </div>
 
-    <title>Gestion Compte Prestataire</title>
+                <div class="form-inline container account-form-inline">
+                    <label class="col-md-2" for="Gender">Genre</label>
+                    @*@Html.EnumDropDownListFor(model => model.Gender, new { @class = "form-control col-md-2" })*@
+                </div>
 
-</head>
+                <div class="form-inline container account-form-inline">
+                    <label class="col-md-2" for="Birthday">Date de naissance</label>
+                    <input type="text" id="Birthday" class="form-control col-md-3" name="Birthday" value="@Model.Birthday.ToString("d")" />
+                </div>
 
-<body>
+                <div class="form-inline container account-form-inline">
+                    <label class="col-md-2" for="Phone">Téléphone</label>
+                    <input type="text" id="Phone" name="Phone" class="form-control col-md-3" value="@Model.Phone" />
+                </div>
+            </div>
 
-    <div class="container">
+            <div class="col-md-6">
+                <div class="form-inline container">
+                    <img id="profileImg" src="@Url.Content("~/Content/Images/" + Model.PhotoUrl)" height="200" width="200" />
+                </div>
 
-        <h2>Gestion & Informations du Compte</h2><br /><br />
+                <div>
+                    <label for="imageURL" class="label-file">Choisir une image</label>
+                    <input type="file" id="imageURL" class="input-file" name="PhotoUrl" value="" />
+                </div>
+            </div>
 
-        <h4>Informations personnelles</h4><br /><br />
-
-        <div class="row">
-            <div class="col">Nom :</div>
-            <div class="col"><input type="text" name="lastname" value="@Model.LastName" /></div>
-        </div>
-
-        <div class="row">
-            <div class="col">Prenom :</div>
-            <div class="col"><input type="text" name="firstname" value="@Model.FirstName" /></div>
-        </div>
-
-        <div class="row">
-            <div class="col">Genre :</div>
-            <div class="col"><input type="text" name="gender" value="@Model.Gender" /></div>
-        </div>
-
-        <div class="row">
-            <div class="col">Date de naissance :</div>
-            <div class="col"><input type="text" id="datepicker" name="birthday" value="@Model.Birthday" /></div>
-        </div>
-
-        <div class="row">
-            <div class="col">Téléphone :</div>
-            <div class="col"><input type="text" name="phone" value="@Model.Phone" /></div>
-        </div>
-
-        <br /><br />
-
-        <div class="row">
-            <div class="col">Photo </div>
-            <div class="col"><img src="@Url.Content("~/Content/Images/"+Model.PhotoUrl)" height="200" width="200" /></div>
-        </div>
-
-        <div class="row">
-            <input type="file" name="image" value="" />
-        </div>
+            <input type="submit" class="btn btn-primary col-md-offset-4 col-md-3 account-btn" value="Enregistrer les modifications" />
+        }
 
         <br /><br /><h4>Informations sur le Véhicule</h4><br /><br />
 
@@ -90,7 +86,7 @@
             <div class="col">@Model.RegisterState</div>
         </div>
 
-        <br/><br/>
+        <br /><br />
 
         <button type="button" class="btn btn-primary btn-lg btn-block">Modifier et Valider</button>
 
@@ -125,9 +121,6 @@
         <input type="submit" class="btn btn-warning" name="passconfirm" value="Modifier Mot de passe" />
 
     </div>
+</div>
 
-
-</body>
-
-</html>
 
