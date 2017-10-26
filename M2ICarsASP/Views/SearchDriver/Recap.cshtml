@@ -1,0 +1,78 @@
+﻿@model M2ICarsASP.Models.Recapitulatif
+@using M2ICarsASP.Models
+
+@{
+    ViewBag.Title = "Récapitulatif";
+}
+
+<section class="container home-container">
+    <h2>Récapitulatif de la commande</h2>
+    <div class="recap-container col-md-3">
+        <div>
+            <label>Date : </label>
+            <span>@Model.Reservation.Date</span>
+        </div>
+        <div>
+            <label>Chauffeur : </label>
+            <span>@Model.Reservation.DriverName</span>
+        </div>
+        <div>
+            <label>Client : </label>
+            <span>@Model.Reservation.ClientName</span>
+        </div>
+        <div>
+            <label>Lieu de Départ : </label>
+            <span>@Model.Reservation.DepartureLocation</span>
+        </div>
+        <div>
+            <label>Lieu d'Arrivée : </label>
+            <span>@Model.Reservation.ArrivalLocation</span>
+        </div>
+        <div>
+            <label>Durée Estimée : </label>
+            <span>
+                @{
+                    TimeSpan time = TimeSpan.FromSeconds(Model.Reservation.Duration);
+                    string str = time.ToString(@"hh\:mm\:ss");
+                }
+                @str
+            </span>
+        </div>
+        
+        <div>           
+            <label>Tarif Estimé : </label>
+            <span>@(Model.Reservation.Price)€</span>
+        </div>
+        </div>
+                
+            <div class="user-infos-section col-md-3 ">
+                <h3>Opinions du conducteur</h3>
+                <table class="table">
+                    <tr>
+                        <th>
+                            <label>Note</label>
+                        </th>
+                        <th>
+                            <label>Commentaire</label>
+                        </th>
+
+                    </tr>
+
+                    @foreach (Opinion o in Model.ListeOpinion)
+                    {
+                        <tr>
+                            <td>
+                                @Html.DisplayFor(modeltem => o.Note)
+
+                            </td>
+                            <td>
+                                @Html.DisplayFor(modelItem => o.Comment)
+                            </td>
+                        </tr>
+                    }
+
+                </table>
+                </div>
+                
+        <img src="~/Content/Images/search.jpg" />
+</section>
