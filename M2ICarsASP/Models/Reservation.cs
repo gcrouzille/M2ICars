@@ -15,9 +15,13 @@ namespace M2ICarsASP.Models
         public int ReservationDriverId { get; set; }
         [IgnoreDataMember]
         public string DriverName { get; set; }
+        [IgnoreDataMember]
+        public string ClientName { get; set; }
         public int ClientId { get; set; }
         public int Duration { get; set; }
         public decimal Price { get; set; }
+      
+        
 
         public Reservation()
         {

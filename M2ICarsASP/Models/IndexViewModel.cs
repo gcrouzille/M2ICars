@@ -16,5 +16,6 @@ namespace M2ICarsASP.Models
             Reservations = new List<Reservation>();
             //TODO MISE EN FORME DE LA LISTE DES RESAS !
         }
+                
     }
 }

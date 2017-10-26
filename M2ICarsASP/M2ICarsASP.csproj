@@ -162,6 +162,8 @@
     <Compile Include="Models\Client.cs" />
     <Compile Include="Models\Driver.cs" />
     <Compile Include="Models\IndexViewModel.cs" />
+    <Compile Include="Models\Opinion.cs" />
+    <Compile Include="Models\Recapitulatif.cs" />
     <Compile Include="Models\Reservation.cs" />
     <Compile Include="Models\SearchResultsViewModel.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
@@ -250,6 +252,7 @@
     <Content Include="Scripts\placesAutocompletion.js" />
     <Content Include="Scripts\respond.js" />
     <Content Include="Scripts\respond.min.js" />
+    <Content Include="Scripts\showClient.js" />
     <Content Include="Scripts\showDrivers.js" />
     <Content Include="Web.config" />
     <Content Include="Web.Debug.config">
@@ -274,7 +277,7 @@
     <Content Include="Views\Search\Search.cshtml" />
     <Content Include="Views\Search\Paiement.cshtml" />
     <Content Include="Views\Search\ReservationValidated.cshtml" />
-    <Content Include="Views\SearchDriver\Validated.cshtml" />
+    <Content Include="Views\SearchDriver\Recap.cshtml" />
     <Content Include="Views\SearchDriver\index.cshtml" />
   </ItemGroup>
   <ItemGroup>
